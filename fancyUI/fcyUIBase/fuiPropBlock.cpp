@@ -1,4 +1,4 @@
-#include "fuiPropBlock.h"
+ï»¿#include "fuiPropBlock.h"
 
 #include "fuiControl.h"
 
@@ -32,7 +32,7 @@ void fuiPropBlock::getAllProp(fuiPropBlock& Block, fuiControl* p)
 	Block.m_ControlProp.clear();
 	Block.m_SubControlProp.clear();
 
-	// ±éÀúËùÓĞÊôĞÔ
+	// éå†æ‰€æœ‰å±æ€§
 	fuiPropertySet::Iterator i = p->GetPropertyBegin();
 	fuiPropertySet::Iterator iEnd = p->GetPropertyEnd();
 	while(i != iEnd)
@@ -42,7 +42,7 @@ void fuiPropBlock::getAllProp(fuiPropBlock& Block, fuiControl* p)
 		++i;
 	}
 	
-	// ±éÀúËùÓĞ×Ó¿Ø¼ş
+	// éå†æ‰€æœ‰å­æ§ä»¶
 	fuInt iSubControlCount = p->GetSubControlCount();
 	for(fuInt i = 0; i<iSubControlCount; i++)
 	{
@@ -58,7 +58,7 @@ void fuiPropBlock::setAllProp(fuiPropBlock& Block)
 {
 	fuiControl* pControl = Block.GetBindControl();
 
-	// ±éÀúËùÓĞÊôĞÔ
+	// éå†æ‰€æœ‰å±æ€§
 	unordered_map<wstring, wstring>::iterator i = Block.m_ControlProp.begin();
 	while(i != Block.m_ControlProp.end())
 	{
@@ -75,7 +75,7 @@ void fuiPropBlock::setAllProp(fuiPropBlock& Block)
 		++i;
 	}
 
-	// ±éÀúËùÓĞ×Ó¿Ø¼şÊôĞÔ
+	// éå†æ‰€æœ‰å­æ§ä»¶å±æ€§
 	vector<fuiPropBlock>::iterator j = Block.m_SubControlProp.begin();
 	while(j != Block.m_SubControlProp.end())
 	{

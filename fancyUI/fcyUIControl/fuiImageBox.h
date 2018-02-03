@@ -1,12 +1,12 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiImageBox.h
-/// @brief fancyUI Í¼Ïñ¿ò
+/// @brief fancyUI å›¾åƒæ¡†
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "../fcyUIBase/fuiControl.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief UI Í¼Ïñ¿ò
+/// @brief UI å›¾åƒæ¡†
 ////////////////////////////////////////////////////////////////////////////////
 class fuiImageBox :
 	public fuiControl
@@ -27,7 +27,7 @@ public:
 		COLORBLENDMETHOD_MODULATE2X,
 		COLORBLENDMETHOD_MODULATE4X
 	};
-protected: // ÊôĞÔ
+protected: // å±æ€§
 	std::wstring m_Image;
 	fcyColor m_BlendColor;
 	IMAGEFILLMETHOD m_ImageFillMethod;
@@ -37,15 +37,15 @@ protected: // ÊôĞÔ
 	fuiPropertyAccessor<fcyColor> m_BlendColor_Accessor;
 	fuiPropertyAccessor<IMAGEFILLMETHOD> m_ImageFillMethod_Accessor;
 	fuiPropertyAccessor<COLORBLENDMETHOD> m_ColorBlendMethod_Accessor;
-protected: // »æÍ¼×ÊÔ´
+protected: // ç»˜å›¾èµ„æº
 	fcyRefPointer<fuiSprite> m_pImageSprite;
 	
 	void OnStyleChanged(fuiControl* pThis, fuiEventArgs* pArgs);
 protected:
-	/// @brief »æÖÆÍ¼Æ¬
-	/// @note  ¿ÉÒÔÓÉÅÉÉúÀàµ÷ÓÃµÄäÖÈ¾½Ó¿Ú
+	/// @brief ç»˜åˆ¶å›¾ç‰‡
+	/// @note  å¯ä»¥ç”±æ´¾ç”Ÿç±»è°ƒç”¨çš„æ¸²æŸ“æ¥å£
 	void DrawImage(fuiGraphics* pGraph, fuiSprite* pSprite, const fcyColor& BlendColor, IMAGEFILLMETHOD Method, COLORBLENDMETHOD ColorMethod);
-public: // ÊµÏÖ½Ó¿Ú
+public: // å®ç°æ¥å£
 	void Update(fDouble ElapsedTime);
 	void Render(fuiGraphics* pGraph);
 public:

@@ -1,4 +1,4 @@
-#include "fuiRes.h"
+Ôªø#include "fuiRes.h"
 
 #include "fuiGraphics.h"
 
@@ -32,13 +32,13 @@ f2dTexture2D* fuiResProviderImpl::QueryTexture(const std::wstring& ResSrc)
 
 	if(i == m_TexCache.end())
 	{
-		// ªÒ»°¡˜
+		// Ëé∑ÂèñÊµÅ
 		f2dStream* pStream = m_pFileSys->GetStream(ResSrc.c_str());
 		if(!pStream)
 			throw fcyException("fuiResProviderImpl::QueryTexture", "Stream not found.");
 		pStream->SetPosition(FCYSEEKORIGIN_BEG, 0);
 
-		// ¥¥Ω®Œ∆¿Ì
+		// ÂàõÂª∫Á∫πÁêÜ
 		f2dTexture2D* pTex = NULL;
 		if(FCYFAILED(m_pRenderer->GetDevice()->CreateTextureFromStream(pStream, 0, 0, false, true, &pTex)))
 		{
@@ -62,13 +62,13 @@ f2dFontProvider* fuiResProviderImpl::QueryFont(const std::wstring& ResSrc, const
 
 	if(i == m_FontCache.end())
 	{
-		// ªÒ»°¡˜
+		// Ëé∑ÂèñÊµÅ
 		f2dStream* pStream = m_pFileSys->GetStream(ResSrc.c_str());
 		if(!pStream)
 			throw fcyException("fuiResProviderImpl::QueryFont", "Stream not found.");
 		pStream->SetPosition(FCYSEEKORIGIN_BEG, 0);
 
-		// ¥¥Ω®◊÷ÃÂ
+		// ÂàõÂª∫Â≠ó‰Ωì
 		f2dFontProvider* pFont = NULL;
 		if(FCYFAILED(m_pRenderer->CreateFontFromFile(pStream, 0, Size, F2DFONTFLAG_NONE, &pFont)))
 		{
@@ -92,16 +92,16 @@ f2dFontProvider* fuiResProviderImpl::QuerySpriteFont(const std::wstring& TexSrc,
 
 	if(i == m_SpriteFontCache.end())
 	{
-		// ≤È—ØŒ∆¿Ì
+		// Êü•ËØ¢Á∫πÁêÜ
 		f2dTexture2D* pTex = QueryTexture(TexSrc);
 
-		// ªÒ»°¡˜
+		// Ëé∑ÂèñÊµÅ
 		f2dStream* pStream = m_pFileSys->GetStream(DefineSrc.c_str());
 		if(!pStream)
 			throw fcyException("fuiResProviderImpl::QuerySpriteFont", "Stream not found.");
 		pStream->SetPosition(FCYSEEKORIGIN_BEG, 0);
 
-		// ¥¥Ω®◊÷ÃÂ
+		// ÂàõÂª∫Â≠ó‰Ωì
 		f2dFontProvider* pFont = NULL;
 		if(FCYFAILED(m_pRenderer->CreateFontFromTex(pStream, pTex, &pFont)))
 		{
@@ -177,7 +177,7 @@ void fuiSprite::ConstructRes(fuiResProvider* pProvider)
 	if(!pRenderer)
 		throw fcyException("fuiSprite::ConstructRes", "fuiResProvider::GetRenderer return null pointer.");
 
-	// ππ‘Ï◊ ‘¥
+	// ÊûÑÈÄ†ËµÑÊ∫ê
 	f2dTexture2D* pTex = pProvider->QueryTexture(m_TexPath);
 	if(!m_bSetRect)
 		m_Rect = fcyRect(0.f, 0.f, (float)pTex->GetWidth(), (float)pTex->GetHeight());
@@ -233,7 +233,7 @@ void fuiBorderSprite::ConstructRes(fuiResProvider* pProvider)
 	if(!pRenderer)
 		throw fcyException("fuiBorderSprite::ConstructRes", "fuiResProvider::GetRenderer return null pointer.");
 
-	// ππ‘Ï‘≠ ºæ´¡È
+	// ÊûÑÈÄ†ÂéüÂßãÁ≤æÁÅµ
 	f2dTexture2D* pTex = pProvider->QueryTexture(m_TexPath);
 	if(FCYFAILED(pRenderer->CreateSprite2D(pTex, m_Rect, &m_pBorderSprite)))
 		throw fcyException("fuiBorderSprite::ConstructRes", "f2dRenderer::CreateSprite2D failed.");
@@ -245,17 +245,17 @@ void fuiBorderSprite::ConstructRes(fuiResProvider* pProvider)
 	tUVCoord.a.y /= m_Rect.GetHeight();
 	tUVCoord.b.y /= m_Rect.GetHeight();
 
-	m_Sprites[0][0] = fcyRect(0.f,          0.f, tUVCoord.a.x, tUVCoord.a.y); // ◊Û…œ
-	m_Sprites[0][1] = fcyRect(tUVCoord.a.x, 0.f, tUVCoord.b.x, tUVCoord.a.y); // …œ
-	m_Sprites[0][2] = fcyRect(tUVCoord.b.x, 0.f, 1.f         , tUVCoord.a.y); // ”“…œ
+	m_Sprites[0][0] = fcyRect(0.f,          0.f, tUVCoord.a.x, tUVCoord.a.y); // Â∑¶‰∏ä
+	m_Sprites[0][1] = fcyRect(tUVCoord.a.x, 0.f, tUVCoord.b.x, tUVCoord.a.y); // ‰∏ä
+	m_Sprites[0][2] = fcyRect(tUVCoord.b.x, 0.f, 1.f         , tUVCoord.a.y); // Âè≥‰∏ä
 
-	m_Sprites[1][0] = fcyRect(0.f,          tUVCoord.a.y, tUVCoord.a.x, tUVCoord.b.y); // ◊Û÷–
-	m_Sprites[1][1] = fcyRect(tUVCoord.a.x, tUVCoord.a.y, tUVCoord.b.x, tUVCoord.b.y); // ÷–
-	m_Sprites[1][2] = fcyRect(tUVCoord.b.x, tUVCoord.a.y, 1.f         , tUVCoord.b.y); // ”“÷–
+	m_Sprites[1][0] = fcyRect(0.f,          tUVCoord.a.y, tUVCoord.a.x, tUVCoord.b.y); // Â∑¶‰∏≠
+	m_Sprites[1][1] = fcyRect(tUVCoord.a.x, tUVCoord.a.y, tUVCoord.b.x, tUVCoord.b.y); // ‰∏≠
+	m_Sprites[1][2] = fcyRect(tUVCoord.b.x, tUVCoord.a.y, 1.f         , tUVCoord.b.y); // Âè≥‰∏≠
 
-	m_Sprites[2][0] = fcyRect(0.f,          tUVCoord.b.y, tUVCoord.a.x, 1.f); // ◊Ûœ¬
-	m_Sprites[2][1] = fcyRect(tUVCoord.a.x, tUVCoord.b.y, tUVCoord.b.x, 1.f); // œ¬
-	m_Sprites[2][2] = fcyRect(tUVCoord.b.x, tUVCoord.b.y, 1.f         , 1.f); // ”“œ¬
+	m_Sprites[2][0] = fcyRect(0.f,          tUVCoord.b.y, tUVCoord.a.x, 1.f); // Â∑¶‰∏ã
+	m_Sprites[2][1] = fcyRect(tUVCoord.a.x, tUVCoord.b.y, tUVCoord.b.x, 1.f); // ‰∏ã
+	m_Sprites[2][2] = fcyRect(tUVCoord.b.x, tUVCoord.b.y, 1.f         , 1.f); // Âè≥‰∏ã
 }
 
 ////////////////////////////////////////////////////////////////////////////////

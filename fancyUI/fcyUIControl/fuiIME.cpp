@@ -1,4 +1,4 @@
-#include "fuiIME.h"
+ï»¿#include "fuiIME.h"
 
 #include "fuiExceptionMacro.h"
 
@@ -13,11 +13,11 @@ fuiIME::fuiIME(fuiPage* pRootPage, const std::wstring& Name)
 	m_bMultiLine(true), m_bHMode(false), m_ActiveIndex(0),
 	m_pFontProvider(NULL), m_pFontRenderer(NULL), m_bInInput(false), m_bInComposition(false)
 {
-	// Ä¬ÈÏÊôĞÔ
+	// é»˜è®¤å±æ€§
 	SetVisible(false);
 	SetLayerPriority(FUIIME_LAYERPRIORITY);
 
-	// ÉèÖÃ·ÃÎÊÆ÷
+	// è®¾ç½®è®¿é—®å™¨
 	m_SingleLineSkin_Accessor = fuiPropertyAccessor<std::wstring>(
 		&m_SingleLineSkin,
 		[&](std::wstring& Prop, const std::wstring* Value)
@@ -52,7 +52,7 @@ fuiIME::fuiIME(fuiPage* pRootPage, const std::wstring& Name)
 	m_ActiveFontColor_Accessor = fuiPropertyAccessor<fcyColor>(&m_ActiveFontColor);
 	m_CandidateFontColor_Accessor = fuiPropertyAccessor<fcyColor>(&m_CandidateFontColor);
 
-	// ×¢²áÊôĞÔ
+	// æ³¨å†Œå±æ€§
 	RegisterProperty(L"SingleLineSkin", &m_SingleLineSkin_Accessor);
 	RegisterProperty(L"MultiLineSkin", &m_MultiLineSkin_Accessor);
 	RegisterProperty(L"MultiLine", &m_bMultiLine_Accessor);
@@ -65,7 +65,7 @@ fuiIME::fuiIME(fuiPage* pRootPage, const std::wstring& Name)
 	RegisterProperty(L"ActiveFontColor", &m_ActiveFontColor_Accessor);
 	RegisterProperty(L"CandidateFontColor", &m_CandidateFontColor_Accessor);
 
-	// ÉèÖÃÊÂ¼ş
+	// è®¾ç½®äº‹ä»¶
 	GetEvent(L"OnStyleChanged") += fuiDelegate::EventCallBack(this, &fuiIME::OnStyleChanged);
 
 	pRootPage->GetEvent(L"OnIMEClosed") += fuiDelegate::EventCallBack(this, &fuiIME::OnIMEClosed);
@@ -96,14 +96,14 @@ void fuiIME::recalcuStr()
 		return;
 	}
 
-	// ¼ÆËãÆ´Ğ´×Ö·û´®°üÎ§ºĞ
+	// è®¡ç®—æ‹¼å†™å­—ç¬¦ä¸²åŒ…å›´ç›’
 	m_CompStrSize = m_pFontRenderer->MeasureString(m_CompositionStr.c_str());
 	m_CompStrSize.b.x += 2.f;
 
 	wstring tCandidateStr;
 	if(m_bHMode)
 	{
-		// Ë®Æ½Ä£Ê½
+		// æ°´å¹³æ¨¡å¼
 		for(fuInt i = 0; i<m_CandidateList.size(); ++i)
 		{
 			tCandidateStr += m_CandidateList[i];
@@ -113,7 +113,7 @@ void fuiIME::recalcuStr()
 	}
 	else
 	{
-		// ´¹Ö±Ä£Ê½
+		// å‚ç›´æ¨¡å¼
 		for(fuInt i = 0; i<m_CandidateList.size(); ++i)
 		{
 			tCandidateStr += m_CandidateList[i];
@@ -122,7 +122,7 @@ void fuiIME::recalcuStr()
 		}
 	}
 
-	// ¼ÆËã°üÎ§ºĞ
+	// è®¡ç®—åŒ…å›´ç›’
 	m_CandidateStrSize = m_pFontRenderer->MeasureString(tCandidateStr.c_str());
 	m_CandidateStrSize.b.x += 2.f;
 	if(m_bHMode)
@@ -142,7 +142,7 @@ void fuiIME::recalcuStr()
 
 void fuiIME::readCandidate(f2dIMECandidateList* pList)
 {
-	// ¶ÁÈ¡ºòÑ¡´ÊÊı¾İ
+	// è¯»å–å€™é€‰è¯æ•°æ®
 	m_ActiveIndex = pList->GetCurIndex() - pList->GetPageStart();
 
 	m_CandidateList.clear();
@@ -272,10 +272,10 @@ void fuiIME::Render(fuiGraphics* pGraph)
 	fcyVec2 tCandidatePos = m_InputBoxOffset;
 	fcyVec2 tAbsolutPos = GetAbsolutePos();
 
-	// ¼ÆËã²¢»æÖÆÍâ¿ò
+	// è®¡ç®—å¹¶ç»˜åˆ¶å¤–æ¡†
 	if(m_bMultiLine)
 	{
-		// ¶àĞĞÄ£Ê½
+		// å¤šè¡Œæ¨¡å¼
 		tRect.b += m_CompositionMargin.a;
 		tRect.b += fcyVec2(m_CompStrSize.GetWidth(), m_CompStrSize.GetHeight());
 		tRect.b += m_CompositionMargin.b;
@@ -286,7 +286,7 @@ void fuiIME::Render(fuiGraphics* pGraph)
 
 		tRect.b.x = FCYMAX(tRect.b.x, tPosX);
 
-		// µ÷ÕûÊ¹Ö®²»Ô½³öÆÁÄ»
+		// è°ƒæ•´ä½¿ä¹‹ä¸è¶Šå‡ºå±å¹•
 		fcyVec2 tOffset = pGraph->GetTopOffset();
 		if(tAbsolutPos.x + tRect.GetWidth() > GetRoot()->GetRect().b.x)
 			tOffset.x += GetRoot()->GetRect().b.x - (tAbsolutPos.x + tRect.GetWidth());
@@ -298,7 +298,7 @@ void fuiIME::Render(fuiGraphics* pGraph)
 		if(m_pMultiLineSkin)
 			m_pMultiLineSkin->Draw(pGraph, tRect);
 
-		// ¼ÆËãÎÄ±¾¿ò
+		// è®¡ç®—æ–‡æœ¬æ¡†
 		if(m_pFontProvider && m_pFontRenderer)
 		{
 			fcyVec2 tCompTextPos = m_InputBoxOffset + m_CompositionMargin.a + fcyVec2(0.f, m_pFontProvider->GetAscender());
@@ -306,19 +306,19 @@ void fuiIME::Render(fuiGraphics* pGraph)
 			m_pFontRenderer->SetColor(m_FontColor);
 			m_pFontRenderer->DrawTextW(pGraph->GetGraphics(), m_CompositionStr.c_str(), tCompTextPos);
 
-			// ¼ÆËãºòÑ¡¿ò
+			// è®¡ç®—å€™é€‰æ¡†
 			tCandidatePos += m_CompositionMargin.a;
 			tCandidatePos.y += m_CompStrSize.GetHeight() + m_CompositionMargin.b.y + m_CandidateMargin.a.y + m_pFontProvider->GetAscender();
 		}
 	}
 	else
 	{
-		// µ¥ĞĞÄ£Ê½
+		// å•è¡Œæ¨¡å¼
 		tRect.b += m_CandidateMargin.a + 
 			fcyVec2(m_CandidateStrSize.GetWidth(), m_CandidateStrSize.GetHeight()) + 
 			m_CandidateMargin.b;
 		
-		// µ÷ÕûÊ¹Ö®²»Ô½³öÆÁÄ»
+		// è°ƒæ•´ä½¿ä¹‹ä¸è¶Šå‡ºå±å¹•
 		fcyVec2 tOffset = pGraph->GetTopOffset();
 		if(tAbsolutPos.x + tRect.GetWidth() > GetRoot()->GetRect().b.x)
 			tOffset.x += GetRoot()->GetRect().b.x - (tAbsolutPos.x + tRect.GetWidth());
@@ -330,16 +330,16 @@ void fuiIME::Render(fuiGraphics* pGraph)
 		if(m_pSingleLineSkin)
 			m_pSingleLineSkin->Draw(pGraph, tRect);
 
-		// ¼ÆËãÎÄ±¾¿ò
+		// è®¡ç®—æ–‡æœ¬æ¡†
 		if(m_pFontProvider && m_pFontRenderer)
 		{
-			// ¼ÆËãºòÑ¡¿ò
+			// è®¡ç®—å€™é€‰æ¡†
 			tCandidatePos += m_CandidateMargin.a;
 			tCandidatePos.y += m_pFontProvider->GetAscender();
 		}
 	}
 
-	// »æÖÆºòÑ¡¿ò
+	// ç»˜åˆ¶å€™é€‰æ¡†
 	if(m_pFontProvider && m_pFontRenderer)
 	{
 		if(m_bHMode)

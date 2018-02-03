@@ -1,4 +1,4 @@
-#include "fuiControl.h"
+ï»¿#include "fuiControl.h"
 
 #include <algorithm>
 
@@ -27,16 +27,16 @@ fuiControl::~fuiControl()
 
 void fuiControl::registerAllProperty()
 {
-	// === ÉèÖÃÄ¬ÈÏ·ÃÎÊÆ÷ ===
-	// Ãû³Æ
+	// === è®¾ç½®é»˜è®¤è®¿é—®å™¨ ===
+	// åç§°
 	m_Name_Accessor = fuiPropertyAccessor<std::wstring>(
 		&m_Name, 
-		fuiPropertyAccessorHelper<std::wstring>::DefaultGetter, // ¿É¶Á
-		fuiPropertyAccessor<std::wstring>::PropSetter()         // ¾Ü¾øĞ´
+		fuiPropertyAccessorHelper<std::wstring>::DefaultGetter, // å¯è¯»
+		fuiPropertyAccessor<std::wstring>::PropSetter()         // æ‹’ç»å†™
 	);
-	// ¶îÍâÊôĞÔ
+	// é¢å¤–å±æ€§
 	m_Tag_Accessor = fuiPropertyAccessor<std::wstring>(&m_Tag);
-	// ¿Ø¼şÎ»ÖÃ
+	// æ§ä»¶ä½ç½®
 	m_Rect_Accessor = fuiPropertyAccessor<fcyRect>(
 		&m_Rect,
 		fuiPropertyAccessorHelper<fcyRect>::DefaultGetter,
@@ -46,7 +46,7 @@ void fuiControl::registerAllProperty()
 			SetRect(tRect);
 		}
 	);
-	// ×ó±ßÎ»ÖÃ
+	// å·¦è¾¹ä½ç½®
 	m_Left_Accessor = fuiPropertyAccessor<float>(
 		&m_Rect.a.x,
 		fuiPropertyAccessorHelper<float>::DefaultGetter,
@@ -56,7 +56,7 @@ void fuiControl::registerAllProperty()
 			SetLeft(tValue);
 		}
 	);
-	// ¶¥±ßÎ»ÖÃ
+	// é¡¶è¾¹ä½ç½®
 	m_Top_Accessor = fuiPropertyAccessor<float>(
 		&m_Rect.a.y,
 		fuiPropertyAccessorHelper<float>::DefaultGetter,
@@ -66,7 +66,7 @@ void fuiControl::registerAllProperty()
 			SetTop(tValue);
 		}
 	);
-	// ¿í¶È
+	// å®½åº¦
 	m_Width_Accessor = fuiPropertyAccessor<float>(
 		NULL, 
 		[&](std::wstring& Prop, const float*) {
@@ -79,7 +79,7 @@ void fuiControl::registerAllProperty()
 			SetWidth(tValue);
 		}
 	);
-	// ¸ß¶È
+	// é«˜åº¦
 	m_Height_Accessor = fuiPropertyAccessor<float>(
 		NULL, 
 		[&](std::wstring& Prop, const float*) {
@@ -92,11 +92,11 @@ void fuiControl::registerAllProperty()
 			SetHeight(tValue);
 		}
 	);
-	// ²Ã¼ô
+	// è£å‰ª
 	m_Clip_Accessor = fuiPropertyAccessor<bool>(&m_bClip);
-	// ´©Í¸
+	// ç©¿é€
 	m_MouseTrans_Accessor = fuiPropertyAccessor<bool>(&m_bMouseTrans);
-	// ²ã´ÎÓÅÏÈ¼¶
+	// å±‚æ¬¡ä¼˜å…ˆçº§
 	m_LayerPriority_Accessor = fuiPropertyAccessor<fFloat>(
 		&m_LayerPriority,
 		[&](std::wstring& Prop, const float* v) {
@@ -120,7 +120,7 @@ void fuiControl::registerAllProperty()
 		}
 	);
 
-	// ×¢²áÊôĞÔ·ÃÎÊÆ÷
+	// æ³¨å†Œå±æ€§è®¿é—®å™¨
 	RegisterProperty(L"Name", &m_Name_Accessor);
 	RegisterProperty(L"Tag", &m_Tag_Accessor);
 	RegisterProperty(L"Rect", &m_Rect_Accessor);
@@ -136,7 +136,7 @@ void fuiControl::registerAllProperty()
 
 void fuiControl::registerAllEvent()
 {
-	// ×¢²áÊÂ¼ş
+	// æ³¨å†Œäº‹ä»¶
 	RegisterEvent(L"OnVisibleChanged");
 
 	RegisterEvent(L"OnParentChanged");
@@ -218,7 +218,7 @@ void fuiControl::setSubControlLayer(fuiControl* pControl, fInt Index)
 	if(!pControl)
 		throw fcyException("fuiControl::attachSubControl", "Param 'pControl' is null.");
 
-	// È·ÈÏË÷Òı
+	// ç¡®è®¤ç´¢å¼•
 	if(Index < 0 && -(Index + 1) > (int)m_SubControlList.size())
 		throw fcyException("fuiControl::setSubControlLayer", "Index out of range.");
 	else if(Index > 0 && Index > (int)m_SubControlList.size())
@@ -269,17 +269,17 @@ void fuiControl::SetParent(fuiControl* pParent)
 	if(pParent == m_pParent)
 		return;
 
-	// ´Ó¸¸¶ÔÏóÖĞÒÆ³ı
+	// ä»çˆ¶å¯¹è±¡ä¸­ç§»é™¤
 	if(m_pParent)
 		m_pParent->removeSubControl(this);
 
-	// ¹Ò½Óµ½ĞÂµÄ¶ÔÏó
+	// æŒ‚æ¥åˆ°æ–°çš„å¯¹è±¡
 	if(pParent)
 		m_pParent = pParent->attachSubControl(this);
 	else
 		pParent = NULL;
 
-	// ´¥·¢ÊÂ¼ş
+	// è§¦å‘äº‹ä»¶
 	ExecEvent(L"OnParentChanged");
 }
 
@@ -303,7 +303,7 @@ fuInt fuiControl::GetSubControlCount()const
 
 fuiControl* fuiControl::GetSubControl(fInt Layer)
 {
-	// È·ÈÏË÷Òı
+	// ç¡®è®¤ç´¢å¼•
 	if(Layer < 0 && -(Layer + 1) > (int)m_SubControlList.size())
 		throw fcyException("fuiControl::GetSubControl", "Index out of range.");
 	else if(Layer > 0 && Layer > (int)m_SubControlList.size())
@@ -330,7 +330,7 @@ void fuiControl::SetControlStyle(fuiStyle* pStyle)
 
 	m_pStyle = pStyle;
 
-	// ´¥·¢ÊÂ¼ş
+	// è§¦å‘äº‹ä»¶
 	ExecEvent(L"OnStyleChanged");
 }
 
@@ -341,7 +341,7 @@ void fuiControl::SetRect(const fcyRect& Rect)
 	
 	m_Rect = Rect;
 
-	// ´¥·¢ÊÂ¼ş
+	// è§¦å‘äº‹ä»¶
 	ExecEvent(L"OnPosChanged");
 	ExecEvent(L"OnSizeChanged");
 }
@@ -352,7 +352,7 @@ void fuiControl::SetLeft(fFloat Value)
 	m_Rect.a.x = Value;
 	m_Rect.b.x = m_Rect.a.x + tOrgWidth;
 
-	// ´¥·¢ÊÂ¼ş
+	// è§¦å‘äº‹ä»¶
 	ExecEvent(L"OnPosChanged");
 }
 
@@ -362,7 +362,7 @@ void fuiControl::SetTop(fFloat Value)
 	m_Rect.a.y = Value;
 	m_Rect.b.y = m_Rect.a.y + tOrgHeight;
 
-	// ´¥·¢ÊÂ¼ş
+	// è§¦å‘äº‹ä»¶
 	ExecEvent(L"OnPosChanged");
 }
 
@@ -373,7 +373,7 @@ void fuiControl::SetWidth(fFloat Value)
 
 	m_Rect.b.x = m_Rect.a.x + Value;
 
-	// ´¥·¢ÊÂ¼ş
+	// è§¦å‘äº‹ä»¶
 	ExecEvent(L"OnSizeChanged");
 }
 
@@ -384,7 +384,7 @@ void fuiControl::SetHeight(fFloat Value)
 
 	m_Rect.b.y = m_Rect.a.y + Value;
 
-	// ´¥·¢ÊÂ¼ş
+	// è§¦å‘äº‹ä»¶
 	ExecEvent(L"OnSizeChanged");
 }
 
@@ -401,7 +401,7 @@ void fuiControl::SetVisible(fBool Value)
 	{
 		m_bVisible = Value;
 
-		// ´¥·¢ÊÂ¼ş
+		// è§¦å‘äº‹ä»¶
 		ExecEvent(L"OnVisibleChanged");
 	}
 }

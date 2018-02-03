@@ -1,17 +1,17 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiProgressBar.h
-/// @brief fancyUI ºáÏò½ø¶ÈÌõ
+/// @brief fancyUI æ¨ªå‘è¿›åº¦æ¡
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "../fcyUIBase/fuiControl.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief UI ºáÏò½ø¶ÈÌõ
+/// @brief UI æ¨ªå‘è¿›åº¦æ¡
 ////////////////////////////////////////////////////////////////////////////////
 class fuiHProgressBar :
 	public fuiControl
 {
-protected: // ÊôĞÔ
+protected: // å±æ€§
 	std::wstring m_BackSprite;
 	std::wstring m_LeftImage;
 	std::wstring m_RightImage;
@@ -31,7 +31,7 @@ protected: // ÊôĞÔ
 	fuiPropertyAccessor<float> m_MinValue_Accessor;
 	fuiPropertyAccessor<float> m_Value_Accessor;
 	fuiPropertyAccessor<fcyRect> m_ProgressMargin_Accessor;
-protected: // »æÍ¼×ÊÔ´
+protected: // ç»˜å›¾èµ„æº
 	fcyRefPointer<fuiBorderSprite> m_pBackSprite;
 	fcyRefPointer<fuiSprite> m_pLeftImage;
 	fcyRefPointer<fuiSprite> m_pRightImage;
@@ -44,7 +44,7 @@ protected: // »æÍ¼×ÊÔ´
 	void UpdateValue();
 
 	void OnStyleChanged(fuiControl* pThis, fuiEventArgs* pArgs);
-public: // ÊµÏÖ½Ó¿Ú
+public: // å®ç°æ¥å£
 	void Update(fDouble ElapsedTime);
 	void Render(fuiGraphics* pGraph);
 public:

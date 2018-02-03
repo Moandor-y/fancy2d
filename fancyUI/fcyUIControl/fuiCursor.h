@@ -1,6 +1,6 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiCursor.h
-/// @brief fancyUI °´Å¥
+/// @brief fancyUI æŒ‰é’®
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "../fcyUIBase/fuiControl.h"
@@ -8,24 +8,24 @@
 #define FUICURSOR_LAYERPRIORITY 1000.f
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief UI °´Å¥
+/// @brief UI æŒ‰é’®
 ////////////////////////////////////////////////////////////////////////////////
 class fuiCursor :
 	public fuiControl
 {
-protected: // ÊôĞÔ
+protected: // å±æ€§
 	std::wstring m_CursorSprite;
 	fcyColor m_BlendColor;
 	
 	fuiPropertyAccessor<std::wstring> m_CursorSprite_Accessor;
 	fuiPropertyAccessor<fcyColor> m_BlendColor_Accessor;
-protected: // »æÍ¼×ÊÔ´
+protected: // ç»˜å›¾èµ„æº
 	fcyRefPointer<fuiSprite> m_pCursorSprite;
 	
 	void OnStyleChanged(fuiControl* pThis, fuiEventArgs* pArgs);
 
 	void OnGlobalMouseMove(fuiControl* pThis, fuiEventArgs* pArgs);
-public: // ÊµÏÖ½Ó¿Ú
+public: // å®ç°æ¥å£
 	void Update(fDouble ElapsedTime);
 	void Render(fuiGraphics* pGraph);
 public:

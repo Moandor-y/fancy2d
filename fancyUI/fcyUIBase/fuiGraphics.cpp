@@ -1,4 +1,4 @@
-#include "fuiGraphics.h"
+ï»¿#include "fuiGraphics.h"
 
 using namespace std;
 
@@ -102,10 +102,10 @@ fResult fuiGraphics::Begin()
 	if(FCYFAILED(tRet = m_pGraphics2D->Begin()))
 		return tRet;
 
-	// ÍÆÈë²Ã¼ô¾ØĞÎ
+	// æ¨å…¥è£å‰ªçŸ©å½¢
 	m_ClipRect.push(m_pDev->GetScissorRect());
 
-	// ±£´æ×´Ì¬
+	// ä¿å­˜çŠ¶æ€
 	m_OrgTransMat = m_pGraphics2D->GetWorldTransform();
 	m_TransMat = fcyMatrix4::GetIdentity();
 
@@ -121,7 +121,7 @@ void fuiGraphics::End()
 	m_InRender = false;
 	m_pGraphics2D->End();
 
-	// »Ø¸´×´Ì¬
+	// å›å¤çŠ¶æ€
 	while(!m_ClipRect.empty())
 	{
 		m_ClipRect.pop();

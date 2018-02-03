@@ -1,6 +1,6 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiEvent.h
-/// @brief fancyUI ¿Ø¼şÊÂ¼ş¼°Î¯ÍĞ
+/// @brief fancyUI æ§ä»¶äº‹ä»¶åŠå§”æ‰˜
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include <fcyRefObj.h>
@@ -16,7 +16,7 @@ class fuiControl;
 class fuiEventArgs;
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief Î¯ÍĞ
+/// @brief å§”æ‰˜
 ////////////////////////////////////////////////////////////////////////////////
 class fuiDelegate
 {
@@ -40,22 +40,22 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ÊÂ¼ş¼¯ºÏ
+/// @brief äº‹ä»¶é›†åˆ
 ////////////////////////////////////////////////////////////////////////////////
 class fuiEventSet
 {
 protected:
-	/// @brief ÊÂ¼şÁĞ±í
+	/// @brief äº‹ä»¶åˆ—è¡¨
 	std::unordered_map<std::wstring, fuiDelegate> m_EventList;
 
-	/// @brief ÊÂ¼ş·ÀÖ¹ÖØÈë±ê¼Ç
+	/// @brief äº‹ä»¶é˜²æ­¢é‡å…¥æ ‡è®°
 	std::unordered_map<std::wstring, fBool> m_EventFlag;
 protected:
-	/// @brief ×¢²áÊÂ¼ş
+	/// @brief æ³¨å†Œäº‹ä»¶
 	void RegisterEvent(const std::wstring& Str);
-	/// @brief Ö´ĞĞÊÂ¼ş
+	/// @brief æ‰§è¡Œäº‹ä»¶
 	void ExecEvent(const std::wstring& Str, fuiControl* pControl, fuiEventArgs* pArgs);
-public: // ÊÂ¼ş²Ù×÷
+public: // äº‹ä»¶æ“ä½œ
 	fuiDelegate& GetEvent(const std::wstring& EventName);
 public:
 	fuiEventSet() {}
@@ -63,27 +63,27 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief »Øµ÷ÊÂ¼ş²ÎÊı
+/// @brief å›è°ƒäº‹ä»¶å‚æ•°
 ////////////////////////////////////////////////////////////////////////////////
 class fuiEventArgs
 {
 public:
-	/// @brief ÊÂ¼şÀàĞÍ
+	/// @brief äº‹ä»¶ç±»å‹
 	enum EVENTTYPE
 	{
-		EVENTTYPE_USER,         ///< @brief ÓÃ»§ÊÂ¼ş
-		EVENTTYPE_CANCELABLE,   ///< @brief ¿É³·ÏúÊÂ¼ş
-		EVENTTYPE_POSITION,     ///< @brief Î»ÖÃÊÂ¼ş
-		EVENTTYPE_OBJECT,       ///< @brief UI¶ÔÏóÊÂ¼ş
-		EVENTTYPE_KEY,          ///< @brief °´¼üÊÂ¼ş
-		EVENTTYPE_CHAR,         ///< @brief ×Ö·ûÊÂ¼ş
-		EVENTTYPE_STRING,       ///< @brief ×Ö·û´®ÊÂ¼ş
-		EVENTTYPE_IMECANDIDATE  ///< @brief IMEºòÑ¡´ÊÊÂ¼ş
+		EVENTTYPE_USER,         ///< @brief ç”¨æˆ·äº‹ä»¶
+		EVENTTYPE_CANCELABLE,   ///< @brief å¯æ’¤é”€äº‹ä»¶
+		EVENTTYPE_POSITION,     ///< @brief ä½ç½®äº‹ä»¶
+		EVENTTYPE_OBJECT,       ///< @brief UIå¯¹è±¡äº‹ä»¶
+		EVENTTYPE_KEY,          ///< @brief æŒ‰é”®äº‹ä»¶
+		EVENTTYPE_CHAR,         ///< @brief å­—ç¬¦äº‹ä»¶
+		EVENTTYPE_STRING,       ///< @brief å­—ç¬¦ä¸²äº‹ä»¶
+		EVENTTYPE_IMECANDIDATE  ///< @brief IMEå€™é€‰è¯äº‹ä»¶
 	};
 public:
-	/// @brief     ²éÑ¯ÊÂ¼ş
-	/// @param[in] Type ÊÇ·ñÖ§³ÖµÄÊÂ¼ş
-	/// @return    ÈôÖ§³ÖÊÂ¼ş£¬Ôò·µ»ØÏàÓ¦µÄ¶ÔÏó
+	/// @brief     æŸ¥è¯¢äº‹ä»¶
+	/// @param[in] Type æ˜¯å¦æ”¯æŒçš„äº‹ä»¶
+	/// @return    è‹¥æ”¯æŒäº‹ä»¶ï¼Œåˆ™è¿”å›ç›¸åº”çš„å¯¹è±¡
 	virtual void* QueryEvent(EVENTTYPE Type)
 	{
 		return NULL;
@@ -94,7 +94,7 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ¿É³·ÏúÊÂ¼ş
+/// @brief å¯æ’¤é”€äº‹ä»¶
 ////////////////////////////////////////////////////////////////////////////////
 class fuiCancelableEventArgs :
 	public fuiEventArgs
@@ -110,7 +110,7 @@ public:
 	{
 		m_bCancel = V;
 	}
-public: // ½Ó¿ÚÊµÏÖ
+public: // æ¥å£å®ç°
 	void* QueryEvent(EVENTTYPE Type)
 	{
 		if(Type == EVENTTYPE_CANCELABLE)
@@ -125,7 +125,7 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief Î»ÖÃÊÂ¼ş
+/// @brief ä½ç½®äº‹ä»¶
 ////////////////////////////////////////////////////////////////////////////////
 class fuiPositionEventArgs :
 	public fuiEventArgs
@@ -141,7 +141,7 @@ public:
 	{
 		m_Pos = V;
 	}
-public: // ½Ó¿ÚÊµÏÖ
+public: // æ¥å£å®ç°
 	void* QueryEvent(EVENTTYPE Type)
 	{
 		if(Type == EVENTTYPE_POSITION)
@@ -155,7 +155,7 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ¶ÔÏóÊÂ¼ş
+/// @brief å¯¹è±¡äº‹ä»¶
 ////////////////////////////////////////////////////////////////////////////////
 class fuiObjectEventArgs :
 	public fuiEventArgs
@@ -171,7 +171,7 @@ public:
 	{
 		m_pObj = V;
 	}
-public: // ½Ó¿ÚÊµÏÖ
+public: // æ¥å£å®ç°
 	void* QueryEvent(EVENTTYPE Type)
 	{
 		if(Type == EVENTTYPE_OBJECT)
@@ -187,7 +187,7 @@ public:
 enum F2DINPUTKEYCODE;
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief °´¼üÊÂ¼ş
+/// @brief æŒ‰é”®äº‹ä»¶
 ////////////////////////////////////////////////////////////////////////////////
 class fuiKeyEventArgs :
 	public fuiEventArgs
@@ -203,7 +203,7 @@ public:
 	{
 		m_pObj = V;
 	}
-public: // ½Ó¿ÚÊµÏÖ
+public: // æ¥å£å®ç°
 	void* QueryEvent(EVENTTYPE Type)
 	{
 		if(Type == EVENTTYPE_KEY)
@@ -217,7 +217,7 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ×Ö·ûÊÂ¼ş
+/// @brief å­—ç¬¦äº‹ä»¶
 ////////////////////////////////////////////////////////////////////////////////
 class fuiCharEventArgs :
 	public fuiEventArgs
@@ -233,7 +233,7 @@ public:
 	{
 		m_Value = V;
 	}
-public: // ½Ó¿ÚÊµÏÖ
+public: // æ¥å£å®ç°
 	void* QueryEvent(EVENTTYPE Type)
 	{
 		if(Type == EVENTTYPE_CHAR)
@@ -247,7 +247,7 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ×Ö·û´®ÊÂ¼ş
+/// @brief å­—ç¬¦ä¸²äº‹ä»¶
 ////////////////////////////////////////////////////////////////////////////////
 class fuiStringEventArgs :
 	public fuiEventArgs
@@ -263,7 +263,7 @@ public:
 	{
 		m_Str = V;
 	}
-public: // ½Ó¿ÚÊµÏÖ
+public: // æ¥å£å®ç°
 	void* QueryEvent(EVENTTYPE Type)
 	{
 		if(Type == EVENTTYPE_STRING)
@@ -279,7 +279,7 @@ public:
 struct f2dIMECandidateList;
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief IMEºòÑ¡´ÊÊÂ¼ş
+/// @brief IMEå€™é€‰è¯äº‹ä»¶
 ////////////////////////////////////////////////////////////////////////////////
 class fuiIMECandidateEventArgs :
 	public fuiEventArgs
@@ -295,7 +295,7 @@ public:
 	{
 		m_pList = pList;
 	}
-public: // ½Ó¿ÚÊµÏÖ
+public: // æ¥å£å®ç°
 	void* QueryEvent(EVENTTYPE Type)
 	{
 		if(Type == EVENTTYPE_IMECANDIDATE)

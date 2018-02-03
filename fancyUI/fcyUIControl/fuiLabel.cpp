@@ -1,4 +1,4 @@
-#include "fuiLabel.h"
+ï»¿#include "fuiLabel.h"
 
 #include "fuiExceptionMacro.h"
 
@@ -10,10 +10,10 @@ fuiLabel::fuiLabel(fuiPage* pRootPage, const std::wstring& Name)
 	: fuiControl(pRootPage, Name), m_HAlign(HALIGNMODE_LEFT), m_VAlign(VALIGNMODE_TOP), m_TextHeight(0),
 	m_pFontProvider(NULL), m_pFontRenderer(NULL)
 {
-	// Ä¬ÈÏ²ÎÊı
+	// é»˜è®¤å‚æ•°
 	m_bClip = true;
 
-	// ÉèÖÃ·ÃÎÊÆ÷
+	// è®¾ç½®è®¿é—®å™¨
 	m_Text_Accessor = fuiPropertyAccessor<wstring>(
 		&m_Text,
 		[&](std::wstring& Prop, const std::wstring* Value)
@@ -100,17 +100,17 @@ fuiLabel::fuiLabel(fuiPage* pRootPage, const std::wstring& Name)
 		}
 	);
 
-	// ×¢²áÊôĞÔ
+	// æ³¨å†Œå±æ€§
 	RegisterProperty(L"Text", &m_Text_Accessor);
 	RegisterProperty(L"FontName", &m_FontName_Accessor);
 	RegisterProperty(L"FontColor", &m_FontColor_Accessor);
 	RegisterProperty(L"HAlign", &m_HAlign_Accessor);
 	RegisterProperty(L"VAlign", &m_VAlign_Accessor);
 
-	// ×¢²áÊÂ¼ş
+	// æ³¨å†Œäº‹ä»¶
 	RegisterEvent(L"OnTextChanged");
 
-	// ÉèÖÃÊÂ¼ş
+	// è®¾ç½®äº‹ä»¶
 	GetEvent(L"OnTextChanged") += fuiDelegate::EventCallBack(this, &fuiLabel::OnTextChanged);
 	GetEvent(L"OnStyleChanged") += fuiDelegate::EventCallBack(this, &fuiLabel::OnStyleChanged);
 }
@@ -123,7 +123,7 @@ void fuiLabel::OnTextChanged(fuiControl* pThis, fuiEventArgs* pArgs)
 	m_Lines.clear();
 	m_LineWidth.resize(fcyStringHelper::StringSplit(m_Text, L"\n", false, m_Lines));
 
-	// ¶ÈÁ¿Ã¿ĞĞµÄ¿í¶È
+	// åº¦é‡æ¯è¡Œçš„å®½åº¦
 	if(m_pFontRenderer && m_pFontProvider)
 	{
 		for(fuInt i = 0; i<m_Lines.size(); ++i)
@@ -151,7 +151,7 @@ void fuiLabel::OnStyleChanged(fuiControl* pThis, fuiEventArgs* pArgs)
 		m_pFontRenderer = ((fuiFont*)m_Font)->GetFontRenderer();
 	}
 
-	// ÖØĞÂ²¼¾Ö
+	// é‡æ–°å¸ƒå±€
 	OnTextChanged(pThis, pArgs);
 }
 
@@ -162,10 +162,10 @@ void fuiLabel::Render(fuiGraphics* pGraph)
 {
 	if(m_pFontProvider && m_pFontRenderer && m_FontColor.a != 0)
 	{
-		// ÉèÖÃÑÕÉ«
+		// è®¾ç½®é¢œè‰²
 		m_pFontRenderer->SetColor(m_FontColor);
 
-		// Ò»ĞĞĞĞ»æÖÆ
+		// ä¸€è¡Œè¡Œç»˜åˆ¶
 		float tAscender = m_pFontProvider->GetAscender();
 		float tDescender = m_pFontProvider->GetDescender();
 		float tLineHeight = m_pFontProvider->GetLineHeight();
@@ -173,7 +173,7 @@ void fuiLabel::Render(fuiGraphics* pGraph)
 		{
 			fcyVec2 tPos;
 
-			// ºáÏòÎ»ÖÃ
+			// æ¨ªå‘ä½ç½®
 			switch(m_HAlign)
 			{
 			case HALIGNMODE_LEFT:
@@ -187,7 +187,7 @@ void fuiLabel::Render(fuiGraphics* pGraph)
 				break;
 			}
 
-			// ×İÏòÎ»ÖÃ
+			// çºµå‘ä½ç½®
 			switch(m_VAlign)
 			{
 			case VALIGNMODE_TOP:

@@ -1,7 +1,7 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiPropBlock.h
-/// @brief fancyUI ÊôĞÔ¿é
-/// @note  ÓÃÓÚ±£´æ¿Ø¼şÊôĞÔ
+/// @brief fancyUI å±æ€§å—
+/// @note  ç”¨äºä¿å­˜æ§ä»¶å±æ€§
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include <fcyRefObj.h>
@@ -11,8 +11,8 @@
 
 class fuiControl;
 
-/// @brief ÊôĞÔ¿é
-/// @note  ÓÃÓÚ±£´æ¿Ø¼şÊôĞÔ×´Ì¬
+/// @brief å±æ€§å—
+/// @note  ç”¨äºä¿å­˜æ§ä»¶å±æ€§çŠ¶æ€
 class fuiPropBlock
 {
 	friend class fuiPropBlock;
@@ -25,16 +25,16 @@ protected:
 	void getAllProp(fuiPropBlock& Block, fuiControl* p);
 	void setAllProp(fuiPropBlock& Block);
 public:
-	/// @brief ·µ»ØÊôĞÔ¿éËù°ó¶¨µÄ¿Ø¼ş
+	/// @brief è¿”å›å±æ€§å—æ‰€ç»‘å®šçš„æ§ä»¶
 	fuiControl* GetBindControl();
-	/// @brief ÖØĞÂ»ñÈ¡ËùÓĞÊôĞÔ
+	/// @brief é‡æ–°è·å–æ‰€æœ‰å±æ€§
 	void Get();
-	/// @brief ÉèÖÃËùÓĞÊôĞÔ
+	/// @brief è®¾ç½®æ‰€æœ‰å±æ€§
 	void Set();
 protected:
 	fuiPropBlock();
 public:
-	/// @brief ¹¹Ôì²¢°ó¶¨µ½¿Ø¼ş
+	/// @brief æ„é€ å¹¶ç»‘å®šåˆ°æ§ä»¶
 	fuiPropBlock(fuiControl* pControl, fBool CaptureImmediate=true);
 	fuiPropBlock(const fuiPropBlock& Org);
 	~fuiPropBlock();

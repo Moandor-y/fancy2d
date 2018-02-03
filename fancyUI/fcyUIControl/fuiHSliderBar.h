@@ -1,6 +1,6 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiSliderBar.h
-/// @brief fancyUI Ë®Æ½»¬¶¯Ìõ
+/// @brief fancyUI æ°´å¹³æ»‘åŠ¨æ¡
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "../fcyUIBase/fuiControl.h"
@@ -8,27 +8,27 @@
 #include "fuiImagedButton.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief UI Ë®Æ½»¬¶¯Ìõ
+/// @brief UI æ°´å¹³æ»‘åŠ¨æ¡
 ////////////////////////////////////////////////////////////////////////////////
 class fuiHSliderBar :
 	public fuiControl
 {
-protected: // ×Ó¿Ø¼ş
+protected: // å­æ§ä»¶
 	fcyRefPointer<fuiImagedButton> m_pSliderButton;
-protected: // ÊôĞÔ
-	std::wstring m_BackBorderSprite;   // ±³¾°¾«Áé
-	std::wstring m_FrontBorderSprite;  // Ç°¾°¾«Áé
-	fcyRect m_SliderBorder;            // »¬¶¯Ìõ±ß½ç
+protected: // å±æ€§
+	std::wstring m_BackBorderSprite;   // èƒŒæ™¯ç²¾çµ
+	std::wstring m_FrontBorderSprite;  // å‰æ™¯ç²¾çµ
+	fcyRect m_SliderBorder;            // æ»‘åŠ¨æ¡è¾¹ç•Œ
 	
 	fuiPropertyAccessor<std::wstring> m_BackBorderSprite_Accessor;
 	fuiPropertyAccessor<std::wstring> m_FrontBorderSprite_Accessor;
 	fuiPropertyAccessor<fcyRect> m_SliderBorder;
-protected: // »æÍ¼Êı¾İ
+protected: // ç»˜å›¾æ•°æ®
 	fcyRefPointer<fuiBorderSprite> m_BackBorderSprite;
 	fcyRefPointer<fuiBorderSprite> m_FrontBorderSprite;
 
 	void OnStyleChanged(fuiControl* pThis, fuiEventArgs* pArgs);
-public: // ÊµÏÖ½Ó¿Ú
+public: // å®ç°æ¥å£
 	void Update(fDouble ElapsedTime);
 	void Render(fuiGraphics* pGraph);
 public:

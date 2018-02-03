@@ -1,11 +1,11 @@
-////////////////////////////////////////////////////////////////////////////////
+Ôªø////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiExceptionMacro.h
-/// @brief ∏®÷˙“Ï≥£∫Í
+/// @brief ËæÖÂä©ÂºÇÂ∏∏ÂÆè
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include <fcyMisc/fcyStringHelper.h>
 
-/// @brief ªÒ»°◊ ‘¥≤¢ºÏ≤È∫œ∑®–‘
+/// @brief Ëé∑ÂèñËµÑÊ∫êÂπ∂Ê£ÄÊü•ÂêàÊ≥ïÊÄß
 #define FUIGETRESANDCHECK(ResName, ResVar, ResType, ResCheck, ExceptionSrc) \
 	ResVar = (ResType*)GetControlStyle()->QueryRes(ResName);             \
 	if(!ResName.empty() && !ResVar)                                      \

@@ -1,17 +1,17 @@
-////////////////////////////////////////////////////////////////////////////////
+Ôªø////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiEditBox.h
-/// @brief fancyUI ±‡º≠øÚ
+/// @brief fancyUI ÁºñËæëÊ°Ü
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "../fcyUIBase/fuiControl.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief UI ±‡º≠øÚ
+/// @brief UI ÁºñËæëÊ°Ü
 ////////////////////////////////////////////////////////////////////////////////
 class fuiEditBox :
 	public fuiControl
 {
-protected: //  Ù–‘
+protected: // Â±ûÊÄß
 	std::wstring m_Text;
 	std::wstring m_FontName;
 	fcyColor m_FontColor;
@@ -42,16 +42,16 @@ private:
 
 	fuInt m_CursorPos;
 
-	float m_CursorLeft;     ///< @brief ±£¥Êπ‚±ÍµΩMargin◊Û≤‡µƒæ‡¿Î
-	fcyVec2 m_TextDrawAt;   ///< @brief ±£¥ÊTextµƒ± ¥•Œª÷√
-	float m_CursorDrawAtY;  ///< @brief π‚±ÍªÊ÷∆Œª÷√
+	float m_CursorLeft;     ///< @brief ‰øùÂ≠òÂÖâÊ†áÂà∞MarginÂ∑¶‰æßÁöÑË∑ùÁ¶ª
+	fcyVec2 m_TextDrawAt;   ///< @brief ‰øùÂ≠òTextÁöÑÁ¨îËß¶‰ΩçÁΩÆ
+	float m_CursorDrawAtY;  ///< @brief ÂÖâÊ†áÁªòÂà∂‰ΩçÁΩÆ
 
-	fBool m_bCursorVisible; ///< @brief π‚±Í «∑Òø…º˚
+	fBool m_bCursorVisible; ///< @brief ÂÖâÊ†áÊòØÂê¶ÂèØËßÅ
 	
-	double m_Timer;          ///< @brief π‚±Íº∆ ±∆˜
+	double m_Timer;          ///< @brief ÂÖâÊ†áËÆ°Êó∂Âô®
 
-	void adjustPos(); // º∆À„Œª÷√
-protected: // ªÊÕº◊ ‘¥
+	void adjustPos(); // ËÆ°ÁÆó‰ΩçÁΩÆ
+protected: // ÁªòÂõæËµÑÊ∫ê
 	fcyRefPointer<fuiSprite> m_Cursor;
 	fcyRefPointer<fuiBorderSprite> m_Border;
 	fcyRefPointer<fuiBorderSprite> m_ActiveBorder;
@@ -71,7 +71,7 @@ protected: // ªÊÕº◊ ‘¥
 	void OnLostFocus(fuiControl* pThis, fuiEventArgs* pArgs);
 
 	void OnMouseLDown(fuiControl* pThis, fuiEventArgs* pArgs);
-public: //  µœ÷Ω”ø⁄
+public: // ÂÆûÁé∞Êé•Âè£
 	void Update(fDouble ElapsedTime);
 	void Render(fuiGraphics* pGraph);
 public:

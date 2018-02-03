@@ -1,4 +1,4 @@
-#include "fuiLabelEx.h"
+ï»¿#include "fuiLabelEx.h"
 
 #include "fuiExceptionMacro.h"
 
@@ -11,10 +11,10 @@ using namespace std;
 fuiLabelEx::fuiLabelEx(fuiPage* pRootPage, const std::wstring& Name)
 	: fuiControl(pRootPage, Name), m_LineHeight(0), m_ZValue(1.f), m_CharDisplaySpeed(0.03f), m_TotalAlpha(255), m_YOffset(0)
 {
-	// Ä¬ÈÏ²ÎÊı
+	// é»˜è®¤å‚æ•°
 	m_bClip = true;
 
-	// ÉèÖÃ·ÃÎÊÆ÷
+	// è®¾ç½®è®¿é—®å™¨
 	m_Text_Accessor = fuiPropertyAccessor<wstring>(
 		&m_Text,
 		[&](std::wstring& Prop, const std::wstring* Value)
@@ -47,24 +47,24 @@ fuiLabelEx::fuiLabelEx(fuiPage* pRootPage, const std::wstring& Name)
 	m_TotalAlpha_Accessor = fuiPropertyAccessor<int>(&m_TotalAlpha);
 	m_YOffset_Accessor = fuiPropertyAccessor<float>(&m_YOffset);
 
-	// Ö»¶ÁÊôĞÔ
+	// åªè¯»å±æ€§
 	m_LineHeight_Accessor = fuiPropertyAccessor<float>(
 		&m_LineHeight,
-		fuiPropertyAccessorHelper<float>::DefaultGetter, // ¿É¶Á
-		fuiPropertyAccessor<float>::PropSetter()         // Ö»¶Á
+		fuiPropertyAccessorHelper<float>::DefaultGetter, // å¯è¯»
+		fuiPropertyAccessor<float>::PropSetter()         // åªè¯»
 		);
 	m_MaxAscender_Accessor = fuiPropertyAccessor<float>(
 		&m_MaxAscender,
-		fuiPropertyAccessorHelper<float>::DefaultGetter, // ¿É¶Á
-		fuiPropertyAccessor<float>::PropSetter()         // Ö»¶Á
+		fuiPropertyAccessorHelper<float>::DefaultGetter, // å¯è¯»
+		fuiPropertyAccessor<float>::PropSetter()         // åªè¯»
 		);
 	m_PenEndPos_Accessor = fuiPropertyAccessor<fcyVec2>(
 		&m_PenEndPos,
-		fuiPropertyAccessorHelper<fcyVec2>::DefaultGetter, // ¿É¶Á
-		fuiPropertyAccessor<fcyVec2>::PropSetter()         // Ö»¶Á
+		fuiPropertyAccessorHelper<fcyVec2>::DefaultGetter, // å¯è¯»
+		fuiPropertyAccessor<fcyVec2>::PropSetter()         // åªè¯»
 		);
 
-	// ×¢²áÊôĞÔ
+	// æ³¨å†Œå±æ€§
 	RegisterProperty(L"Text", &m_Text_Accessor);
 	RegisterProperty(L"FontName", &m_FontName_Accessor);
 	RegisterProperty(L"FontColor", &m_FontColor_Accessor);
@@ -76,10 +76,10 @@ fuiLabelEx::fuiLabelEx(fuiPage* pRootPage, const std::wstring& Name)
 	RegisterProperty(L"MaxAscender", &m_MaxAscender_Accessor);
 	RegisterProperty(L"PenEndPos", &m_PenEndPos_Accessor);
 
-	// ×¢²áÊÂ¼ş
+	// æ³¨å†Œäº‹ä»¶
 	RegisterEvent(L"OnTextChanged");
 
-	// ÉèÖÃÊÂ¼ş
+	// è®¾ç½®äº‹ä»¶
 	GetEvent(L"OnTextChanged") += fuiDelegate::EventCallBack(this, &fuiLabelEx::OnTextChanged);
 	GetEvent(L"OnStyleChanged") += fuiDelegate::EventCallBack(this, &fuiLabelEx::OnStyleChanged);
 }
@@ -92,7 +92,7 @@ fcyVec2 fuiLabelEx::drawText(f2dGraphics2D* pGraph, const std::wstring& Text, in
 	if(!pGraph || !pFontProvider)
 		return StartPos;
 
-	// --- ×¼±¸¶¥µã ---
+	// --- å‡†å¤‡é¡¶ç‚¹ ---
 	fcyColor tBlendColor(BlendColor);
 	tBlendColor.a = (fByte)(tBlendColor.a * (m_TotalAlpha / 255.f));
 	f2dGraphics2DVertex tVerts[4] = 
@@ -103,10 +103,10 @@ fcyVec2 fuiLabelEx::drawText(f2dGraphics2D* pGraph, const std::wstring& Text, in
 		{ 0.f, 0.f, m_ZValue, tBlendColor.argb, 0.f, 0.f }
 	};
 
-	// --- ¼ÆËãĞèÒª»æÖÆµÄÊıÁ¿ ---
-	fcyVec2 tPos = StartPos;                        // ±Ê´¥Î»ÖÃ
+	// --- è®¡ç®—éœ€è¦ç»˜åˆ¶çš„æ•°é‡ ---
+	fcyVec2 tPos = StartPos;                        // ç¬”è§¦ä½ç½®
 
-	// --- »æÖÆÃ¿Ò»¸ö×Ö·û ---
+	// --- ç»˜åˆ¶æ¯ä¸€ä¸ªå­—ç¬¦ ---
 	f2dTexture2D* pTex = pFontProvider->GetCacheTexture();
 	if(!pTex)
 		return StartPos;
@@ -114,7 +114,7 @@ fcyVec2 fuiLabelEx::drawText(f2dGraphics2D* pGraph, const std::wstring& Text, in
 	f2dGlyphInfo tInfo;
 	for(int i = 0; i<Count; ++i)
 	{
-		// »»ĞĞ´¦Àí
+		// æ¢è¡Œå¤„ç†
 		if(Text[i] == L'\n')
 		{
 			tPos.x = Margin;
@@ -122,18 +122,18 @@ fcyVec2 fuiLabelEx::drawText(f2dGraphics2D* pGraph, const std::wstring& Text, in
 			continue;
 		}
 
-		// È¡³öÎÄ×Ö
+		// å–å‡ºæ–‡å­—
 		if(FCYOK(pFontProvider->QueryGlyph(pGraph, Text[i], &tInfo)))
 		{
-			// ¼ì²é±Ê´¥ÊÇ·ñÔ½½ç
+			// æ£€æŸ¥ç¬”è§¦æ˜¯å¦è¶Šç•Œ
 			if(tPos.x + tInfo.Advance.x > GetWidth() - Margin)
 			{
-				// »»ĞĞ
+				// æ¢è¡Œ
 				tPos.x = Margin;
 				tPos.y += m_LineHeight;
 			}
 
-			// ¿½±´ÌùÍ¼uvĞÅÏ¢²¢½øĞĞ·­×ª´¦Àí
+			// æ‹·è´è´´å›¾uvä¿¡æ¯å¹¶è¿›è¡Œç¿»è½¬å¤„ç†
 			tVerts[0].u = tInfo.GlyphPos.a.x;
 			tVerts[0].v = tInfo.GlyphPos.a.y;
 			tVerts[1].u = tInfo.GlyphPos.b.x;
@@ -143,7 +143,7 @@ fcyVec2 fuiLabelEx::drawText(f2dGraphics2D* pGraph, const std::wstring& Text, in
 			tVerts[3].u = tInfo.GlyphPos.a.x;
 			tVerts[3].v = tInfo.GlyphPos.b.y;
 			
-			// ¼ÆËãÎ»ÖÃ¾ØĞÎ
+			// è®¡ç®—ä½ç½®çŸ©å½¢
 			tVerts[0].x = tPos.x - tInfo.BrushPos.x;
 			tVerts[0].y = tPos.y - tInfo.BrushPos.y;
 			tVerts[1].x = tVerts[0].x + tInfo.GlyphSize.x;
@@ -153,14 +153,14 @@ fcyVec2 fuiLabelEx::drawText(f2dGraphics2D* pGraph, const std::wstring& Text, in
 			tVerts[3].x = tVerts[0].x;
 			tVerts[3].y = tVerts[2].y;
 			
-			// »æÍ¼
+			// ç»˜å›¾
 			pGraph->DrawQuad(pTex, tVerts);
 
 			tPos += tInfo.Advance;
 		}
 	}
 
-	// ·µ»ØĞÂµÄÎ»ÖÃ
+	// è¿”å›æ–°çš„ä½ç½®
 	return tPos;
 }
 
@@ -170,18 +170,18 @@ fcyVec2 fuiLabelEx::calcuTextEndDrawPos()
 	if(m_Font)
 		tProvider = m_Font->GetFontProvider();
 
-	// ±ß¾à = 2.f
+	// è¾¹è· = 2.f
 	float tMargin = 2.f;
 	fcyVec2 tStartPos(tMargin, m_MaxAscender);
 	for(size_t i = 0; i<m_DrawText.size(); ++i)
 	{
 		int tCountToDraw = m_DrawText[i].length();
 
-		// ¼ÆËãÒ»¶ÎÎÄ±¾³¤¶È
+		// è®¡ç®—ä¸€æ®µæ–‡æœ¬é•¿åº¦
 		f2dGlyphInfo tInfo;
 		for(int j = 0; j<tCountToDraw; ++j)
 		{
-			// »»ĞĞ´¦Àí
+			// æ¢è¡Œå¤„ç†
 			if(m_DrawText[i][j] == L'\n')
 			{
 				tStartPos.x = tMargin;
@@ -189,13 +189,13 @@ fcyVec2 fuiLabelEx::calcuTextEndDrawPos()
 				continue;
 			}
 
-			// È¡³öÎÄ×Ö
+			// å–å‡ºæ–‡å­—
 			if(FCYOK(tProvider->QueryGlyph(NULL, m_DrawText[i][j], &tInfo)))
 			{
-				// ¼ì²é±Ê´¥ÊÇ·ñÔ½½ç
+				// æ£€æŸ¥ç¬”è§¦æ˜¯å¦è¶Šç•Œ
 				if(tStartPos.x + tInfo.Advance.x > GetWidth() - tMargin)
 				{
-					// »»ĞĞ
+					// æ¢è¡Œ
 					tStartPos.x = tMargin;
 					tStartPos.y += m_LineHeight;
 				}
@@ -203,7 +203,7 @@ fcyVec2 fuiLabelEx::calcuTextEndDrawPos()
 			}
 		}
 
-		// Ö´ĞĞÖ¸Áî
+		// æ‰§è¡ŒæŒ‡ä»¤
 		if(i != m_DrawText.size() - 1)
 		{
 			DrawCmd& tCmd = m_DrawCmd[i];
@@ -221,7 +221,7 @@ fcyVec2 fuiLabelEx::calcuTextEndDrawPos()
 
 void fuiLabelEx::OnTextChanged(fuiControl* pThis, fuiEventArgs* pArgs)
 {
-	// Çå¿ÕËùÓĞÊı¾İ
+	// æ¸…ç©ºæ‰€æœ‰æ•°æ®
 	m_DrawText.clear();
 	m_DrawCmd.clear();
 	m_FontList.clear();
@@ -239,11 +239,11 @@ void fuiLabelEx::OnTextChanged(fuiControl* pThis, fuiEventArgs* pArgs)
 	m_CurDisplayCount = 0;
 	m_CharWait = 0.f;
 
-	// ½âÎö×´Ì¬
-	stack<fcyColor> tColorStack;  // ÑÕÉ«Õ»
-	stack<fcyRefPointer<fuiFont>> tFontStack;  // ×ÖÌåÕ»
+	// è§£æçŠ¶æ€
+	stack<fcyColor> tColorStack;  // é¢œè‰²æ ˆ
+	stack<fcyRefPointer<fuiFont>> tFontStack;  // å­—ä½“æ ˆ
 
-	// ½âÎöÎÄ±¾
+	// è§£ææ–‡æœ¬
 	fcyLexicalReader tReader(m_Text);
 	wstring tLastStrBlock;
 	while(!tReader.IsEOF())
@@ -252,33 +252,33 @@ void fuiLabelEx::OnTextChanged(fuiControl* pThis, fuiEventArgs* pArgs)
 
 		switch (tChar)
 		{
-		case L'\\': // ´¦Àí×ªÒå
+		case L'\\': // å¤„ç†è½¬ä¹‰
 			tChar = tReader.ReadChar();
 			switch (tChar)
 			{
-			case L'n': // ×·¼Ó»»ĞĞ
+			case L'n': // è¿½åŠ æ¢è¡Œ
 				tLastStrBlock += L'\n';
 				break;
-			case L't': // ×·¼Ó \t
+			case L't': // è¿½åŠ  \t
 				tLastStrBlock += L'\t';
-			case L'\\': // ×ªÒå \ 
+			case L'\\': // è½¬ä¹‰ \ 
 				tLastStrBlock += L'\\';
 				break;
-			case L'[': // ×ªÒå [ 
+			case L'[': // è½¬ä¹‰ [ 
 				tLastStrBlock += L'[';
 				break;
-			default:   // Î´Ê¶±ğ
+			default:   // æœªè¯†åˆ«
 				tLastStrBlock += tChar;
 				break;
 			}
 			break;
-		case L'[': // ¶ÁÈ¡ÃüÁî
+		case L'[': // è¯»å–å‘½ä»¤
 			{
 				while(1)
 				{
 					tReader.IgnoreSpace();
 
-					// ¶ÁÈ¡ÃüÁîÃû³Æ
+					// è¯»å–å‘½ä»¤åç§°
 					bool bOK = false;
 					wstring tCmdName;
 					while(!bOK)
@@ -299,14 +299,14 @@ void fuiLabelEx::OnTextChanged(fuiControl* pThis, fuiEventArgs* pArgs)
 						}
 					}
 
-					// ¼ì²éÃüÁîÀàĞÍ
+					// æ£€æŸ¥å‘½ä»¤ç±»å‹
 					if(tCmdName.length() > 0 && tCmdName[0] == L'/')
 					{
-						// ÍÆÈëÎÄ±¾¿é
+						// æ¨å…¥æ–‡æœ¬å—
 						m_DrawText.push_back(tLastStrBlock);
 						tLastStrBlock.clear();
 
-						// ¶ÑÕ»»ØÍË
+						// å †æ ˆå›é€€
 						if(tCmdName == L"/color")
 						{
 							fcyColor& obj = m_FontColor;
@@ -353,13 +353,13 @@ void fuiLabelEx::OnTextChanged(fuiControl* pThis, fuiEventArgs* pArgs)
 					}
 					else
 					{
-						// Æ¥Åä=
+						// åŒ¹é…=
 						tReader.Match(L'=', true);
 
-						// Æ¥Åä"
+						// åŒ¹é…"
 						tReader.Match(L'"', true);
 
-						// ¶ÁÈ¡²ÎÊı
+						// è¯»å–å‚æ•°
 						wstring tParam;
 						do
 						{
@@ -370,11 +370,11 @@ void fuiLabelEx::OnTextChanged(fuiControl* pThis, fuiEventArgs* pArgs)
 						}
 						while(tChar != L'"');
 
-						// ÍÆÈëÎÄ±¾¿é
+						// æ¨å…¥æ–‡æœ¬å—
 						m_DrawText.push_back(tLastStrBlock);
 						tLastStrBlock.clear();
 
-						// ÍÆÈëÃüÁî
+						// æ¨å…¥å‘½ä»¤
 						if(tCmdName == L"color")
 						{
 							fcyColor tColor;
@@ -399,30 +399,30 @@ void fuiLabelEx::OnTextChanged(fuiControl* pThis, fuiEventArgs* pArgs)
 						{
 							fcyRefPointer<fuiFont> tFont;
 
-							// ¼ì²éÊÇ·ñÒÑ¾­¶ÁÈ¡
+							// æ£€æŸ¥æ˜¯å¦å·²ç»è¯»å–
 							if(m_FontList.find(tParam) != m_FontList.end())
 								tFont = m_FontList[tParam];
 							else
 							{
-								// ¼ÓÔØ×ÖÌå
+								// åŠ è½½å­—ä½“
 								tFont = (fuiFont*)GetControlStyle()->QueryRes(tParam);
 								if(!tFont)
 									throw fcyException("fuiLabelEx::OnTextChanged", "Font '%s' not found.",
 										fcyStringHelper::WideCharToMultiByte(tParam).c_str()
 										);
 
-								// »ñµÃĞĞ¸ß
+								// è·å¾—è¡Œé«˜
 								if(tFont->GetFontProvider()->GetLineHeight() > m_LineHeight)
 									m_LineHeight = tFont->GetFontProvider()->GetLineHeight();
 
-								// »ñµÃÏÂ½ì
+								// è·å¾—ä¸‹å±Š
 								if(tFont->GetFontProvider()->GetAscender() > m_MaxAscender)
 									m_MaxAscender = tFont->GetFontProvider()->GetAscender();
 
 								m_FontList[tParam] = tFont;
 							}
 
-							// ÍÆÈë¶ÑÕ»
+							// æ¨å…¥å †æ ˆ
 							tFontStack.push(tFont);
 
 							DrawCmd tCmd;
@@ -474,7 +474,7 @@ void fuiLabelEx::OnStyleChanged(fuiControl* pThis, fuiEventArgs* pArgs)
 
 	m_Font = tFont;
 
-	// ÖØĞÂ²¼¾Ö
+	// é‡æ–°å¸ƒå±€
 	OnTextChanged(pThis, pArgs);
 }
 
@@ -506,7 +506,7 @@ void fuiLabelEx::Render(fuiGraphics* pGraph)
 	if(m_Font)
 		tProvider = m_Font->GetFontProvider();
 
-	// ±ß¾à = 2.f
+	// è¾¹è· = 2.f
 	fcyVec2 tStartPos(2.f, m_MaxAscender + m_YOffset);
 	int tTextCount = m_CurDisplayCount;
 	for(size_t i = 0; i<m_DrawText.size(); ++i)
@@ -524,10 +524,10 @@ void fuiLabelEx::Render(fuiGraphics* pGraph)
 		else
 			tTextCount -= tCountToDraw;
 
-		// »æÖÆÒ»¶ÎÎÄ±¾, ±ß¾à = 2.f
+		// ç»˜åˆ¶ä¸€æ®µæ–‡æœ¬, è¾¹è· = 2.f
 		tStartPos = drawText(pGraph->GetGraphics(), m_DrawText[i], tCountToDraw, tProvider, tBlendColor, tStartPos);
 
-		// Ö´ĞĞÖ¸Áî
+		// æ‰§è¡ŒæŒ‡ä»¤
 		if(i != m_DrawText.size() - 1)
 		{
 			DrawCmd& tCmd = m_DrawCmd[i];

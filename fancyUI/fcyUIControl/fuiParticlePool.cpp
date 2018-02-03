@@ -1,4 +1,4 @@
-#include "fuiParticlePool.h"
+Ôªø#include "fuiParticlePool.h"
 
 #include "fuiExceptionMacro.h"
 
@@ -11,18 +11,18 @@ using namespace std;
 fuiParticlePool::fuiParticlePool(fuiPage* pRootPage, const std::wstring& Name)
 	: fuiControl(pRootPage, Name)
 {
-	// ƒ¨»œ≤Œ ˝
+	// ÈªòËÆ§ÂèÇÊï∞
 	m_bClip = true;
 	m_bMouseTrans = true;
 
 	m_ParticlePool_Accessor = fuiPropertyAccessor<void*>(
 		(void**)&m_pParticlePool,
-		fuiPropertyAccessorHelper<void*>::DefaultGetter, // ø…∂¡
-		fuiPropertyAccessor<void*>::PropSetter()         // ÷ª∂¡
+		fuiPropertyAccessorHelper<void*>::DefaultGetter, // ÂèØËØª
+		fuiPropertyAccessor<void*>::PropSetter()         // Âè™ËØª
 		);
 	RegisterProperty(L"ParticlePoolPtr", &m_ParticlePool_Accessor);
 
-	// ¥¥Ω®¡£◊”≥ÿ
+	// ÂàõÂª∫Á≤íÂ≠êÊ±†
 	if(FCYFAILED(GetRoot()->GetRenderer()->CreateParticlePool(&m_pParticlePool)))
 		throw fcyException("fuiParticlePool::fuiParticlePool", "f2dRenderer::CreateParticlePool failed.");
 }

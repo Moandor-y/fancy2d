@@ -1,4 +1,4 @@
-#include "fuiStyle.h"
+ï»¿#include "fuiStyle.h"
 
 #include "fuiFactory.h"
 
@@ -60,7 +60,7 @@ void fuiStyle::LoadResFromFile(f2dStream* pStream, fuiResProvider* pProvider)
 
 		fcyRefPointer<fuiRes> tRes = fuiResFactory::GetInstance()->CreateRes(pSubNode->GetName(), tName);
 		
-		// ÉèÖÃÊôÐÔ
+		// è®¾ç½®å±žæ€§
 		fcyXmlAttributeIterator tIter = pSubNode->GetFirstAttributeIter();
 		while(tIter != pSubNode->GetLastAttributeIter())
 		{
@@ -70,10 +70,10 @@ void fuiStyle::LoadResFromFile(f2dStream* pStream, fuiResProvider* pProvider)
 			++tIter;
 		}
 
-		// ¹¹Ôì×ÊÔ´
+		// æž„é€ èµ„æº
 		tRes->ConstructRes(pProvider);
 		
-		// ×¢²á
+		// æ³¨å†Œ
 		RegisterRes(tName, tRes);
 	}
 }

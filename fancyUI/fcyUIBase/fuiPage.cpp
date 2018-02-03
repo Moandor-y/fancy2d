@@ -1,4 +1,4 @@
-#include "fuiPage.h"
+ï»¿#include "fuiPage.h"
 
 #include "fuiFactory.h"
 
@@ -107,22 +107,22 @@ const F2DINPUTKEYCODE VKCodeToF2DKeyCodeTable[256] =
 	F2DINPUTKEYCODE_APPS,       // 93 VK_APPS
 	F2DINPUTKEYCODE_UNKNOWN,    // 94
 	F2DINPUTKEYCODE_SLEEP,      // 95 VK_SLEEP
-	F2DINPUTKEYCODE_NUMPAD0,    // 96 VK_NUMPAD0 = Ğ¡¼üÅÌ 0
-	F2DINPUTKEYCODE_NUMPAD1,    // 97 VK_NUMPAD1 = Ğ¡¼üÅÌ 1
-	F2DINPUTKEYCODE_NUMPAD2,    // 98 VK_NUMPAD2 = Ğ¡¼üÅÌ 2
-	F2DINPUTKEYCODE_NUMPAD3,    // 99 VK_NUMPAD3 = Ğ¡¼üÅÌ 3
-	F2DINPUTKEYCODE_NUMPAD4,    // 100 VK_NUMPAD4 = Ğ¡¼üÅÌ 4
-	F2DINPUTKEYCODE_NUMPAD5,    // 101 VK_NUMPAD5 = Ğ¡¼üÅÌ 5
-	F2DINPUTKEYCODE_NUMPAD6,    // 102 VK_NUMPAD6 = Ğ¡¼üÅÌ 6
-	F2DINPUTKEYCODE_NUMPAD7,    // 103 VK_NUMPAD7 = Ğ¡¼üÅÌ 7
-	F2DINPUTKEYCODE_NUMPAD8,    // 104 VK_NUMPAD8 = Ğ¡¼üÅÌ 8
-	F2DINPUTKEYCODE_NUMPAD9,    // 105 VK_NUMPAD9 = Ğ¡¼üÅÌ 9
-	F2DINPUTKEYCODE_MULTIPLY,   // 106 VK_MULTIPLY = Ğ¡¼üÅÌ *
-	F2DINPUTKEYCODE_ADD,        // 107 VK_ADD = Ğ¡¼üÅÌ +
-	F2DINPUTKEYCODE_NUMPADENTER,// 108 VK_SEPARATOR = Ğ¡¼üÅÌ Enter
-	F2DINPUTKEYCODE_SUBTRACT,   // 109 VK_SUBTRACT = Ğ¡¼üÅÌ -
-	F2DINPUTKEYCODE_DECIMAL,    // 110 VK_DECIMAL = Ğ¡¼üÅÌ .
-	F2DINPUTKEYCODE_DIVIDE,     // 111 VK_DIVIDE = Ğ¡¼üÅÌ /
+	F2DINPUTKEYCODE_NUMPAD0,    // 96 VK_NUMPAD0 = å°é”®ç›˜ 0
+	F2DINPUTKEYCODE_NUMPAD1,    // 97 VK_NUMPAD1 = å°é”®ç›˜ 1
+	F2DINPUTKEYCODE_NUMPAD2,    // 98 VK_NUMPAD2 = å°é”®ç›˜ 2
+	F2DINPUTKEYCODE_NUMPAD3,    // 99 VK_NUMPAD3 = å°é”®ç›˜ 3
+	F2DINPUTKEYCODE_NUMPAD4,    // 100 VK_NUMPAD4 = å°é”®ç›˜ 4
+	F2DINPUTKEYCODE_NUMPAD5,    // 101 VK_NUMPAD5 = å°é”®ç›˜ 5
+	F2DINPUTKEYCODE_NUMPAD6,    // 102 VK_NUMPAD6 = å°é”®ç›˜ 6
+	F2DINPUTKEYCODE_NUMPAD7,    // 103 VK_NUMPAD7 = å°é”®ç›˜ 7
+	F2DINPUTKEYCODE_NUMPAD8,    // 104 VK_NUMPAD8 = å°é”®ç›˜ 8
+	F2DINPUTKEYCODE_NUMPAD9,    // 105 VK_NUMPAD9 = å°é”®ç›˜ 9
+	F2DINPUTKEYCODE_MULTIPLY,   // 106 VK_MULTIPLY = å°é”®ç›˜ *
+	F2DINPUTKEYCODE_ADD,        // 107 VK_ADD = å°é”®ç›˜ +
+	F2DINPUTKEYCODE_NUMPADENTER,// 108 VK_SEPARATOR = å°é”®ç›˜ Enter
+	F2DINPUTKEYCODE_SUBTRACT,   // 109 VK_SUBTRACT = å°é”®ç›˜ -
+	F2DINPUTKEYCODE_DECIMAL,    // 110 VK_DECIMAL = å°é”®ç›˜ .
+	F2DINPUTKEYCODE_DIVIDE,     // 111 VK_DIVIDE = å°é”®ç›˜ /
 	F2DINPUTKEYCODE_F1,         // 112 VK_F1 = F1
 	F2DINPUTKEYCODE_F2,         // 113 VK_F2 = F2
 	F2DINPUTKEYCODE_F3,         // 114 VK_F3 = F3
@@ -308,10 +308,10 @@ fuiPage::fuiPage(const std::wstring& Name, f2dRenderer* pRenderer, f2dGraphics2D
 
 fuiPage::~fuiPage()
 {
-	// Çå¿Õ×Ó¶ÔÏó
+	// æ¸…ç©ºå­å¯¹è±¡
 	m_SubControlList.clear();
 	
-	// ¼ì²éĞ¹Â¶
+	// æ£€æŸ¥æ³„éœ²
 	if(!m_ControlMap.empty())
 	{
 		fcyDebug::Trace(L"[ @ fuiPage::~fuiPage ] Detected object not properly release.\n");
@@ -336,7 +336,7 @@ void fuiPage::loadLayoutNode(fcyXmlElement* pNode, fuiControl* pParent)
 	{
 		fcyXmlElement* pSubNode = pNode->GetNode(i);
 
-		// ¼ì²éÃû³Æ
+		// æ£€æŸ¥åç§°
 		if(!pSubNode->HasAttribute(L"Name"))
 			throw fcyException("fuiPage::loadLayoutNode", "Property 'Name' is needed.");
 
@@ -344,7 +344,7 @@ void fuiPage::loadLayoutNode(fcyXmlElement* pNode, fuiControl* pParent)
 
 		const wstring& tName = pSubNode->GetAttribute(L"Name");
 
-		// ¿Ø¼ş¸²Ğ´
+		// æ§ä»¶è¦†å†™
 		if(pSubNode->GetName() == L"override")
 		{	
 			pNew = FindControl(tName);
@@ -355,14 +355,14 @@ void fuiPage::loadLayoutNode(fcyXmlElement* pNode, fuiControl* pParent)
 		}
 		else
 		{
-			// ´´½¨¿Ø¼ş
+			// åˆ›å»ºæ§ä»¶
 			pNew = fuiFactory::GetInstace()->CreateControl(pSubNode->GetName(), this, tName);
 		}
 
-		// ÉèÖÃ¸¸¶ÔÏó
+		// è®¾ç½®çˆ¶å¯¹è±¡
 		pNew->SetParent(pParent);
 
-		// Ã¶¾ÙËùÓĞÊôĞÔ²¢ÉèÖÃ
+		// æšä¸¾æ‰€æœ‰å±æ€§å¹¶è®¾ç½®
 		fcyXmlAttributeIterator tIter = pSubNode->GetFirstAttributeIter();
 		while(tIter != pSubNode->GetLastAttributeIter())
 		{
@@ -374,10 +374,10 @@ void fuiPage::loadLayoutNode(fcyXmlElement* pNode, fuiControl* pParent)
 			++tIter;
 		}
 
-		// ´¥·¢Íâ¹Û±ä»¯ÊÂ¼ş
+		// è§¦å‘å¤–è§‚å˜åŒ–äº‹ä»¶
 		pNew->ExecEvent(L"OnStyleChanged");
 
-		// µİ¹éÉèÖÃ×Ó¿Ø¼ş
+		// é€’å½’è®¾ç½®å­æ§ä»¶
 		loadLayoutNode(pSubNode, pNew);
 	}
 }
@@ -394,7 +394,7 @@ void fuiPage::debugDraw(fuiGraphics* pGraph, fuiControl* pControl)
 		
 		if(p == m_pControlAtMousePos)
 		{
-			// »æÖÆÊó±ê´¦¿Ø¼ş
+			// ç»˜åˆ¶é¼ æ ‡å¤„æ§ä»¶
 			pGraph->GetGeometry()->SetPenColor(0, 0xF0F0F000);
 			pGraph->GetGeometry()->SetPenColor(1, 0xFFF0F000);
 			pGraph->GetGeometry()->SetPenColor(2, 0xF0F0F000);
@@ -407,7 +407,7 @@ void fuiPage::debugDraw(fuiGraphics* pGraph, fuiControl* pControl)
 		}
 		else if(p == m_pFocus)
 		{
-			// »æÖÆ½¹µã¿Ø¼ş
+			// ç»˜åˆ¶ç„¦ç‚¹æ§ä»¶
 			pGraph->GetGeometry()->SetPenColor(0, 0xF0F0F0F0);
 			pGraph->GetGeometry()->SetPenColor(1, 0xFFF0F0F0);
 			pGraph->GetGeometry()->SetPenColor(2, 0xF0F0F0F0);
@@ -459,7 +459,7 @@ fuiControl* fuiPage::getControlAtPos(fuiControl* pControl, const fcyVec2& Pos, f
 
 void fuiPage::execStyleChanged(fuiControl* p)
 {
-	// ´¥·¢ËùÓĞ¿Ø¼şµÄOnStyleChangedÊÂ¼ş
+	// è§¦å‘æ‰€æœ‰æ§ä»¶çš„OnStyleChangedäº‹ä»¶
 	for(fuInt i = 0; i<p->m_SubControlList.size(); ++i)
 	{
 		p->ExecEvent(L"OnStyleChanged");
@@ -472,7 +472,7 @@ bool fuiPage::sendMouseMove(const fcyVec2& MousePos)
 {
 	m_MouseLastPos = MousePos;
 
-	// ·¢ËÍÈ«¾ÖÏûÏ¢
+	// å‘é€å…¨å±€æ¶ˆæ¯
 	{
 		fuiPositionEventArgs tArgs;
 		tArgs.SetPos(MousePos);
@@ -481,26 +481,26 @@ bool fuiPage::sendMouseMove(const fcyVec2& MousePos)
 
 	m_pControlAtMousePos = getControlAtPos(this, MousePos, m_ControlMousePos);
 
-	if(m_pLockMouseControl) // ÈôÊó±êÊÂ¼ş±»Ëø¶¨
+	if(m_pLockMouseControl) // è‹¥é¼ æ ‡äº‹ä»¶è¢«é”å®š
 	{
-		// ·¢ËÍÊó±êÒÆ¶¯ÏûÏ¢
+		// å‘é€é¼ æ ‡ç§»åŠ¨æ¶ˆæ¯
 		fuiPositionEventArgs tArgs;
 		tArgs.SetPos(MousePos - m_ControlOrigin);
 		m_pLastMouseMoveControl->ExecEvent(L"OnMouseMove", &tArgs);
 	}
-	else // Î´±»Ëø¶¨
+	else // æœªè¢«é”å®š
 	{
-		// ¶ÔÏó·¢Éú±ä»¯
+		// å¯¹è±¡å‘ç”Ÿå˜åŒ–
 		if(m_pLastMouseMoveControl != m_pControlAtMousePos)
 		{
-			// ·¢ËÍÊó±êÒÆ³öÏûÏ¢
+			// å‘é€é¼ æ ‡ç§»å‡ºæ¶ˆæ¯
 			if(m_pLastMouseMoveControl)
 				m_pLastMouseMoveControl->ExecEvent(L"OnMouseLeave");
 
 			m_pLastMouseMoveControl = m_pControlAtMousePos;
 		}
 
-		// ·¢ËÍÊó±êÒÆ¶¯ÏûÏ¢
+		// å‘é€é¼ æ ‡ç§»åŠ¨æ¶ˆæ¯
 		if(m_pLastMouseMoveControl)
 		{
 			fuiPositionEventArgs tArgs;
@@ -508,7 +508,7 @@ bool fuiPage::sendMouseMove(const fcyVec2& MousePos)
 			m_pLastMouseMoveControl->ExecEvent(L"OnMouseMove", &tArgs);
 		}
 
-		// ¼ÆËãµ±Ç°¿Ø¼şÔ­µã
+		// è®¡ç®—å½“å‰æ§ä»¶åŸç‚¹
 		m_ControlOrigin = MousePos - m_ControlMousePos;
 	}
 
@@ -517,7 +517,7 @@ bool fuiPage::sendMouseMove(const fcyVec2& MousePos)
 
 bool fuiPage::sendMouseButtonDown(MOUSEBUTTON Button, fcyVec2* MousePos)
 {
-	// ·¢ËÍÈ«¾ÖÏûÏ¢
+	// å‘é€å…¨å±€æ¶ˆæ¯
 	{
 		switch(Button)
 		{
@@ -536,12 +536,12 @@ bool fuiPage::sendMouseButtonDown(MOUSEBUTTON Button, fcyVec2* MousePos)
 	if(MousePos)
 		sendMouseMove(*MousePos);
 
-	if(!m_pLockMouseControl) // Î´Ëø¶¨£¬ÔòËø¶¨Êó±êÏûÏ¢
+	if(!m_pLockMouseControl) // æœªé”å®šï¼Œåˆ™é”å®šé¼ æ ‡æ¶ˆæ¯
 	{
 		m_pLockMouseControl = m_pControlAtMousePos;
 		m_MouseUnlockEvent = Button;
 
-		// ´¦Àí½¹µã
+		// å¤„ç†ç„¦ç‚¹
 		if(m_pFocus != m_pLockMouseControl)
 		{
 			if(m_pFocus)
@@ -560,7 +560,7 @@ bool fuiPage::sendMouseButtonDown(MOUSEBUTTON Button, fcyVec2* MousePos)
 		}
 	}
 	
-	// Ö±½ÓÏò¿Ø¼ş·¢ËÍÏûÏ¢
+	// ç›´æ¥å‘æ§ä»¶å‘é€æ¶ˆæ¯
 	if(m_pLockMouseControl)
 	{
 		switch(Button)
@@ -583,7 +583,7 @@ bool fuiPage::sendMouseButtonDown(MOUSEBUTTON Button, fcyVec2* MousePos)
 
 bool fuiPage::sendMouseButtonUp(MOUSEBUTTON Button, fcyVec2* MousePos)
 {
-	// ·¢ËÍÈ«¾ÖÏûÏ¢
+	// å‘é€å…¨å±€æ¶ˆæ¯
 	{
 		switch(Button)
 		{
@@ -617,7 +617,7 @@ bool fuiPage::sendMouseButtonUp(MOUSEBUTTON Button, fcyVec2* MousePos)
 			break;
 		}
 
-		if(m_MouseUnlockEvent == Button) // ½âËø
+		if(m_MouseUnlockEvent == Button) // è§£é”
 			m_pLockMouseControl = NULL;
 		return true;
 	}
@@ -673,7 +673,7 @@ void fuiPage::LoadLayoutFromFile(fcyStream* pStream)
 	fcyXmlDocument tXml(pStream);
 	fcyXmlElement* pXmlRoot = tXml.GetRootElement();
 
-	// ¼ÓÔØ²¼¾Ö
+	// åŠ è½½å¸ƒå±€
 	loadLayoutNode(pXmlRoot, this);
 }
 
@@ -764,7 +764,7 @@ void fuiPage::Render(fuiGraphics* pGraph)
 	if(pGraph == NULL)
 		pGraph = &m_pGraphics;
 
-	// »æÖÆËùÓĞ¿Ø¼ş
+	// ç»˜åˆ¶æ‰€æœ‰æ§ä»¶
 	if(FCYFAILED(pGraph->Begin()))
 		return;
 
@@ -781,7 +781,7 @@ void fuiPage::Render(fuiGraphics* pGraph)
 
 	pGraph->End();
 
-	// µ÷ÊÔ»æÍ¼
+	// è°ƒè¯•ç»˜å›¾
 	if(m_bDebug)
 	{
 		if(FCYFAILED(pGraph->Begin()))
@@ -789,14 +789,14 @@ void fuiPage::Render(fuiGraphics* pGraph)
 
 		pGraph->GetGeometry()->SetPenSize(2.f);
 
-		// »æÖÆ±ß¿ò
+		// ç»˜åˆ¶è¾¹æ¡†
 		pGraph->GetGeometry()->SetPenColor(0, 0xF0FFFFFF);
 		pGraph->GetGeometry()->SetPenColor(1, 0xFFFFFFFF);
 		pGraph->GetGeometry()->SetPenColor(2, 0xF0FFFFFF);
 
 		pGraph->GetGeometry()->DrawRectangle(pGraph->GetGraphics(), GetRect());
 
-		// »æÖÆ¿Ø¼ş±ß¿ò
+		// ç»˜åˆ¶æ§ä»¶è¾¹æ¡†
 		pGraph->GetGeometry()->SetPenColor(0, 0xF0FF0000);
 		pGraph->GetGeometry()->SetPenColor(1, 0xFFFF0000);
 		pGraph->GetGeometry()->SetPenColor(2, 0xF0FF0000);

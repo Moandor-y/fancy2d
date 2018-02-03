@@ -1,4 +1,4 @@
-#include "fuiImagedButton.h"
+ï»¿#include "fuiImagedButton.h"
 
 #include "fuiExceptionMacro.h"
 
@@ -29,12 +29,12 @@ fuiImagedButton::fuiImagedButton(fuiPage* pRootPage, const std::wstring& Name)
 	);
 	m_MouseEventMargin_Accessor = fuiPropertyAccessor<fcyRect>(&m_MouseEventMargin);
 
-	// ×¢²áÊôĞÔ
+	// æ³¨å†Œå±æ€§
 	RegisterProperty(L"ActiveImage", &m_ActiveImage_Accessor);
 	RegisterProperty(L"ClickImage", &m_ClickImage_Accessor);
 	RegisterProperty(L"MouseEventMargin", &m_MouseEventMargin_Accessor);
 
-	// ×¢²áÊÂ¼ş
+	// æ³¨å†Œäº‹ä»¶
 	GetEvent(L"OnStyleChanged") += fuiDelegate::EventCallBack(this, &fuiImagedButton::OnStyleChanged);
 
 	GetEvent(L"OnMouseMove") += fuiDelegate::EventCallBack(this, &fuiImagedButton::OnMouseMove);
@@ -42,7 +42,7 @@ fuiImagedButton::fuiImagedButton(fuiPage* pRootPage, const std::wstring& Name)
 	GetEvent(L"OnMouseLDown") += fuiDelegate::EventCallBack(this, &fuiImagedButton::OnMouseLButtonDown);
 	GetEvent(L"OnMouseLUp") += fuiDelegate::EventCallBack(this, &fuiImagedButton::OnMouseLButtonUp);
 
-	// ×¢²áÊÂ¼ş
+	// æ³¨å†Œäº‹ä»¶
 	RegisterEvent(L"OnClick");
 }
 
@@ -86,7 +86,7 @@ void fuiImagedButton::OnMouseLButtonUp(fuiControl* pThis, fuiEventArgs* pArgs)
 
 void fuiImagedButton::Render(fuiGraphics* pGraph)
 {
-	// ÒÀ¾İ×´Ì¬»æÖÆÏàÓ¦Í¼Æ¬
+	// ä¾æ®çŠ¶æ€ç»˜åˆ¶ç›¸åº”å›¾ç‰‡
 	fuiSprite* tSprite = NULL;
 	if(m_bIsMouseDown)
 		tSprite = m_pClickImageSprite;
@@ -101,10 +101,10 @@ void fuiImagedButton::Render(fuiGraphics* pGraph)
 	if(tSprite == NULL)
 		tSprite = m_pImageSprite;
 
-	// µ÷ÓÃ»ùÀà½øĞĞ»æÖÆ
+	// è°ƒç”¨åŸºç±»è¿›è¡Œç»˜åˆ¶
 	fuiImageBox::DrawImage(pGraph, tSprite, m_BlendColor, m_ImageFillMethod, m_ColorBlendMethod);
 
-	// Ìø¹ıfuiImageBoxµÄRender
+	// è·³è¿‡fuiImageBoxçš„Render
 	fuiControl::Render(pGraph);
 }
 

@@ -1,18 +1,18 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiImagedButton.h
-/// @brief fancyUI Í¼ĞÎ°´Å¥
+/// @brief fancyUI å›¾å½¢æŒ‰é’®
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "../fcyUIBase/fuiControl.h"
 #include "fuiImageBox.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief UI Í¼ĞÎ°´Å¥
+/// @brief UI å›¾å½¢æŒ‰é’®
 ////////////////////////////////////////////////////////////////////////////////
 class fuiImagedButton :
 	public fuiImageBox
 {
-protected: // ÊôĞÔ
+protected: // å±æ€§
 	std::wstring m_ActiveImage;
 	std::wstring m_ClickImage;
 	fcyRect m_MouseEventMargin;
@@ -20,7 +20,7 @@ protected: // ÊôĞÔ
 	fuiPropertyAccessor<std::wstring> m_ActiveImage_Accessor;
 	fuiPropertyAccessor<std::wstring> m_ClickImage_Accessor;
 	fuiPropertyAccessor<fcyRect> m_MouseEventMargin_Accessor;
-protected: // »æÍ¼×ÊÔ´
+protected: // ç»˜å›¾èµ„æº
 	bool m_bIsMoveIn;
 	bool m_bIsMouseDown;
 
@@ -28,12 +28,12 @@ protected: // »æÍ¼×ÊÔ´
 	fcyRefPointer<fuiSprite> m_pClickImageSprite;
 	
 	void OnStyleChanged(fuiControl* pThis, fuiEventArgs* pArgs);
-protected: // ÊµÏÖÊó±êÊÂ¼ş
+protected: // å®ç°é¼ æ ‡äº‹ä»¶
 	void OnMouseMove(fuiControl* pThis, fuiEventArgs* pArgs);
 	void OnMouseLeave(fuiControl* pThis, fuiEventArgs* pArgs);
 	void OnMouseLButtonDown(fuiControl* pThis, fuiEventArgs* pArgs);
 	void OnMouseLButtonUp(fuiControl* pThis, fuiEventArgs* pArgs);
-public: // ¸²¸ÇImageBoxÊµÏÖ
+public: // è¦†ç›–ImageBoxå®ç°
 	void Render(fuiGraphics* pGraph);
 	fBool HitTest(const fcyVec2& Pos);
 public:

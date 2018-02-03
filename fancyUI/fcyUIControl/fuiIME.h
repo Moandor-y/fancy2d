@@ -1,6 +1,6 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiIME.h
-/// @brief fancyUI ÊäÈë·¨¿Ø¼ş
+/// @brief fancyUI è¾“å…¥æ³•æ§ä»¶
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include <fcyRefObj.h>
@@ -11,25 +11,25 @@
 #define FUIIME_LAYERPRIORITY 900.f
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief fancyUI ÊäÈë·¨¿Ø¼ş
+/// @brief fancyUI è¾“å…¥æ³•æ§ä»¶
 ////////////////////////////////////////////////////////////////////////////////
 class fuiIME :
 	public fuiControl
 {
-protected: // ÊôĞÔ
-	std::wstring m_SingleLineSkin;  ///< @brief µ¥ĞĞÆ¤·ô
-	std::wstring m_MultiLineSkin;   ///< @brief ¶àĞĞÆ¤·ô
-	fBool m_bMultiLine;             ///< @brief ¶àĞĞÄ£Ê½
-	fBool m_bHMode;                 ///< @brief Ë®Æ½Ä£Ê½
-	fcyVec2 m_InputBoxOffset;       ///< @brief ÊäÈë¿ò¾àÀë¹â±êµÄÎ»ÒÆ
-	fcyRect m_CompositionMargin;    ///< @brief Æ´Ğ´¿ò±ß¾à
-	fcyRect m_CandidateMargin;      ///< @brief ºòÑ¡¿ò±ß¾à
-	std::wstring m_FontName;        ///< @brief ×ÖÌåÃû³Æ
-	fcyColor m_FontColor;           ///< @brief ×ÖÌåÑÕÉ«
-	fcyColor m_ActiveFontColor;     ///< @brief ¼¤»î×ÖÌåÑÕÉ«
-	fcyColor m_CandidateFontColor;  ///< @brief ±¸Ñ¡×ÖÌåÑÕÉ«
+protected: // å±æ€§
+	std::wstring m_SingleLineSkin;  ///< @brief å•è¡Œçš®è‚¤
+	std::wstring m_MultiLineSkin;   ///< @brief å¤šè¡Œçš®è‚¤
+	fBool m_bMultiLine;             ///< @brief å¤šè¡Œæ¨¡å¼
+	fBool m_bHMode;                 ///< @brief æ°´å¹³æ¨¡å¼
+	fcyVec2 m_InputBoxOffset;       ///< @brief è¾“å…¥æ¡†è·ç¦»å…‰æ ‡çš„ä½ç§»
+	fcyRect m_CompositionMargin;    ///< @brief æ‹¼å†™æ¡†è¾¹è·
+	fcyRect m_CandidateMargin;      ///< @brief å€™é€‰æ¡†è¾¹è·
+	std::wstring m_FontName;        ///< @brief å­—ä½“åç§°
+	fcyColor m_FontColor;           ///< @brief å­—ä½“é¢œè‰²
+	fcyColor m_ActiveFontColor;     ///< @brief æ¿€æ´»å­—ä½“é¢œè‰²
+	fcyColor m_CandidateFontColor;  ///< @brief å¤‡é€‰å­—ä½“é¢œè‰²
 
-	// ·ÃÎÊÆ÷
+	// è®¿é—®å™¨
 	fuiPropertyAccessor<std::wstring> m_SingleLineSkin_Accessor;
 	fuiPropertyAccessor<std::wstring> m_MultiLineSkin_Accessor;
 	fuiPropertyAccessor<fBool> m_bMultiLine_Accessor;
@@ -41,13 +41,13 @@ protected: // ÊôĞÔ
 	fuiPropertyAccessor<fcyColor> m_FontColor_Accessor;
 	fuiPropertyAccessor<fcyColor> m_ActiveFontColor_Accessor;
 	fuiPropertyAccessor<fcyColor> m_CandidateFontColor_Accessor;
-protected: // äÖÈ¾Êı¾İ
+protected: // æ¸²æŸ“æ•°æ®
 	fcyRefPointer<fuiBorderSprite> m_pSingleLineSkin;
 	fcyRefPointer<fuiBorderSprite> m_pMultiLineSkin;
 	fcyRefPointer<fuiFont> m_Font;
 	f2dFontProvider* m_pFontProvider;
 	f2dFontRenderer* m_pFontRenderer;
-protected: // ÊäÈë·¨Êı¾İ
+protected: // è¾“å…¥æ³•æ•°æ®
 	std::wstring m_CompositionStr;
 	std::vector<std::wstring> m_CandidateList;
 	fcyRect m_CompStrSize;
@@ -75,7 +75,7 @@ protected:
 	void OnTextInputEnd(fuiControl* pThis, fuiEventArgs* pArgs);
 
 	void OnStyleChanged(fuiControl* pThis, fuiEventArgs* pArgs);
-public: // ÊµÏÖ½Ó¿Ú
+public: // å®ç°æ¥å£
 	void Update(fDouble ElapsedTime);
 	void Render(fuiGraphics* pGraph);
 public:

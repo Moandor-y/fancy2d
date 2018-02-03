@@ -1,4 +1,4 @@
-#include "fuiImageBox.h"
+ï»¿#include "fuiImageBox.h"
 
 #include "fuiExceptionMacro.h"
 
@@ -10,7 +10,7 @@ fuiImageBox::fuiImageBox(fuiPage* pRootPage, const std::wstring& Name)
 	: fuiControl(pRootPage, Name), m_ImageFillMethod(IMAGEFILLMETHOD_LEFTTOP), 
 	m_ColorBlendMethod(COLORBLENDMETHOD_DEFAULT)
 {
-	// Ä¬ÈÏÊôÐÔ
+	// é»˜è®¤å±žæ€§
 	SetClip(false);
 
 	m_Image_Accessor = fuiPropertyAccessor<wstring>(
@@ -97,13 +97,13 @@ fuiImageBox::fuiImageBox(fuiPage* pRootPage, const std::wstring& Name)
 		}
 	);
 
-	// ×¢²áÊôÐÔ
+	// æ³¨å†Œå±žæ€§
 	RegisterProperty(L"Image", &m_Image_Accessor);
 	RegisterProperty(L"BlendColor", &m_BlendColor_Accessor);
 	RegisterProperty(L"FillMethod", &m_ImageFillMethod_Accessor);
 	RegisterProperty(L"ColorBlendMethod", &m_ColorBlendMethod_Accessor);
 
-	// ×¢²áÊÂ¼þ
+	// æ³¨å†Œäº‹ä»¶
 	GetEvent(L"OnStyleChanged") += fuiDelegate::EventCallBack(this, &fuiImageBox::OnStyleChanged);
 }
 

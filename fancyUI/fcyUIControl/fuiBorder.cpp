@@ -1,4 +1,4 @@
-#include "fuiBorder.h"
+ï»¿#include "fuiBorder.h"
 
 #include "fuiExceptionMacro.h"
 
@@ -9,7 +9,7 @@ using namespace std;
 fuiBorder::fuiBorder(fuiPage* pRootPage, const std::wstring& Name)
 	: fuiControl(pRootPage, Name)
 {
-	// Ä¬ÈÏÊôÐÔ
+	// é»˜è®¤å±žæ€§
 	SetClip(false);
 
 	m_BorderImage_Accessor = fuiPropertyAccessor<wstring>(
@@ -23,11 +23,11 @@ fuiBorder::fuiBorder(fuiPage* pRootPage, const std::wstring& Name)
 	);
 	m_BlendColor_Accessor = fuiPropertyAccessor<fcyColor>(&m_BlendColor);
 
-	// ×¢²áÊôÐÔ
+	// æ³¨å†Œå±žæ€§
 	RegisterProperty(L"BorderImage", &m_BorderImage_Accessor);
 	RegisterProperty(L"BlendColor", &m_BlendColor_Accessor);
 
-	// ×¢²áÊÂ¼þ
+	// æ³¨å†Œäº‹ä»¶
 	GetEvent(L"OnStyleChanged") += fuiDelegate::EventCallBack(this, &fuiBorder::OnStyleChanged);
 }
 

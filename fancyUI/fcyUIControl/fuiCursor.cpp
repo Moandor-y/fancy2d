@@ -1,4 +1,4 @@
-#include "fuiCursor.h"
+ï»¿#include "fuiCursor.h"
 
 #include "fuiExceptionMacro.h"
 
@@ -11,18 +11,18 @@ using namespace std;
 fuiCursor::fuiCursor(fuiPage* pRootPage, const std::wstring& Name)
 	: fuiControl(pRootPage, Name)
 {
-	// Ä¬ÈÏÊôÐÔ
+	// é»˜è®¤å±žæ€§
 	SetMouseTrans(true);
 	SetLayerPriority(FUICURSOR_LAYERPRIORITY);
 
 	m_CursorSprite_Accessor = fuiPropertyAccessor<wstring>(&m_CursorSprite);
 	m_BlendColor_Accessor = fuiPropertyAccessor<fcyColor>(&m_BlendColor);
 
-	// ×¢²áÊôÐÔ
+	// æ³¨å†Œå±žæ€§
 	RegisterProperty(L"CursorSprite", &m_CursorSprite_Accessor);
 	RegisterProperty(L"BlendColor", &m_BlendColor_Accessor);
 
-	// ×¢²áÊÂ¼þ
+	// æ³¨å†Œäº‹ä»¶
 	GetEvent(L"OnStyleChanged") += fuiDelegate::EventCallBack(this, &fuiCursor::OnStyleChanged);
 	pRootPage->GetEvent(L"OnGlobalMouseMove") += fuiDelegate::EventCallBack(this, &fuiCursor::OnGlobalMouseMove);
 }

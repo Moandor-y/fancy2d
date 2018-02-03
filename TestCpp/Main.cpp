@@ -1,16 +1,16 @@
-// Èç¹ûĞèÒªÒıÈëfcyStreamÔò±ØĞëÔÚf2dÖ®Ç°ÒıÈë
+ï»¿// å¦‚æœéœ€è¦å¼•å…¥fcyStreamåˆ™å¿…é¡»åœ¨f2dä¹‹å‰å¼•å…¥
 #include <fcyIO/fcyStream.h>
 #include <fcyFile/fcyModelMeshFile.h>
 #include <fcyFile/fcyModelMeshExporter.h>
 #include <fcyOS/fcyDebug.h>
 #include <fcyOS/fcyMultiThread.h>
 
-// UI¿â
+// UIåº“
 #include <fcyUIBase/fuiPage.h>
 #include <fcyUIBase/fuiFactory.h>
 #include <fcyUIBase/fuiPropBlock.h>
 
-// f2dÍ·ÎÄ¼ş
+// f2då¤´æ–‡ä»¶
 #include <f2d.h>
 
 #include <iostream>
@@ -23,22 +23,22 @@ class MyApp :
 	public f2dEngineEventListener
 {
 private:
-	// ±ØÒª×é¼ş
+	// å¿…è¦ç»„ä»¶
 	fcyRefPointer<f2dEngine> m_pEngine;
 	f2dFileSys* m_pFileSys;
 	f2dRenderer* m_pRenderer;
 	f2dRenderDevice* m_pDev;
 	f2dSoundSys* m_pSoundSys;
 
-	// äÖÈ¾Æ÷
+	// æ¸²æŸ“å™¨
 	fcyRefPointer<f2dGraphics2D> m_pGraph2D;
 
-	// ²âÊÔÓÃ
+	// æµ‹è¯•ç”¨
 	fuiResProviderImpl tProvider;
 	fcyRefPointer<fuiPage> m_pRootUIPage;
 
 	fcyRefPointer<f2dGeometryRenderer> m_pGRender;
-private:  // ¹¦ÄÜº¯Êı
+private:  // åŠŸèƒ½å‡½æ•°
 	void showSelfInfo()
 	{
 		f2dCPUInfo tInfo;
@@ -47,17 +47,17 @@ private:  // ¹¦ÄÜº¯Êı
 
 		cout<<"f2d Version"<<(F2DVERSION>>16)<<"."<<(F2DVERSION & 0x0000FFFF)<<"\n"<<endl;
 
-		cout<<"[ CPUÖÆÔìÉÌ ] "<<tInfo.CPUString<<endl;
-		cout<<"[  CPUÆ·ÅÆ  ] "<<tInfo.CPUBrandString<<"\n"<<endl;
+		cout<<"[ CPUåˆ¶é€ å•† ] "<<tInfo.CPUString<<endl;
+		cout<<"[  CPUå“ç‰Œ  ] "<<tInfo.CPUBrandString<<"\n"<<endl;
 
-		cout<<"[ ÏÔ¿¨Ãû³Æ ] "<<m_pDev->GetDeviceName()<<"\n"<<endl;
+		cout<<"[ æ˜¾å¡åç§° ] "<<m_pDev->GetDeviceName()<<"\n"<<endl;
 
 		for(fuInt i = 0; i<m_pDev->GetSupportResolutionCount(); ++i)
 		{
 			fcyVec2 t = m_pDev->EnumSupportResolution(i);
-			cout<<"[ ·Ö±æÂÊ ] "<<(int)t.x<<"x"<<(int)t.y;
+			cout<<"[ åˆ†è¾¨ç‡ ] "<<(int)t.x<<"x"<<(int)t.y;
 
-			cout<<" ( ¿¹¾â³İµÈ¼¶ ";
+			cout<<" ( æŠ—é”¯é½¿ç­‰çº§ ";
 			for(int j = F2DAALEVEL_NONE; j != F2DAALEVEL_16; j++)
 			{
 				if(m_pDev->CheckMultiSample((F2DAALEVEL)j, true))
@@ -87,12 +87,12 @@ private:  // ¹¦ÄÜº¯Êı
 
 		cout<<endl;
 	}
-protected: // ÒıÇæÏûÏ¢
+protected: // å¼•æ“æ¶ˆæ¯
 	fBool OnUpdate(fDouble ElapsedTime, f2dFPSController* pFPSController, f2dMsgPump* pMsgPump)
 	{
 		static fcyVec2 tMouse = fcyVec2(300.f, 300.f);
 
-		// ÏûÏ¢´¦Àí
+		// æ¶ˆæ¯å¤„ç†
 		f2dMsg tMsg;
 		while(FCYOK(pMsgPump->GetMsg(&tMsg)))
 		{
@@ -117,7 +117,7 @@ protected: // ÒıÇæÏûÏ¢
 			}
 		}
 
-		// ¸üĞÂUI
+		// æ›´æ–°UI
 		m_pRootUIPage->Update(ElapsedTime);
 
 		fCharW tBuffer[256];
@@ -138,7 +138,7 @@ protected: // ÒıÇæÏûÏ¢
 
 		m_pDev->Clear(0);
 
-		// »æÖÆUI
+		// ç»˜åˆ¶UI
 		m_pRootUIPage->Render();
 
 		return true; 
@@ -150,16 +150,16 @@ public:
 			void OnErr(fuInt TimeTick, fcStr Src, fcStr Desc)
 			{
 				fChar pBuffer[1024];
-				sprintf_s(pBuffer, "³õÊ¼»¯Ê§°Ü£¡\nÊ±¼ä´Á£º%u\nÎÊÌâÀ´Ô´£º%s\n´íÎóÃèÊö£º%s", TimeTick, Src, Desc);
-				MessageBoxA(0, pBuffer, "f2d ³õÊ¼»¯Ê§°Ü", MB_ICONERROR);
+				sprintf_s(pBuffer, "åˆå§‹åŒ–å¤±è´¥ï¼\næ—¶é—´æˆ³ï¼š%u\né—®é¢˜æ¥æºï¼š%s\né”™è¯¯æè¿°ï¼š%s", TimeTick, Src, Desc);
+				MessageBoxA(0, pBuffer, "f2d åˆå§‹åŒ–å¤±è´¥", MB_ICONERROR);
 			}
 		} tErrCallBack;
 
-		// ´´½¨ÒıÇæ
+		// åˆ›å»ºå¼•æ“
 		if(FCYFAILED(CreateF2DEngineAndInit(
 			F2DVERSION,
 			fcyRect(50.f, 50.f, 640.f + 50.f, 480.f + 50.f), // 640x480
-			L"ÎŞ±êÌâ",               // ±êÌâ
+			L"æ— æ ‡é¢˜",               // æ ‡é¢˜
 			true,
 			false,  // VSYNC
 			F2DAALEVEL_NONE,
@@ -168,22 +168,22 @@ public:
 			&tErrCallBack)))
 		{ return; }
 
-		// »ñµÃ×é¼ş
+		// è·å¾—ç»„ä»¶
 		m_pFileSys = m_pEngine->GetFileSys();
 		m_pRenderer = m_pEngine->GetRenderer();
 		m_pDev = m_pEngine->GetRenderer()->GetDevice();
 		m_pSoundSys = m_pEngine->GetSoundSys();
 
-		// ĞÅÏ¢×Ô¾Ù
+		// ä¿¡æ¯è‡ªä¸¾
 		showSelfInfo();
 
-		// ¼ÓÔØ×ÊÔ´
+		// åŠ è½½èµ„æº
 		{
-			// Ó³Éä±¾µØÎÄ¼ş¼ĞDemoResµ½½ÚµãRes
+			// æ˜ å°„æœ¬åœ°æ–‡ä»¶å¤¹DemoResåˆ°èŠ‚ç‚¹Res
 			m_pFileSys->LoadRealPath(L"Res", L"DemoRes\\");
 			m_pFileSys->LoadRealPath(L"Simple", L"DemoRes\\Simple\\");
 
-			// ´´½¨äÖÈ¾Æ÷
+			// åˆ›å»ºæ¸²æŸ“å™¨
 			m_pDev->CreateGraphics2D(0, 0, &m_pGraph2D);
 			m_pRenderer->CreateGeometryRenderer(&m_pGRender);
 
@@ -202,28 +202,28 @@ public:
 						{
 							m_pRootUIPage->FindControl(L"TestLabelEx")->RawSetProperty(L"Text", p->RawGetProperty(L"Text"));
 						}
-						catch(...) { m_pRootUIPage->FindControl(L"TestLabelEx")->RawSetProperty(L"Text", L"[color=\"250,200,0,0\"]ÊäÈë²»ºÏ·¨[/color]"); }
+						catch(...) { m_pRootUIPage->FindControl(L"TestLabelEx")->RawSetProperty(L"Text", L"[color=\"250,200,0,0\"]è¾“å…¥ä¸åˆæ³•[/color]"); }
 					};
 				m_pRootUIPage->FindControl(L"TestImage")->SetVisible(false);
 			}
 			catch(const fcyException& e)
 			{
 				fChar pBuffer[1024];
-				sprintf_s(pBuffer, "³õÊ¼»¯Ê§°Ü£¡\nÊ±¼ä´Á£º%u\nÎÊÌâÀ´Ô´£º%s\n´íÎóÃèÊö£º%s", e.GetTime(), e.GetSrc(), e.GetDesc());
-				MessageBoxA(0, pBuffer, "f2d ³õÊ¼»¯Ê§°Ü", MB_ICONERROR);
+				sprintf_s(pBuffer, "åˆå§‹åŒ–å¤±è´¥ï¼\næ—¶é—´æˆ³ï¼š%u\né—®é¢˜æ¥æºï¼š%s\né”™è¯¯æè¿°ï¼š%s", e.GetTime(), e.GetSrc(), e.GetDesc());
+				MessageBoxA(0, pBuffer, "f2d åˆå§‹åŒ–å¤±è´¥", MB_ICONERROR);
 
 				return;
 			}
 		}
 
-		// ÏÔÊ¾´°¿Ú
+		// æ˜¾ç¤ºçª—å£
 		m_pEngine->GetMainWindow()->SetVisiable(true);
 		m_pEngine->GetMainWindow()->MoveToCenter();
 
-		// Òş²ØÊó±ê
+		// éšè—é¼ æ ‡
 		m_pEngine->GetMainWindow()->HideMouse(false);
 
-		// Æô¶¯
+		// å¯åŠ¨
 		m_pEngine->Run(F2DENGTHREADMODE_MULTITHREAD);
 	}
 	~MyApp()

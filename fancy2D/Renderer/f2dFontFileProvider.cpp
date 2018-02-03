@@ -1,4 +1,4 @@
-#include "f2dFontFileProvider.h"
+ï»¿#include "f2dFontFileProvider.h"
 
 #include <fcyException.h>
 
@@ -13,12 +13,12 @@ f2dFontFileProvider::f2dFontFileProvider(f2dRenderDevice* pParent, f2dStream* pS
 	m_CacheXCount(0), m_CacheYCount(0), m_Cache(NULL), m_CacheTex(NULL),
 	m_UsedNodeList(NULL), m_FreeNodeList(NULL)
 {
-	// --- ³õÊ¼»¯freetype ---
+	// --- åˆå§‹åŒ–freetype ---
 	FT_Error tErr = FT_Init_FreeType( &m_FontLib );
 	if(tErr)
 		throw fcyException("f2dFontFileProvider::f2dFontFileProvider", "FT_Init_FreeType failed.");
 
-	// --- ×¼±¸Á÷ ---
+	// --- å‡†å¤‡æµ ---
 	pStream->SetPosition(FCYSEEKORIGIN_BEG, 0);
 	memset(&m_Args, 0, sizeof(m_Args));
 	memset(&m_Stream, 0, sizeof(m_Stream));
@@ -30,7 +30,7 @@ f2dFontFileProvider::f2dFontFileProvider(f2dRenderDevice* pParent, f2dStream* pS
 	m_Stream.close = streamClose;
 	m_pStream->AddRef();
 
-	// --- ¼ÓÔØ×ÖÌå ---
+	// --- åŠ è½½å­—ä½“ ---
 	tErr = FT_Open_Face(m_FontLib, &m_Args, FaceIndex, &m_Face);
 	if(tErr)
 	{
@@ -41,21 +41,21 @@ f2dFontFileProvider::f2dFontFileProvider(f2dRenderDevice* pParent, f2dStream* pS
 		throw fcyException("f2dFontFileProvider::f2dFontFileProvider", "FT_New_Memory_Face failed.");
 	}
 
-	// --- ÉèÖÃ×ÖÌå´óĞ¡ ---
+	// --- è®¾ç½®å­—ä½“å¤§å° ---
 	FT_Set_Pixel_Sizes(m_Face, (FT_UInt)FontSize.x, (FT_UInt)FontSize.y);
 
-	// --- ¹¹½¨»º³åÇø ---
-	// »ñµÃ×ÖÌå´óĞ¡
+	// --- æ„å»ºç¼“å†²åŒº ---
+	// è·å¾—å­—ä½“å¤§å°
 	m_PerGlyphSize.x = ceil(widthSizeToPixel(abs(m_Face->bbox.xMax - m_Face->bbox.xMin)) + s_Magin * 2.f);
 	m_PerGlyphSize.y = ceil(heightSizeToPixel(abs(m_Face->bbox.yMax - m_Face->bbox.yMin)) + s_Magin * 2.f);
 
-	// ¼ÆËãĞĞÁĞµÄÎÄ×ÖÊı
+	// è®¡ç®—è¡Œåˆ—çš„æ–‡å­—æ•°
 	if(1024.f / m_PerGlyphSize.x < 10.f || 1024.f / m_PerGlyphSize.y < 10.f)
 	{
-		// ²»×ã10x10¸ö×ÖĞÎ
+		// ä¸è¶³10x10ä¸ªå­—å½¢
 		if(2048.f / m_PerGlyphSize.x < 1.f || 2048.f / m_PerGlyphSize.y < 1.f)
 		{
-			// ²»×ãÒ»¸ö×ÖĞÎ
+			// ä¸è¶³ä¸€ä¸ªå­—å½¢
 			FT_Done_Face(m_Face);
 			FT_Done_FreeType(m_FontLib);
 
@@ -77,7 +77,7 @@ f2dFontFileProvider::f2dFontFileProvider(f2dRenderDevice* pParent, f2dStream* pS
 		m_CacheYCount = (int)(1024.f / m_PerGlyphSize.y);
 	}
 
-	// ²úÉú×ÖÌå»º³åÎÆÀí
+	// äº§ç”Ÿå­—ä½“ç¼“å†²çº¹ç†
 	if(!makeCache(m_TexSize))
 	{
 		FT_Done_Face(m_Face);
@@ -88,7 +88,7 @@ f2dFontFileProvider::f2dFontFileProvider(f2dRenderDevice* pParent, f2dStream* pS
 		throw fcyException("f2dFontFileProvider::f2dFontFileProvider", "makeCache failed.");
 	}
 
-	// --- °ó¶¨¼àÌıÆ÷ ---
+	// --- ç»‘å®šç›‘å¬å™¨ ---
 	m_pParent->AttachListener(this);
 }
 
@@ -97,20 +97,20 @@ f2dFontFileProvider::~f2dFontFileProvider()
 	FT_Done_Face(m_Face);
 	FT_Done_FreeType(m_FontLib);
 
-	// ÊÍ·Å×ÖÌå»º³å
+	// é‡Šæ”¾å­—ä½“ç¼“å†²
 	FCYSAFEDELARR(m_Cache);
 	FCYSAFEKILL(m_CacheTex);
 
-	// ÊÍ·ÅÁ÷
+	// é‡Šæ”¾æµ
 	FCYSAFEKILL(m_pStream);
 
-	// ³·Ïú¼àÌıÆ÷
+	// æ’¤é”€ç›‘å¬å™¨
 	m_pParent->RemoveListener(this);
 }
 
 void f2dFontFileProvider::addUsedNode(FontCacheInfo* p)
 {
-	// Á¬½Ó±¾½Úµã
+	// è¿æ¥æœ¬èŠ‚ç‚¹
 	if(m_UsedNodeList)
 	{
 		p->pPrev = m_UsedNodeList->pPrev;
@@ -121,7 +121,7 @@ void f2dFontFileProvider::addUsedNode(FontCacheInfo* p)
 		p->pPrev = p->pNext = p;
 	}
 
-	// ²åÈë±¾½Úµã
+	// æ’å…¥æœ¬èŠ‚ç‚¹
 	if(m_UsedNodeList)
 	{
 		m_UsedNodeList->pPrev->pNext = p;
@@ -132,30 +132,30 @@ void f2dFontFileProvider::addUsedNode(FontCacheInfo* p)
 
 void f2dFontFileProvider::removeFreeNode(FontCacheInfo* p)
 {
-	// ¼ì²éÊÇ·ñÎª±íÍ·
+	// æ£€æŸ¥æ˜¯å¦ä¸ºè¡¨å¤´
 	if(p == m_FreeNodeList)
 		m_FreeNodeList = p->pNext;
 
-	// ÒÆ³ı±¾ÉíµÄÁ¬½Ó
+	// ç§»é™¤æœ¬èº«çš„è¿æ¥
 	if(p->pPrev)
 		p->pPrev->pNext = p->pNext;
 	if(p->pNext)
 		p->pNext->pPrev = p->pPrev;
 
-	// Çå¿ÕÖµ
+	// æ¸…ç©ºå€¼
 	p->pNext = p->pPrev = NULL;
 }
 
 void f2dFontFileProvider::removeUsedNode(FontCacheInfo* p)
 {
-	// ÊÇ·ñÊÇÊ×½Úµã
+	// æ˜¯å¦æ˜¯é¦–èŠ‚ç‚¹
 	if(p == m_UsedNodeList)
 		if(p->pNext == p)
 			m_UsedNodeList = NULL;
 		else
 			m_UsedNodeList = p->pNext;
 
-	// ÒÆ³ı×ÔÉíµÄÁ¬½Ó
+	// ç§»é™¤è‡ªèº«çš„è¿æ¥
 	p->pNext->pPrev = p->pPrev;
 	p->pPrev->pNext = p->pNext;
 
@@ -164,78 +164,78 @@ void f2dFontFileProvider::removeUsedNode(FontCacheInfo* p)
 
 f2dFontFileProvider::FontCacheInfo* f2dFontFileProvider::getChar(fCharW Char)
 {
-	// ÏÈÔÚ×ÖµäÀïÃæÑ°ÕÒ
+	// å…ˆåœ¨å­—å…¸é‡Œé¢å¯»æ‰¾
 	FontCacheInfo* pCache = m_Dict[Char];
 
-	// ÕÒµ½µÄ»°Ö±½Ó·µ»Ø
+	// æ‰¾åˆ°çš„è¯ç›´æ¥è¿”å›
 	if(pCache)
 	{
-		// ÕÒµ½UsedListÖĞ¶ÔÓ¦µÄÎ»ÖÃ£¬²¢É¾³ı½Úµã£¬½«ÆäÒÆµ½Ê×Î»
+		// æ‰¾åˆ°UsedListä¸­å¯¹åº”çš„ä½ç½®ï¼Œå¹¶åˆ é™¤èŠ‚ç‚¹ï¼Œå°†å…¶ç§»åˆ°é¦–ä½
 		removeUsedNode(pCache);
 		addUsedNode(pCache);
 
 		return pCache;
 	}
 
-	// ·ñÔò¼ì²éÊÇ·ñÓĞ¿ÕÎ»»æÖÆ×ÖÌå
+	// å¦åˆ™æ£€æŸ¥æ˜¯å¦æœ‰ç©ºä½ç»˜åˆ¶å­—ä½“
 	if(m_FreeNodeList)
 	{
-		// ÓĞ¿ÕÎ»
+		// æœ‰ç©ºä½
 		pCache = m_FreeNodeList;
 
-		// ´ÓÁĞ±íÖĞÒÆ³ı
+		// ä»åˆ—è¡¨ä¸­ç§»é™¤
 		removeFreeNode(pCache);
 
-		// »æÖÆ×ÖÌå
+		// ç»˜åˆ¶å­—ä½“
 		renderCache(pCache, Char);
 
-		// ¼ÇÂ¼
+		// è®°å½•
 		m_Dict[Char] = pCache;
 
-		// ¼ÓÈëMRUÁĞ±í
+		// åŠ å…¥MRUåˆ—è¡¨
 		addUsedNode(pCache);
 
-		// ·µ»Ø
+		// è¿”å›
 		return pCache;
 	}
 
-	// Ã»ÓĞ¿ÕÎ»ÁË
+	// æ²¡æœ‰ç©ºä½äº†
 	{
-		// ´ÓUsedListµÄ×îºóÈ¡³ö
+		// ä»UsedListçš„æœ€åå–å‡º
 		pCache = m_UsedNodeList->pPrev;
 
-		// Çå¿Õ¶ÔÓ¦µÄ»º´æÊı¾İ
+		// æ¸…ç©ºå¯¹åº”çš„ç¼“å­˜æ•°æ®
 		m_Dict[pCache->Character] = NULL;
 
-		// ÒÆ³ı
+		// ç§»é™¤
 		removeUsedNode(pCache);
 
-		// »æÖÆ
+		// ç»˜åˆ¶
 		renderCache(pCache, Char);
 
-		// ¼ÇÂ¼
+		// è®°å½•
 		m_Dict[Char] = pCache;
 
-		// ¼ÓÈëMRUÁĞ±í
+		// åŠ å…¥MRUåˆ—è¡¨
 		addUsedNode(pCache);
 
-		// ·µ»Ø
+		// è¿”å›
 		return pCache;
 	}
 }
 
 bool f2dFontFileProvider::makeCache(fuInt Size)
 {
-	// Çå³ı¹ıÍùÊı¾İ
+	// æ¸…é™¤è¿‡å¾€æ•°æ®
 	m_Dict.clear();
 	FCYSAFEDELARR(m_Cache);
 	FCYSAFEKILL(m_CacheTex);
 	m_UsedNodeList = NULL;
 
-	// ½¨Á¢×ÖÌå»º³åÇø
+	// å»ºç«‹å­—ä½“ç¼“å†²åŒº
 	if(FCYFAILED(m_pParent->CreateDynamicTexture(Size, Size, &m_CacheTex)))
 		return false;
-	// Çå¿Õ»º³åÇø
+	// æ¸…ç©ºç¼“å†²åŒº
 	{
 		fuInt tPitch = 0;
 		fData tData = NULL;
@@ -260,7 +260,7 @@ bool f2dFontFileProvider::makeCache(fuInt Size)
 
 	m_FreeNodeList = m_Cache;
 
-	// ³õÊ¼»¯ĞÅÏ¢
+	// åˆå§‹åŒ–ä¿¡æ¯
 	int tCurIndex = 0;
 	for(fuInt j = 0; j<m_CacheYCount; j++)
 		for(fuInt i = 0; i<m_CacheXCount; ++i)
@@ -275,7 +275,7 @@ bool f2dFontFileProvider::makeCache(fuInt Size)
 			tCurIndex++;
 		}
 
-	// Á¬½Ó»º³åÇø
+	// è¿æ¥ç¼“å†²åŒº
 	m_Cache[0].pPrev = NULL;
 	m_Cache[0].pNext = &m_Cache[1];
 	m_Cache[tCount - 1].pNext = NULL;
@@ -291,13 +291,13 @@ bool f2dFontFileProvider::makeCache(fuInt Size)
 
 bool f2dFontFileProvider::renderCache(FontCacheInfo* pCache, fCharW Char)
 {
-	// ¼ÓÔØÎÄ×Öµ½×ÖĞÎ²Û²¢äÖÈ¾
+	// åŠ è½½æ–‡å­—åˆ°å­—å½¢æ§½å¹¶æ¸²æŸ“
 	FT_Load_Char( m_Face, Char, FT_LOAD_RENDER );
 
-	// »ñµÃÍ¼Ïñ
+	// è·å¾—å›¾åƒ
 	FT_Bitmap* tBitmap = &m_Face->glyph->bitmap;
 
-	// Ğ´Èë¶ÔÓ¦ÊôĞÔ
+	// å†™å…¥å¯¹åº”å±æ€§
 	pCache->Character = Char;
 	pCache->Advance = fcyVec2(m_Face->glyph->advance.x / 64.f, m_Face->glyph->advance.y / 64.f);
 	pCache->BrushPos = fcyVec2(-(float)m_Face->glyph->bitmap_left, (float)m_Face->glyph->bitmap_top);
@@ -307,14 +307,14 @@ bool f2dFontFileProvider::renderCache(FontCacheInfo* pCache, fCharW Char)
 		);
 	pCache->GlyphSize = fcyVec2((float)m_Face->glyph->bitmap.width, (float)m_Face->glyph->bitmap.rows); 
 	
-	// ×ªµ½UV×ø±ê
+	// è½¬åˆ°UVåæ ‡
 	fcyVec2 tUVScale(1.f / (float)m_CacheTex->GetWidth(), 1.f / (float)m_CacheTex->GetHeight());
 	pCache->UV.a.x *= tUVScale.x;
 	pCache->UV.a.y *= tUVScale.y;
 	pCache->UV.b.x *= tUVScale.x;
 	pCache->UV.b.y *= tUVScale.y;
 
-	// ¿½±´µ½¶ÔÓ¦Î»ÖÃ
+	// æ‹·è´åˆ°å¯¹åº”ä½ç½®
 	{
 		fuInt tPitch = 0;
 		fData tData = NULL;
@@ -333,7 +333,7 @@ bool f2dFontFileProvider::renderCache(FontCacheInfo* pCache, fCharW Char)
 				
 				pColor[x].argb = 0x00000000;
 
-				// ÔÚ×ÖÌåÊı¾İÖĞ
+				// åœ¨å­—ä½“æ•°æ®ä¸­
 				if (y >= s_Magin && y < s_Magin + tBitmap->rows)
 				{
 					if (x >= s_Magin && x < s_Magin + tBitmap->width)
@@ -356,7 +356,7 @@ void f2dFontFileProvider::OnRenderDeviceLost()
 {
 	m_Dict.clear();
 	
-	// ±£´æËùÓĞÒÑ»º´æµÄÎÄ×Ö
+	// ä¿å­˜æ‰€æœ‰å·²ç¼“å­˜çš„æ–‡å­—
 	m_CharInUsing.clear();
 	m_CharInUsing.reserve(m_CacheXCount * m_CacheYCount + 1);
 
@@ -378,7 +378,7 @@ void f2dFontFileProvider::OnRenderDeviceReset()
 {
 	makeCache(m_TexSize);
 
-	// ÖØĞÂ»º´æ
+	// é‡æ–°ç¼“å­˜
 	CacheString(m_CharInUsing.c_str());
 	m_CharInUsing.clear();
 	m_CharInUsing.reserve(0);
@@ -412,14 +412,14 @@ fResult f2dFontFileProvider::QueryGlyph(f2dGraphics* pGraph, fCharW Character, f
 		return tRet;
 	}
 
-	if(pGraph)  // »æÖÆ¹ı³Ì
+	if(pGraph)  // ç»˜åˆ¶è¿‡ç¨‹
 	{
-		// ¼ì²éÊÇ·ñĞèÒªFlush
+		// æ£€æŸ¥æ˜¯å¦éœ€è¦Flush
 		if(m_FreeNodeList == NULL && !m_Dict[Character])
 			pGraph->Flush();
 	}
 
-	// È¡³öÎÄ×Ö
+	// å–å‡ºæ–‡å­—
 	FontCacheInfo* pCache = getChar(Character);
 
 	InfoOut->Advance = pCache->Advance;

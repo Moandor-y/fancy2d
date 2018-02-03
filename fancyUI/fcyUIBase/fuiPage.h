@@ -1,6 +1,6 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiPage.h
-/// @brief fancyUI ¸ù¿Ø¼ş
+/// @brief fancyUI æ ¹æ§ä»¶
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include <fcyRefObj.h>
@@ -10,73 +10,73 @@
 #include "fuiStyle.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief fancyUI ¸ù¿Ø¼ş
+/// @brief fancyUI æ ¹æ§ä»¶
 ////////////////////////////////////////////////////////////////////////////////
 class fuiPage :
 	public fuiControl
 {
 	friend class fuiControl;
 public:
-	/// @brief Êó±ê°´¼ü
+	/// @brief é¼ æ ‡æŒ‰é”®
 	enum MOUSEBUTTON
 	{
-		MOUSEBUTTON_L,  ///< @brief Êó±ê×ó¼ü
-		MOUSEBUTTON_M,  ///< @brief Êó±êÖĞ¼ü
-		MOUSEBUTTON_R   ///< @brief Êó±êÓÒ¼ü
+		MOUSEBUTTON_L,  ///< @brief é¼ æ ‡å·¦é”®
+		MOUSEBUTTON_M,  ///< @brief é¼ æ ‡ä¸­é”®
+		MOUSEBUTTON_R   ///< @brief é¼ æ ‡å³é”®
 	};
 public:
 	static F2DINPUTKEYCODE VKKeyToF2DKey(fuInt VKCode);
 protected:
-	/// @brief ¿Ø¼ş±í
+	/// @brief æ§ä»¶è¡¨
 	std::unordered_map<std::wstring, fuiControl*> m_ControlMap;
 
-	/// @brief Ä¬ÈÏÑùÊ½
+	/// @brief é»˜è®¤æ ·å¼
 	fcyRefPointer<fuiStyle> m_pDefaultStyle;
 
-	/// @brief °ó¶¨µÄf2dRenderer
+	/// @brief ç»‘å®šçš„f2dRenderer
 	f2dRenderer* m_pRenderer;
 
-	/// @brief äÖÈ¾Æ÷
+	/// @brief æ¸²æŸ“å™¨
 	fuiGraphics m_pGraphics;
 
-	/// @brief DEBUG¿ª¹Ø
+	/// @brief DEBUGå¼€å…³
 	fBool m_bDebug;
 
-	/// @brief Êó±êÎ»ÖÃµÄ¿Ø¼ş
+	/// @brief é¼ æ ‡ä½ç½®çš„æ§ä»¶
 	fuiControl* m_pControlAtMousePos;
 
-	/// @brief Êó±êÎ»ÖÃµÄ¿Ø¼şµÄÏà¶ÔÊó±êÎ»ÖÃ
+	/// @brief é¼ æ ‡ä½ç½®çš„æ§ä»¶çš„ç›¸å¯¹é¼ æ ‡ä½ç½®
 	fcyVec2 m_ControlMousePos;
 
-	/// @brief ÉÏÒ»¸ö½ÓÊÜÊó±êÒÆ¶¯ĞÅÏ¢µÄ¿Ø¼ş×óÉÏ½Ç×ø±ê
+	/// @brief ä¸Šä¸€ä¸ªæ¥å—é¼ æ ‡ç§»åŠ¨ä¿¡æ¯çš„æ§ä»¶å·¦ä¸Šè§’åæ ‡
 	fcyVec2 m_ControlOrigin;
 
-	/// @brief ÉÏÒ»¸ö½ÓÊÜÊó±êÒÆ¶¯ĞÅÏ¢µÄ¿Ø¼ş
+	/// @brief ä¸Šä¸€ä¸ªæ¥å—é¼ æ ‡ç§»åŠ¨ä¿¡æ¯çš„æ§ä»¶
 	fuiControl* m_pLastMouseMoveControl;
 
-	/// @brief Êó±êËø¶¨¶ÔÏó
+	/// @brief é¼ æ ‡é”å®šå¯¹è±¡
 	fuiControl* m_pLockMouseControl;
 
-	/// @brief Êó±ê½âËøÏûÏ¢
+	/// @brief é¼ æ ‡è§£é”æ¶ˆæ¯
 	MOUSEBUTTON m_MouseUnlockEvent;
 
-	/// @brief ½¹µã £¨ÉÏÒ»¸öÊó±êËø¶¨¶ÔÏó£©
+	/// @brief ç„¦ç‚¹ ï¼ˆä¸Šä¸€ä¸ªé¼ æ ‡é”å®šå¯¹è±¡ï¼‰
 	fuiControl* m_pFocus;
 
-	/// @brief Êó±êÉÏÒ»´ÎÎ»ÖÃ
+	/// @brief é¼ æ ‡ä¸Šä¸€æ¬¡ä½ç½®
 	fcyVec2 m_MouseLastPos;
 private:
-	/// @brief  ¼ÓÔØ²¼¾Ö½Úµã
+	/// @brief  åŠ è½½å¸ƒå±€èŠ‚ç‚¹
 	void loadLayoutNode(fcyXmlElement* pNode, fuiControl* pParent);
-	/// @brief  DEBUG»æÍ¼
+	/// @brief  DEBUGç»˜å›¾
 	void debugDraw(fuiGraphics* pGraph, fuiControl* pControl);
-	/// @brief     »ñµÃÊó±ê´¦µÄ¿Ø¼ş
-	/// @param[in] pControl Òª²âÊÔµÄ¿Ø¼ş
-	/// @param[in] Pos      Êó±êÏà¶Ô¸¸¿Ø¼şµÄÎ»ÖÃ
+	/// @brief     è·å¾—é¼ æ ‡å¤„çš„æ§ä»¶
+	/// @param[in] pControl è¦æµ‹è¯•çš„æ§ä»¶
+	/// @param[in] Pos      é¼ æ ‡ç›¸å¯¹çˆ¶æ§ä»¶çš„ä½ç½®
 	fuiControl* getControlAtPos(fuiControl* pControl, const fcyVec2& Pos, fcyVec2& PosOut);
-	/// @brief µİ¹é´¥·¢ÑùÊ½±ä¸ü
+	/// @brief é€’å½’è§¦å‘æ ·å¼å˜æ›´
 	void execStyleChanged(fuiControl* p);
-	/// @brief Í¶µİ×Ó¶ÔÏó¶ªÊ§½¹µãÏûÏ¢
+	/// @brief æŠ•é€’å­å¯¹è±¡ä¸¢å¤±ç„¦ç‚¹æ¶ˆæ¯
 	void sendSubControlLostFocusMsg(fuiControl* pControl)
 	{
 		fuiObjectEventArgs tArgs;
@@ -90,7 +90,7 @@ private:
 			p = p->GetParent();
 		}
 	}
-	/// @brief Í¶µİ×Ó¶ÔÏó»ñµÃ½¹µãÏûÏ¢
+	/// @brief æŠ•é€’å­å¯¹è±¡è·å¾—ç„¦ç‚¹æ¶ˆæ¯
 	void sendSubControlGetFocusMsg(fuiControl* pControl)
 	{
 		fuiObjectEventArgs tArgs;
@@ -104,57 +104,57 @@ private:
 			p = p->GetParent();
 		}
 	}
-	/// @brief     ´¦ÀíÊó±êÒÆ¶¯ÏûÏ¢
-	/// @param[in] MousePos Ïà¶ÔÓÚ¸¸¿Ø¼ş£¨ÆÁÄ»£©µÄÎ»ÖÃ
-	/// @return    ÏûÏ¢ÊÇ·ñÓĞÊÜÌå
+	/// @brief     å¤„ç†é¼ æ ‡ç§»åŠ¨æ¶ˆæ¯
+	/// @param[in] MousePos ç›¸å¯¹äºçˆ¶æ§ä»¶ï¼ˆå±å¹•ï¼‰çš„ä½ç½®
+	/// @return    æ¶ˆæ¯æ˜¯å¦æœ‰å—ä½“
 	bool sendMouseMove(const fcyVec2& MousePos);
-	/// @brief     ´¦ÀíÊó±ê°´ÏÂÏûÏ¢
-	/// @param[in] Button   °´Å¥
-	/// @param[in] MousePos ¿ÉÑ¡Êó±êÎ»ÖÃ£¬ÖØĞÂ·¢ËÍÏûÏ¢µ½SendMouseMove
-	/// @return    ÏûÏ¢ÊÇ·ñÓĞÊÜÌå
+	/// @brief     å¤„ç†é¼ æ ‡æŒ‰ä¸‹æ¶ˆæ¯
+	/// @param[in] Button   æŒ‰é’®
+	/// @param[in] MousePos å¯é€‰é¼ æ ‡ä½ç½®ï¼Œé‡æ–°å‘é€æ¶ˆæ¯åˆ°SendMouseMove
+	/// @return    æ¶ˆæ¯æ˜¯å¦æœ‰å—ä½“
 	bool sendMouseButtonDown(MOUSEBUTTON Button, fcyVec2* MousePos);
-	/// @brief     ´¦ÀíÊó±ê·Å¿ªÏûÏ¢
-	/// @param[in] Button   °´Å¥
-	/// @param[in] MousePos ¿ÉÑ¡Êó±êÎ»ÖÃ£¬ÖØĞÂ·¢ËÍÏûÏ¢µ½SendMouseMove
-	/// @return    ÏûÏ¢ÊÇ·ñÓĞÊÜÌå
+	/// @brief     å¤„ç†é¼ æ ‡æ”¾å¼€æ¶ˆæ¯
+	/// @param[in] Button   æŒ‰é’®
+	/// @param[in] MousePos å¯é€‰é¼ æ ‡ä½ç½®ï¼Œé‡æ–°å‘é€æ¶ˆæ¯åˆ°SendMouseMove
+	/// @return    æ¶ˆæ¯æ˜¯å¦æœ‰å—ä½“
 	bool sendMouseButtonUp(MOUSEBUTTON Button, fcyVec2* MousePos);
 protected: // for fuiControl
-	/// @brief  ×¢²áÒ»¸ö¿Ø¼ş
+	/// @brief  æ³¨å†Œä¸€ä¸ªæ§ä»¶
 	void RegisterControl(fuiControl* pControl);
-	/// @brief  È¡Ïû¿Ø¼ş×¢²á
+	/// @brief  å–æ¶ˆæ§ä»¶æ³¨å†Œ
 	void UnregisterControl(fuiControl* pControl);
 public:
-	/// @brief »ñµÃ°ó¶¨µÄrenderer
+	/// @brief è·å¾—ç»‘å®šçš„renderer
 	f2dRenderer* GetRenderer() { return m_pRenderer; }
-	/// @brief  ¼ÓÔØ²¼¾ÖÎÄ¼ş
+	/// @brief  åŠ è½½å¸ƒå±€æ–‡ä»¶
 	void LoadLayoutFromFile(fcyStream* pStream);
-	/// @brief  »ñµÃ¿Ø¼ş
-	/// @note   Èô¿Ø¼ş²»´æÔÚÔòÅ×³öÒì³£
-	/// @return ¿Ø¼şÈõÒıÓÃ
+	/// @brief  è·å¾—æ§ä»¶
+	/// @note   è‹¥æ§ä»¶ä¸å­˜åœ¨åˆ™æŠ›å‡ºå¼‚å¸¸
+	/// @return æ§ä»¶å¼±å¼•ç”¨
 	fuiControl* GetControl(const std::wstring& Name);
-	/// @brief  Ñ°ÕÒ¿Ø¼ş
-	/// @return ¿Ø¼şÈõÒıÓÃ»òÕßNULL
+	/// @brief  å¯»æ‰¾æ§ä»¶
+	/// @return æ§ä»¶å¼±å¼•ç”¨æˆ–è€…NULL
 	fuiControl* FindControl(const std::wstring& Name);
-	/// @brief  ÊÇ·ñDEBUG
+	/// @brief  æ˜¯å¦DEBUG
 	fBool GetDebugMode()const { return m_bDebug; }
-	/// @brief  DEBUGÄ£Ê½
+	/// @brief  DEBUGæ¨¡å¼
 	void SetDebugMode(fBool Value) { m_bDebug = Value; }
-	/// @brief  ·µ»ØÊó±êÉÏÒ»´Î¾ø¶ÔÎ»ÖÃ
+	/// @brief  è¿”å›é¼ æ ‡ä¸Šä¸€æ¬¡ç»å¯¹ä½ç½®
 	const fcyVec2& GetMouseLastPos() { return m_MouseLastPos; }
-	/// @brief ·µ»Ø½¹µã
+	/// @brief è¿”å›ç„¦ç‚¹
 	fuiControl* GetFocusControl() { return m_pFocus; }
-	/// @brief ÉèÖÃ½¹µã
+	/// @brief è®¾ç½®ç„¦ç‚¹
 	void SetFocusControl(fuiControl* p);
-	/// @brief Ç¿ÖÆ½â³ı¿Ø¼şµÄÊó±ê²¶»ñ
+	/// @brief å¼ºåˆ¶è§£é™¤æ§ä»¶çš„é¼ æ ‡æ•è·
 	void ReleaseMouseEventCatch();
-public: // ½Ó¿ÚÊµÏÖ
+public: // æ¥å£å®ç°
 	fuiStyle* GetControlStyle()const;
 	void SetControlStyle(fuiStyle* pStyle);
 
 	void Update(fDouble ElapsedTime);
 	void Render(fuiGraphics* pGraph=NULL);
-public: // UIÏûÏ¢
-	/// @brief ´¦Àíf2dÏûÏ¢
+public: // UIæ¶ˆæ¯
+	/// @brief å¤„ç†f2dæ¶ˆæ¯
 	bool DealF2DMsg(const f2dMsg& Msg);
 public:
 	fuiPage(const std::wstring& Name, f2dRenderer* pRenderer, f2dGraphics2D* pGraph);

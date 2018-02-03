@@ -1,4 +1,4 @@
-#include "fuiButton.h"
+ï»¿#include "fuiButton.h"
 
 #include "fuiExceptionMacro.h"
 
@@ -10,10 +10,10 @@ fuiButton::fuiButton(fuiPage* pRootPage, const std::wstring& Name)
 	: fuiControl(pRootPage, Name), m_ButtonState(BUTTONSTATE_DEFAULT),
 	m_LabelOffsetWhenDown(2.f, 2.f)
 {
-	// Ä¬ÈÏ²ÎÊý
+	// é»˜è®¤å‚æ•°
 	m_bClip = true;
 
-	// ´´½¨×Ó¿Ø¼þ
+	// åˆ›å»ºå­æŽ§ä»¶
 	m_pTextLabel.DirectSet(new fuiLabel(pRootPage, Name + L".TextLabel"));
 	m_pTextLabel->SetParent(this);
 	m_pTextLabel->SetMouseTrans(true);
@@ -21,7 +21,7 @@ fuiButton::fuiButton(fuiPage* pRootPage, const std::wstring& Name)
 	m_pTextLabel->RawSetProperty(L"HAlign", L"Center");
 	m_pTextLabel->RawSetProperty(L"VAlign", L"Center");
 
-	// ÉèÖÃ·ÃÎÊÆ÷
+	// è®¾ç½®è®¿é—®å™¨
 	m_DefaultSprite_Accessor = fuiPropertyAccessor<wstring>(
 			&m_DefaultSprite,
 			[&](std::wstring& Prop, const std::wstring* Value)
@@ -63,13 +63,13 @@ fuiButton::fuiButton(fuiPage* pRootPage, const std::wstring& Name)
 		);
 	m_LabelOffsetWhenDown_Accessor = fuiPropertyAccessor<fcyVec2>(&m_LabelOffsetWhenDown);
 
-	// ×¢²áÊôÐÔ
+	// æ³¨å†Œå±žæ€§
 	RegisterProperty(L"DefaultSprite", &m_DefaultSprite_Accessor);
 	RegisterProperty(L"MouseOnSprite", &m_MouseOnSprite_Accessor);
 	RegisterProperty(L"MouseDownSprite", &m_MouseDownSprite_Accessor);
 	RegisterProperty(L"LabelOffsetWhenDown", &m_LabelOffsetWhenDown_Accessor);
 
-	// ÉèÖÃÊÂ¼þ
+	// è®¾ç½®äº‹ä»¶
 	GetEvent(L"OnStyleChanged") += fuiDelegate::EventCallBack(this, &fuiButton::OnStyleChanged);
 	GetEvent(L"OnSizeChanged") += fuiDelegate::EventCallBack(this, &fuiButton::OnSizeChanged);
 

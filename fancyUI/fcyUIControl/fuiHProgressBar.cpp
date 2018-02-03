@@ -1,4 +1,4 @@
-#include "fuiHProgressBar.h"
+ï»¿#include "fuiHProgressBar.h"
 
 #include "fuiExceptionMacro.h"
 
@@ -9,7 +9,7 @@ using namespace std;
 fuiHProgressBar::fuiHProgressBar(fuiPage* pRootPage, const std::wstring& Name)
 	: fuiControl(pRootPage, Name), m_MaxValue(100.f), m_MinValue(0.f), m_Value(100.f), m_Percent(1.f), m_LeftImageWidth(0), m_RightImageWidth(0), m_CenterImageWidth(0)
 {
-	// Ä¬ÈÏÊôÐÔ
+	// é»˜è®¤å±žæ€§
 	SetClip(false);
 
 	m_BackSprite_Accessor = fuiPropertyAccessor<wstring>(
@@ -81,7 +81,7 @@ fuiHProgressBar::fuiHProgressBar(fuiPage* pRootPage, const std::wstring& Name)
 	);
 	m_ProgressMargin_Accessor = fuiPropertyAccessor<fcyRect>(&m_ProgressMargin);
 	
-	// ×¢²áÊôÐÔ
+	// æ³¨å†Œå±žæ€§
 	RegisterProperty(L"BackSprite",     &m_BackSprite_Accessor);
 	RegisterProperty(L"LeftImage",      &m_LeftImage_Accessor);
 	RegisterProperty(L"RightImage",     &m_RightImage_Accessor);
@@ -92,10 +92,10 @@ fuiHProgressBar::fuiHProgressBar(fuiPage* pRootPage, const std::wstring& Name)
 	RegisterProperty(L"Value",          &m_Value_Accessor);
 	RegisterProperty(L"ProgressMargin", &m_ProgressMargin_Accessor);
 
-	// ×¢²áÊÂ¼þ
+	// æ³¨å†Œäº‹ä»¶
 	RegisterEvent(L"OnValueChanged");
 
-	// ×¢²áÊÂ¼þ
+	// æ³¨å†Œäº‹ä»¶
 	GetEvent(L"OnStyleChanged") += fuiDelegate::EventCallBack(this, &fuiHProgressBar::OnStyleChanged);
 }
 
@@ -104,7 +104,7 @@ fuiHProgressBar::~fuiHProgressBar()
 
 void fuiHProgressBar::UpdateValue()
 {
-	// ¼ÆËã½ø¶È°Ù·Ö±È
+	// è®¡ç®—è¿›åº¦ç™¾åˆ†æ¯”
 	m_Percent = m_Value / (m_MaxValue - m_MinValue);
 	if(m_Percent < 0.f)
 		m_Percent = 0.f;
@@ -154,7 +154,7 @@ void fuiHProgressBar::Render(fuiGraphics* pGraph)
 		m_pBackSprite->Draw(pGraph, fcyRect(0.f, 0.f, GetWidth(), GetHeight()), m_BlendColor);
 	if(m_pLeftImage && m_pCenterImage && m_pRightImage)
 	{
-		// ¼ÆËã¿Ø¼þÓÐÐ§´óÐ¡
+		// è®¡ç®—æŽ§ä»¶æœ‰æ•ˆå¤§å°
 		float tValidWidth = GetWidth() - m_ProgressMargin.a.x - m_ProgressMargin.b.x;
 		float tValidHeight = GetHeight() - m_ProgressMargin.a.y - m_ProgressMargin.b.y;
 		if(tValidWidth > 0.f && tValidHeight > 0.f)

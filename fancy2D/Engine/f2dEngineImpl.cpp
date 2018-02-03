@@ -1,4 +1,4 @@
-#include "f2dEngineImpl.h"
+ï»¿#include "f2dEngineImpl.h"
 
 #include "../Input/f2dInputSysImpl.h"
 #include "../Sound/f2dSoundSysImpl.h"
@@ -14,7 +14,7 @@
 using namespace std;
 
 ////////////////////////////////////////////////////////////////////////////////
-// µ¼³öº¯Êı
+// å¯¼å‡ºå‡½æ•°
 extern "C" fResult F2DDLLFUNC CreateF2DEngine(fuInt Version, f2dEngineEventListener* pListener, f2dEngine** pOut, f2dInitialErrListener* pErrListener)
 {
 	if(!pOut)
@@ -67,23 +67,23 @@ extern "C" fResult F2DDLLFUNC CreateF2DEngineAndInit(fuInt Version, const fcyRec
 
 fuInt f2dEngineImpl::UpdateAndRenderThread::ThreadJob()
 {
-	// Ïß³ÌÏà¹ØÉèÖÃ
+	// çº¿ç¨‹ç›¸å…³è®¾ç½®
 	SetThreadAffinityMask(GetCurrentThread(), 1);
 	SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_TIME_CRITICAL);
 
-	// ³õÊ¼»¯¼ÆÊıÆ÷ºÍFPS¿ØÖÆÆ÷
+	// åˆå§‹åŒ–è®¡æ•°å™¨å’ŒFPSæ§åˆ¶å™¨
 	fcyStopWatch tTimer;
 	f2dFPSControllerImpl tFPSController(m_MaxFPS);
 
-	// »ñµÃäÖÈ¾Éè±¸
+	// è·å¾—æ¸²æŸ“è®¾å¤‡
 	f2dRenderDeviceImpl* tpRenderDev = NULL;
 	if(m_pEngine->GetRenderer())
 		tpRenderDev = (f2dRenderDeviceImpl*)m_pEngine->GetRenderer()->GetDevice();
 
-	// ¿ªÊ¼¼ÆÊ±
+	// å¼€å§‹è®¡æ—¶
 	tTimer.Reset();
 
-	// Ö´ĞĞäÖÈ¾¸üĞÂÑ­»·
+	// æ‰§è¡Œæ¸²æŸ“æ›´æ–°å¾ªç¯
 	fcyCriticalSection& tLock = m_pEngine->m_Sec;
 	fBool bExit = false;
 	fBool bDoPresent = false;
@@ -94,25 +94,25 @@ fuInt f2dEngineImpl::UpdateAndRenderThread::ThreadJob()
 		bExit = m_pEngine->m_bStop;
 		tLock.UnLock();
 
-		// ¼ì²éÍË³ö
+		// æ£€æŸ¥é€€å‡º
 		if(bExit)
 			break;
 		
-		// ¸üĞÂFPS
+		// æ›´æ–°FPS
 		tTime = tFPSController.Update(tTimer);
 		
-		// Ö´ĞĞÏÔÊ¾ÊÂ¼ş
+		// æ‰§è¡Œæ˜¾ç¤ºäº‹ä»¶
 		if(bDoPresent)
 			m_pEngine->DoPresent(tpRenderDev);
 
-		// Ö´ĞĞ¸üĞÂÊÂ¼ş
+		// æ‰§è¡Œæ›´æ–°äº‹ä»¶
 		m_pEngine->DoUpdate(tTime, &tFPSController);
 
-		// Ö´ĞĞäÖÈ¾ÊÂ¼ş
+		// æ‰§è¡Œæ¸²æŸ“äº‹ä»¶
 		bDoPresent = m_pEngine->DoRender(tTime, &tFPSController, tpRenderDev);
 	}
 
-	// Í¶µİÖÕÖ¹ÏûÏ¢
+	// æŠ•é€’ç»ˆæ­¢æ¶ˆæ¯
 	PostThreadMessage(m_MainThreadID, WM_USER, 0, 0);
 
 	return 0;
@@ -120,14 +120,14 @@ fuInt f2dEngineImpl::UpdateAndRenderThread::ThreadJob()
 
 fuInt f2dEngineImpl::UpdateThread::ThreadJob()
 {
-	// ³õÊ¼»¯¼ÆÊıÆ÷ºÍFPS¿ØÖÆÆ÷
+	// åˆå§‹åŒ–è®¡æ•°å™¨å’ŒFPSæ§åˆ¶å™¨
 	fcyStopWatch tTimer;
 	f2dFPSControllerImpl tFPSController(m_MaxFPS);
 
-	// ¿ªÊ¼¼ÆÊ±
+	// å¼€å§‹è®¡æ—¶
 	tTimer.Reset();
 
-	// Ö´ĞĞäÖÈ¾¸üĞÂÑ­»·
+	// æ‰§è¡Œæ¸²æŸ“æ›´æ–°å¾ªç¯
 	fcyCriticalSection& tLock = m_pEngine->m_Sec;
 	fBool bExit = false;
 	fDouble tTime = 0;
@@ -137,18 +137,18 @@ fuInt f2dEngineImpl::UpdateThread::ThreadJob()
 		bExit = m_pEngine->m_bStop;
 		tLock.UnLock();
 
-		// ¼ì²éÍË³ö
+		// æ£€æŸ¥é€€å‡º
 		if(bExit)
 			break;
 
-		// ¸üĞÂFPS
+		// æ›´æ–°FPS
 		tTime = tFPSController.Update(tTimer);
 		
-		// Ö´ĞĞ¸üĞÂÊÂ¼ş
+		// æ‰§è¡Œæ›´æ–°äº‹ä»¶
 		m_pEngine->DoUpdate(tTime, &tFPSController);
 	}
 
-	// Í¶µİÖÕÖ¹ÏûÏ¢
+	// æŠ•é€’ç»ˆæ­¢æ¶ˆæ¯
 	PostThreadMessage(m_MainThreadID, WM_USER, 0, 0);
 
 	return 0;
@@ -156,19 +156,19 @@ fuInt f2dEngineImpl::UpdateThread::ThreadJob()
 
 fuInt f2dEngineImpl::RenderThread::ThreadJob()
 {
-	// ³õÊ¼»¯¼ÆÊıÆ÷ºÍFPS¿ØÖÆÆ÷
+	// åˆå§‹åŒ–è®¡æ•°å™¨å’ŒFPSæ§åˆ¶å™¨
 	fcyStopWatch tTimer;
 	f2dFPSControllerImpl tFPSController(m_MaxFPS);
 
-	// »ñµÃäÖÈ¾Éè±¸
+	// è·å¾—æ¸²æŸ“è®¾å¤‡
 	f2dRenderDeviceImpl* tpRenderDev = NULL;
 	if(m_pEngine->GetRenderer())
 		tpRenderDev = (f2dRenderDeviceImpl*)m_pEngine->GetRenderer()->GetDevice();
 
-	// ¿ªÊ¼¼ÆÊ±
+	// å¼€å§‹è®¡æ—¶
 	tTimer.Reset();
 
-	// Ö´ĞĞäÖÈ¾¸üĞÂÑ­»·
+	// æ‰§è¡Œæ¸²æŸ“æ›´æ–°å¾ªç¯
 	fcyCriticalSection& tLock = m_pEngine->m_Sec;
 	fBool bExit = false;
 	fBool bDoPresent = false;
@@ -179,18 +179,18 @@ fuInt f2dEngineImpl::RenderThread::ThreadJob()
 		bExit = m_pEngine->m_bStop;
 		tLock.UnLock();
 
-		// ¼ì²éÍË³ö
+		// æ£€æŸ¥é€€å‡º
 		if(bExit)
 			break;
 
-		// ¸üĞÂFPS
+		// æ›´æ–°FPS
 		tTime = tFPSController.Update(tTimer);
 
-		// Ö´ĞĞÏÔÊ¾ÊÂ¼ş
+		// æ‰§è¡Œæ˜¾ç¤ºäº‹ä»¶
 		if(bDoPresent)
 			m_pEngine->DoPresent(tpRenderDev);
 		
-		// Ö´ĞĞäÖÈ¾ÊÂ¼ş
+		// æ‰§è¡Œæ¸²æŸ“äº‹ä»¶
 		bDoPresent = m_pEngine->DoRender(tTime, &tFPSController, tpRenderDev);
 	}
 
@@ -218,7 +218,7 @@ f2dEngineImpl::f2dEngineImpl(const fcyRect& WinPos, fcStrW Title, fBool Windowed
 	m_CPUString = fcyCPUID::GetCPUString();
 	m_CPUBrandString = fcyCPUID::GetCPUBrand();
 
-	// ³õÊ¼»¯²¿¼ş
+	// åˆå§‹åŒ–éƒ¨ä»¶
 	try
 	{
 		m_pWindow = m_WinClass.CreateRenderWindow(WinPos, Title, false, F2DWINBORDERTYPE_FIXED);
@@ -243,7 +243,7 @@ f2dEngineImpl::f2dEngineImpl(const fcyRect& WinPos, fcStrW Title, fBool Windowed
 
 f2dEngineImpl::~f2dEngineImpl()
 {
-	// Ïú»Ù×é¼ş
+	// é”€æ¯ç»„ä»¶
 	FCYSAFEKILL(m_pVideoSys);
 	FCYSAFEKILL(m_pRenderer);
 	FCYSAFEKILL(m_pInputSys);
@@ -255,12 +255,12 @@ void f2dEngineImpl::ThrowException(const fcyException& e)
 {
 	FCYDEBUGEXCPT(e);
 
-	// ÉèÖÃ×î½üÒ»´Î´íÎó
+	// è®¾ç½®æœ€è¿‘ä¸€æ¬¡é”™è¯¯
 	m_LastErrTime = e.GetTime();
 	m_LastErrSrc = e.GetSrc();
 	m_LastErrDesc = e.GetDesc();
 
-	// ·â×°²¢Å×³öÏûÏ¢
+	// å°è£…å¹¶æŠ›å‡ºæ¶ˆæ¯
 	f2dMsgMemHelper<fcyException>* tObjMem = new f2dMsgMemHelper<fcyException>(e);
 	SendMsg(
 		F2DMSG_APP_ONEXCEPTION,
@@ -418,24 +418,24 @@ fResult f2dEngineImpl::SendMsg(const f2dMsg& Msg, f2dInterface* pMemObj)
 
 void f2dEngineImpl::Run_SingleThread(fuInt UpdateMaxFPS)
 {
-	// Ïß³ÌÏà¹ØÉèÖÃ
+	// çº¿ç¨‹ç›¸å…³è®¾ç½®
 	SetThreadAffinityMask(GetCurrentThread(), 1);
 	SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_TIME_CRITICAL);
 
-	// ³õÊ¼»¯¼ÆÊıÆ÷ºÍFPS¿ØÖÆÆ÷
+	// åˆå§‹åŒ–è®¡æ•°å™¨å’ŒFPSæ§åˆ¶å™¨
 	fcyStopWatch tTimer;
 	fcyStopWatch tMsgTimer;
 	f2dFPSControllerImpl tFPSController(UpdateMaxFPS);
 
-	// »ñµÃäÖÈ¾Éè±¸
+	// è·å¾—æ¸²æŸ“è®¾å¤‡
 	f2dRenderDeviceImpl* tpRenderDev = NULL;
 	if(m_pRenderer)
 		tpRenderDev = (f2dRenderDeviceImpl*)m_pRenderer->GetDevice();
 
-	// ¿ªÊ¼¼ÆÊ±
+	// å¼€å§‹è®¡æ—¶
 	tTimer.Reset();
 
-	// Ö´ĞĞ³ÌĞòÑ­»·
+	// æ‰§è¡Œç¨‹åºå¾ªç¯
 	fBool bExit = false;
 	fBool bDoPresent = false;
 	fDouble tTime = 0;
@@ -450,7 +450,7 @@ void f2dEngineImpl::Run_SingleThread(fuInt UpdateMaxFPS)
 		if(bExit)
 			break;
 
-		// Ó¦ÓÃ³ÌĞòÏûÏ¢´¦Àí
+		// åº”ç”¨ç¨‹åºæ¶ˆæ¯å¤„ç†
 		{
 			tMsgTimer.Reset();
 			if(PeekMessage(&tMsg, 0, 0, 0, PM_REMOVE))
@@ -458,35 +458,35 @@ void f2dEngineImpl::Run_SingleThread(fuInt UpdateMaxFPS)
 				TranslateMessage(&tMsg);
 				DispatchMessage(&tMsg);
 
-				// ·¢ËÍÍË³öÏûÏ¢
+				// å‘é€é€€å‡ºæ¶ˆæ¯
 				if(tMsg.message == WM_QUIT)
 					SendMsg(F2DMSG_APP_ONEXIT);
 			}
 			tMsgTime = tMsgTimer.GetElapsed();
 		}
 
-		// ¸üĞÂFPS
-		tTime = tFPSController.Update(tTimer) - tMsgTime;  // ĞŞÕıÓÉÓÚ´¦ÀíÏûÏ¢¶îÍâºÄ·ÑµÄÊ±¼ä
+		// æ›´æ–°FPS
+		tTime = tFPSController.Update(tTimer) - tMsgTime;  // ä¿®æ­£ç”±äºå¤„ç†æ¶ˆæ¯é¢å¤–è€—è´¹çš„æ—¶é—´
 		
-		// Ö´ĞĞÏÔÊ¾ÊÂ¼ş
+		// æ‰§è¡Œæ˜¾ç¤ºäº‹ä»¶
 		if(bDoPresent)
 			DoPresent(tpRenderDev);
 
-		// Ö´ĞĞ¸üĞÂÊÂ¼ş
+		// æ‰§è¡Œæ›´æ–°äº‹ä»¶
 		DoUpdate(tTime, &tFPSController);
 
-		// Ö´ĞĞäÖÈ¾ÊÂ¼ş
+		// æ‰§è¡Œæ¸²æŸ“äº‹ä»¶
 		bDoPresent = DoRender(tTime, &tFPSController, tpRenderDev);
 	}
 }
 
 void f2dEngineImpl::Run_MultiThread(fuInt UpdateMaxFPS)
 {
-	// ´´½¨¹¤×÷Ïß³Ì²¢Ö´ĞĞ
+	// åˆ›å»ºå·¥ä½œçº¿ç¨‹å¹¶æ‰§è¡Œ
 	UpdateAndRenderThread tThread(this, UpdateMaxFPS);
 	tThread.Resume();
 
-	// Ö´ĞĞ³ÌĞòÑ­»·
+	// æ‰§è¡Œç¨‹åºå¾ªç¯
 	fBool bExit = false;
 	MSG tMsg;
 	while(1)
@@ -509,7 +509,7 @@ void f2dEngineImpl::Run_MultiThread(fuInt UpdateMaxFPS)
 			break;
 		}
 
-		// Ó¦ÓÃ³ÌĞòÏûÏ¢´¦Àí
+		// åº”ç”¨ç¨‹åºæ¶ˆæ¯å¤„ç†
 		if(GetMessage(&tMsg, 0, 0, 0))
 		{
 			TranslateMessage(&tMsg);
@@ -517,25 +517,25 @@ void f2dEngineImpl::Run_MultiThread(fuInt UpdateMaxFPS)
 		}
 		else
 		{
-			// ·¢ËÍÍË³öÏûÏ¢
+			// å‘é€é€€å‡ºæ¶ˆæ¯
 			if(tMsg.message == WM_QUIT)
 				SendMsg(F2DMSG_APP_ONEXIT);
 		}
 	}
 
-	// µÈ´ı¹¤×÷Ïß³Ì
+	// ç­‰å¾…å·¥ä½œçº¿ç¨‹
 	tThread.Wait();
 }
 
 void f2dEngineImpl::Run_FullMultiThread(fuInt UpdateMaxFPS, fuInt RenderMaxFPS)
 {
-	// ´´½¨¹¤×÷Ïß³Ì²¢Ö´ĞĞ
+	// åˆ›å»ºå·¥ä½œçº¿ç¨‹å¹¶æ‰§è¡Œ
 	UpdateThread tUpdateThread(this, UpdateMaxFPS);
 	RenderThread tRenderThread(this, RenderMaxFPS);
 	tUpdateThread.Resume();
 	tRenderThread.Resume();
 
-	// Ö´ĞĞ³ÌĞòÑ­»·
+	// æ‰§è¡Œç¨‹åºå¾ªç¯
 	fBool bExit = false;
 	MSG tMsg;
 	while(1)
@@ -562,7 +562,7 @@ void f2dEngineImpl::Run_FullMultiThread(fuInt UpdateMaxFPS, fuInt RenderMaxFPS)
 			break;
 		}
 
-		// Ó¦ÓÃ³ÌĞòÏûÏ¢´¦Àí
+		// åº”ç”¨ç¨‹åºæ¶ˆæ¯å¤„ç†
 		if(GetMessage(&tMsg, 0, 0, 0))
 		{
 			TranslateMessage(&tMsg);
@@ -570,13 +570,13 @@ void f2dEngineImpl::Run_FullMultiThread(fuInt UpdateMaxFPS, fuInt RenderMaxFPS)
 		}
 		else
 		{
-			// ·¢ËÍÍË³öÏûÏ¢
+			// å‘é€é€€å‡ºæ¶ˆæ¯
 			if(tMsg.message == WM_QUIT)
 				SendMsg(F2DMSG_APP_ONEXIT);
 		}
 	}
 
-	// µÈ´ı¹¤×÷Ïß³Ì
+	// ç­‰å¾…å·¥ä½œçº¿ç¨‹
 	tUpdateThread.Wait();
 	tRenderThread.Wait();
 }
@@ -585,18 +585,18 @@ void f2dEngineImpl::DoUpdate(fDouble ElapsedTime, f2dFPSControllerImpl* pFPSCont
 {
 	f2dMsgPump* tPump = NULL;
 
-	// ½»»»ÏûÏ¢±Ã²¢Çå¿ÕÏûÏ¢±Ã
+	// äº¤æ¢æ¶ˆæ¯æ³µå¹¶æ¸…ç©ºæ¶ˆæ¯æ³µ
 	m_Sec.Lock();
 	tPump = &m_MsgPump[ m_PumpIndex ];
 	m_PumpIndex = !m_PumpIndex;
 	m_MsgPump[m_PumpIndex].Clear();
 	m_Sec.UnLock();
 
-	// ¸üĞÂÊäÈëÉè±¸
+	// æ›´æ–°è¾“å…¥è®¾å¤‡
 	if(m_pInputSys)
 		m_pInputSys->Update();
 
-	// Ö´ĞĞ¼àÌıÆ÷
+	// æ‰§è¡Œç›‘å¬å™¨
 	if(m_pListener)
 	{
 		if(false == m_pListener->OnUpdate(ElapsedTime, pFPSController, tPump))
@@ -606,10 +606,10 @@ void f2dEngineImpl::DoUpdate(fDouble ElapsedTime, f2dFPSControllerImpl* pFPSCont
 
 bool f2dEngineImpl::DoRender(fDouble ElapsedTime, f2dFPSControllerImpl* pFPSController, f2dRenderDeviceImpl* pDev)
 {
-	// Í¬²½Éè±¸×´Ì¬£¬´¦ÀíÉè±¸¶ªÊ§
+	// åŒæ­¥è®¾å¤‡çŠ¶æ€ï¼Œå¤„ç†è®¾å¤‡ä¸¢å¤±
 	if(pDev && FCYOK(pDev->SyncDevice()))
 	{
-		if(m_pListener) // ´¥·¢äÖÈ¾ÊÂ¼ş
+		if(m_pListener) // è§¦å‘æ¸²æŸ“äº‹ä»¶
 			return m_pListener->OnRender(ElapsedTime, pFPSController);
 	}
 
@@ -618,6 +618,6 @@ bool f2dEngineImpl::DoRender(fDouble ElapsedTime, f2dFPSControllerImpl* pFPSCont
 
 void f2dEngineImpl::DoPresent(f2dRenderDeviceImpl* pDev)
 {
-	// µİ½»»­Ãæ
+	// é€’äº¤ç”»é¢
 	pDev->Present();
 }

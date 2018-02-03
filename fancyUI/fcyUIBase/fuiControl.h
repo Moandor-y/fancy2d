@@ -1,6 +1,6 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiControl.h
-/// @brief fancyUI ¿Ø¼ş»ùÀà
+/// @brief fancyUI æ§ä»¶åŸºç±»
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "fuiProperty.h"
@@ -13,7 +13,7 @@
 class fuiPage;
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief fancyUI¿Ø¼ş»ùÀà
+/// @brief fancyUIæ§ä»¶åŸºç±»
 ////////////////////////////////////////////////////////////////////////////////
 class fuiControl :
 	public fcyRefObjImpl<fcyRefObj>, 
@@ -23,152 +23,152 @@ class fuiControl :
 	friend class fuiControl;
 	friend class fuiPage;
 protected:
-	/// @brief ¸ù¿Ø¼ş
+	/// @brief æ ¹æ§ä»¶
 	fuiPage* m_pRootPage;
 
-	/// @brief ¿Ø¼şÑùÊ½
+	/// @brief æ§ä»¶æ ·å¼
 	fuiStyle* m_pStyle;
 
-	/// @brief ¸¸¶ÔÏó
+	/// @brief çˆ¶å¯¹è±¡
 	fuiControl* m_pParent;
 	
-	/// @brief ×Ó¿Ø¼ş
-	/// @note  Ë÷ÒıÔ½Ğ¡Ô½µ×²ã
+	/// @brief å­æ§ä»¶
+	/// @note  ç´¢å¼•è¶Šå°è¶Šåº•å±‚
 	std::vector<fcyRefPointer<fuiControl> > m_SubControlList;
 
-	// ========== ÊôĞÔ&ÊÂ¼ş ==========
-protected: // ÊôĞÔ
-	// ÊôĞÔ³ÉÔ±
-	std::wstring m_Name;     ///< @brief [Ö»¶Á] ¿Ø¼şÃû
-	std::wstring m_Tag;      ///< @brief [¶ÁĞ´] ¸½´øÊôĞÔ
-	fcyRect m_Rect;          ///< @brief [¶ÁĞ´] ¿Ø¼şÎ»ÖÃ
-	fBool m_bClip;           ///< @brief [¶ÁĞ´] ²Ã¼ô
-	fBool m_bMouseTrans;     ///< @brief [¶ÁĞ´] Êó±ê´©Í¸
-	fFloat m_LayerPriority;  ///< @brief [¶ÁĞ´] ²ã´ÎÓÅÏÈÈ¨
-	fBool m_bVisible;        ///< @brief [¶ÁĞ´] ÊÇ·ñ¿É¼û
+	// ========== å±æ€§&äº‹ä»¶ ==========
+protected: // å±æ€§
+	// å±æ€§æˆå‘˜
+	std::wstring m_Name;     ///< @brief [åªè¯»] æ§ä»¶å
+	std::wstring m_Tag;      ///< @brief [è¯»å†™] é™„å¸¦å±æ€§
+	fcyRect m_Rect;          ///< @brief [è¯»å†™] æ§ä»¶ä½ç½®
+	fBool m_bClip;           ///< @brief [è¯»å†™] è£å‰ª
+	fBool m_bMouseTrans;     ///< @brief [è¯»å†™] é¼ æ ‡ç©¿é€
+	fFloat m_LayerPriority;  ///< @brief [è¯»å†™] å±‚æ¬¡ä¼˜å…ˆæƒ
+	fBool m_bVisible;        ///< @brief [è¯»å†™] æ˜¯å¦å¯è§
 
-	// ·ÃÎÊÆ÷
-	fuiPropertyAccessor<std::wstring> m_Name_Accessor;   ///< @brief ¿Ø¼şÃû·ÃÎÊÆ÷ 
-	fuiPropertyAccessor<std::wstring> m_Tag_Accessor;    ///< @brief ¶îÍâÊôĞÔ·ÃÎÊÆ÷ 
-	fuiPropertyAccessor<fcyRect> m_Rect_Accessor;        ///< @brief ¿Ø¼ş·¶Î§·ÃÎÊÆ÷
-	fuiPropertyAccessor<float> m_Left_Accessor;          ///< @brief ×ó²à¾àÀë·ÃÎÊÆ÷ 
-	fuiPropertyAccessor<float> m_Top_Accessor;           ///< @brief ¶¥¶Ë¾àÀë·ÃÎÊÆ÷ 
-	fuiPropertyAccessor<float> m_Width_Accessor;         ///< @brief ¿í¶È·ÃÎÊÆ÷ 
-	fuiPropertyAccessor<float> m_Height_Accessor;        ///< @brief ¸ß¶È·ÃÎÊÆ÷
-	fuiPropertyAccessor<bool> m_Clip_Accessor;           ///< @brief ²Ã¼ô·ÃÎÊÆ÷
-	fuiPropertyAccessor<bool> m_MouseTrans_Accessor;     ///< @brief Êó±ê´©Í¸·ÃÎÊÆ÷
-	fuiPropertyAccessor<float> m_LayerPriority_Accessor; ///< @brief ²ã´ÎÓÅÏÈÈ¨·ÃÎÊÆ÷
-	fuiPropertyAccessor<bool> m_bVisible_Accessor;       ///< @brief ¿É¼ûĞÔ·ÃÎÊÆ÷
+	// è®¿é—®å™¨
+	fuiPropertyAccessor<std::wstring> m_Name_Accessor;   ///< @brief æ§ä»¶åè®¿é—®å™¨ 
+	fuiPropertyAccessor<std::wstring> m_Tag_Accessor;    ///< @brief é¢å¤–å±æ€§è®¿é—®å™¨ 
+	fuiPropertyAccessor<fcyRect> m_Rect_Accessor;        ///< @brief æ§ä»¶èŒƒå›´è®¿é—®å™¨
+	fuiPropertyAccessor<float> m_Left_Accessor;          ///< @brief å·¦ä¾§è·ç¦»è®¿é—®å™¨ 
+	fuiPropertyAccessor<float> m_Top_Accessor;           ///< @brief é¡¶ç«¯è·ç¦»è®¿é—®å™¨ 
+	fuiPropertyAccessor<float> m_Width_Accessor;         ///< @brief å®½åº¦è®¿é—®å™¨ 
+	fuiPropertyAccessor<float> m_Height_Accessor;        ///< @brief é«˜åº¦è®¿é—®å™¨
+	fuiPropertyAccessor<bool> m_Clip_Accessor;           ///< @brief è£å‰ªè®¿é—®å™¨
+	fuiPropertyAccessor<bool> m_MouseTrans_Accessor;     ///< @brief é¼ æ ‡ç©¿é€è®¿é—®å™¨
+	fuiPropertyAccessor<float> m_LayerPriority_Accessor; ///< @brief å±‚æ¬¡ä¼˜å…ˆæƒè®¿é—®å™¨
+	fuiPropertyAccessor<bool> m_bVisible_Accessor;       ///< @brief å¯è§æ€§è®¿é—®å™¨
 
-	// ×¢²áËùÓĞÄ¬ÈÏÊôĞÔ
+	// æ³¨å†Œæ‰€æœ‰é»˜è®¤å±æ€§
 	void registerAllProperty();
-public: // ÊÂ¼ş
-	/// @brief     Ö´ĞĞ¿Ø¼şÊÂ¼ş
-	/// @param[in] Str   ÊÂ¼şÃû³Æ
-	/// @param[in] pArgs ÊÂ¼ş²ÎÊı
+public: // äº‹ä»¶
+	/// @brief     æ‰§è¡Œæ§ä»¶äº‹ä»¶
+	/// @param[in] Str   äº‹ä»¶åç§°
+	/// @param[in] pArgs äº‹ä»¶å‚æ•°
 	void ExecEvent(const std::wstring& Str, fuiEventArgs* pArgs = &fuiDelegate::EmptyEventArgs)
 	{
 		fuiEventSet::ExecEvent(Str, this, pArgs);
 	}
 protected:
-	// ×¢²áËùÓĞÄ¬ÈÏÊÂ¼ş
+	// æ³¨å†Œæ‰€æœ‰é»˜è®¤äº‹ä»¶
 	void registerAllEvent();
 	
-	// ========== ¿Ø¼ş»ù´¡ÊôĞÔ²Ù×÷ ==========
+	// ========== æ§ä»¶åŸºç¡€å±æ€§æ“ä½œ ==========
 protected: // for fuiControl
-	/// @brief  Ôö¼ÓÒ»¸ö×Ó¿Ø¼ş
-	/// @return ·µ»Ø¸¸¿Ø¼şÖ¸Õë
+	/// @brief  å¢åŠ ä¸€ä¸ªå­æ§ä»¶
+	/// @return è¿”å›çˆ¶æ§ä»¶æŒ‡é’ˆ
 	virtual fuiControl* attachSubControl(fuiControl* pControl);
-	/// @brief  ÒÆ³ıÒ»¸ö×Ó¿Ø¼ş
+	/// @brief  ç§»é™¤ä¸€ä¸ªå­æ§ä»¶
 	virtual void removeSubControl(fuiControl* pControl);
-	/// @brief ²éÑ¯×Ó¿Ø¼şµÄ²ã´Î
+	/// @brief æŸ¥è¯¢å­æ§ä»¶çš„å±‚æ¬¡
 	virtual fuInt getSubControlLayer(const fuiControl* pControl);
-	/// @brief ÉèÖÃ×Ó¿Ø¼şµÄ²ã´Î
+	/// @brief è®¾ç½®å­æ§ä»¶çš„å±‚æ¬¡
 	virtual void setSubControlLayer(fuiControl* pControl, fInt Index);
-	/// @brief ÖØĞÂÅÅÁĞ¿Ø¼ş
+	/// @brief é‡æ–°æ’åˆ—æ§ä»¶
 	virtual void resortControl();
 public:
-	// === Î´×¢²áÊôĞÔ ===
-	/// @brief ·µ»ØÆÁÄ»¾ø¶ÔÎ»ÖÃ
+	// === æœªæ³¨å†Œå±æ€§ ===
+	/// @brief è¿”å›å±å¹•ç»å¯¹ä½ç½®
 	fcyVec2 GetAbsolutePos();
-	/// @brief »ñµÃ¸ù¿Ø¼ş
+	/// @brief è·å¾—æ ¹æ§ä»¶
 	fuiPage* GetRoot()const { return m_pRootPage; }
-	/// @brief »ñµÃ¸¸¶ÔÏó
+	/// @brief è·å¾—çˆ¶å¯¹è±¡
 	fuiControl* GetParent()const { return m_pParent; }
-	/// @brief ÉèÖÃ¸¸¶ÔÏó
+	/// @brief è®¾ç½®çˆ¶å¯¹è±¡
 	void SetParent(fuiControl* pParent);
-	/// @brief ²éÑ¯ÔÚ¸¸¶ÔÏóµÄ¾ø¶Ô²ã´Î
+	/// @brief æŸ¥è¯¢åœ¨çˆ¶å¯¹è±¡çš„ç»å¯¹å±‚æ¬¡
 	fuInt GetLayer()const;
-	/// @brief     ÉèÖÃÔÚ¸¸¶ÔÏóµÄ²ã´Î
-	/// @param[in] Layer Ïà¶Ô²ã´Î£¬-1±íÊ¾¶¥²ã£¬0±íÊ¾µ×²ã
+	/// @brief     è®¾ç½®åœ¨çˆ¶å¯¹è±¡çš„å±‚æ¬¡
+	/// @param[in] Layer ç›¸å¯¹å±‚æ¬¡ï¼Œ-1è¡¨ç¤ºé¡¶å±‚ï¼Œ0è¡¨ç¤ºåº•å±‚
 	void SetLayer(fInt Layer);
-	/// @brief ·µ»Ø×Ó¿Ø¼şÊıÄ¿
+	/// @brief è¿”å›å­æ§ä»¶æ•°ç›®
 	virtual fuInt GetSubControlCount()const;
-	/// @brief     ·µ»Ø×Ó¿Ø¼ş
-	/// @note      ÈõÒıÓÃ
-	/// @param[in] Layer Ïà¶Ô²ã´Î
+	/// @brief     è¿”å›å­æ§ä»¶
+	/// @note      å¼±å¼•ç”¨
+	/// @param[in] Layer ç›¸å¯¹å±‚æ¬¡
 	virtual fuiControl* GetSubControl(fInt Layer);
-	/// @brief ²éÑ¯¿Ø¼şÑùÊ½
+	/// @brief æŸ¥è¯¢æ§ä»¶æ ·å¼
 	virtual fuiStyle* GetControlStyle()const;
-	/// @brief ÉèÖÃ¿Ø¼şÑùÊ½
+	/// @brief è®¾ç½®æ§ä»¶æ ·å¼
 	virtual void SetControlStyle(fuiStyle* pStyle);
 
-	// === ¿ìËÙ·ÃÎÊÊôĞÔ ===
-	/// @brief »ñµÃ¿Ø¼şÎ¨Ò»Ãû³Æ
+	// === å¿«é€Ÿè®¿é—®å±æ€§ ===
+	/// @brief è·å¾—æ§ä»¶å”¯ä¸€åç§°
 	const std::wstring& GetName()const { return m_Name; }
-	/// @brief ·µ»Ø¶îÍâÊı¾İ
+	/// @brief è¿”å›é¢å¤–æ•°æ®
 	const std::wstring& GetTag()const { return m_Tag; }
-	/// @brief ÉèÖÃ¶îÍâÊı¾İ
+	/// @brief è®¾ç½®é¢å¤–æ•°æ®
 	void SetTag(const std::wstring& Str) { m_Tag = Str; }
-	/// @brief »ñµÃ¿Ø¼ş¾ØĞÎÎ»ÖÃ
+	/// @brief è·å¾—æ§ä»¶çŸ©å½¢ä½ç½®
 	const fcyRect& GetRect()const { return m_Rect; }
-	/// @brief ÉèÖÃ¿Ø¼ş¾ØĞÎÎ»ÖÃ
+	/// @brief è®¾ç½®æ§ä»¶çŸ©å½¢ä½ç½®
 	void SetRect(const fcyRect& Rect);
-	/// @brief »ñµÃ¿Ø¼ş×ó±ßÎ»ÖÃ
+	/// @brief è·å¾—æ§ä»¶å·¦è¾¹ä½ç½®
 	fFloat GetLeft()const { return m_Rect.a.x; }
-	/// @brief ÉèÖÃ¿Ø¼ş×ó±ßÎ»ÖÃ
+	/// @brief è®¾ç½®æ§ä»¶å·¦è¾¹ä½ç½®
 	void SetLeft(fFloat Value);
-	/// @brief »ñµÃ¿Ø¼ş¶¥±ßÎ»ÖÃ
+	/// @brief è·å¾—æ§ä»¶é¡¶è¾¹ä½ç½®
 	fFloat GetTop()const { return m_Rect.a.y; }
-	/// @brief ÉèÖÃ¿Ø¼ş¶¥±ßÎ»ÖÃ
+	/// @brief è®¾ç½®æ§ä»¶é¡¶è¾¹ä½ç½®
 	void SetTop(fFloat Value);
-	/// @brief ·µ»Ø¿Ø¼ş¿í¶È
+	/// @brief è¿”å›æ§ä»¶å®½åº¦
 	fFloat GetWidth()const { return m_Rect.GetWidth(); }
-	/// @brief ÉèÖÃ¿Ø¼ş¿í¶È
+	/// @brief è®¾ç½®æ§ä»¶å®½åº¦
 	void SetWidth(fFloat Value);
-	/// @brief ·µ»Ø¿Ø¼ş¸ß¶È
+	/// @brief è¿”å›æ§ä»¶é«˜åº¦
 	fFloat GetHeight()const { return m_Rect.GetHeight(); }
-	/// @brief ÉèÖÃ¿Ø¼ş¸ß¶È
+	/// @brief è®¾ç½®æ§ä»¶é«˜åº¦
 	void SetHeight(fFloat Value);
-	/// @brief ·µ»ØÊÇ·ñ²Ã¼ô
+	/// @brief è¿”å›æ˜¯å¦è£å‰ª
 	fBool GetClip()const { return m_bClip; }
-	/// @brief ÉèÖÃÊÇ·ñ²Ã¼ô
+	/// @brief è®¾ç½®æ˜¯å¦è£å‰ª
 	void SetClip(fBool Value) { m_bClip = Value; }
-	/// @brief ·µ»ØÊÇ·ñ´©Í¸
+	/// @brief è¿”å›æ˜¯å¦ç©¿é€
 	fBool GetMouseTrans()const { return m_bMouseTrans; }
-	/// @brief ÉèÖÃÊÇ·ñ´©Í¸
+	/// @brief è®¾ç½®æ˜¯å¦ç©¿é€
 	void SetMouseTrans(fBool Value) { m_bMouseTrans = Value; }
-	/// @brief ·µ»Ø²ã´ÎÓÅÏÈ¼¶
+	/// @brief è¿”å›å±‚æ¬¡ä¼˜å…ˆçº§
 	fFloat GetLayerPriority()const { return m_LayerPriority; }
-	/// @brief ÉèÖÃ²ã´ÎÓÅÏÈ¼¶
+	/// @brief è®¾ç½®å±‚æ¬¡ä¼˜å…ˆçº§
 	void SetLayerPriority(fFloat Value);
-	/// @brief ·µ»Ø¿É¼ûĞÔ
+	/// @brief è¿”å›å¯è§æ€§
 	fBool GetVisible()const { return m_bVisible; }
-	/// @brief ÉèÖÃ¿É¼ûĞÔ
+	/// @brief è®¾ç½®å¯è§æ€§
 	void SetVisible(fBool Value);
-public:  // ¸²Ğ´²Ù×÷
-	/// @brief ¸üĞÂ¿Ø¼ş×´Ì¬
+public:  // è¦†å†™æ“ä½œ
+	/// @brief æ›´æ–°æ§ä»¶çŠ¶æ€
 	virtual void Update(fDouble ElapsedTime);
-	/// @brief äÖÈ¾¿Ø¼ş
+	/// @brief æ¸²æŸ“æ§ä»¶
 	virtual void Render(fuiGraphics* pGraph);
-	/// @brief     Hit²âÊÔ
-	/// @param[in] Pos Ïà¶Ô¿Ø¼ş×óÉÏ½ÇµÄÎ»ÖÃ
+	/// @brief     Hitæµ‹è¯•
+	/// @param[in] Pos ç›¸å¯¹æ§ä»¶å·¦ä¸Šè§’çš„ä½ç½®
 	virtual fBool HitTest(const fcyVec2& Pos) { return true; }
-private:   // ½ûÖ¹¿½±´
+private:   // ç¦æ­¢æ‹·è´
 	fuiControl(const fuiControl& Org);
 	fuiControl& operator=(const fuiControl& Right);
-protected: // ½ûÖ¹´´½¨
+protected: // ç¦æ­¢åˆ›å»º
 	fuiControl(fuiPage* pRootControl, const std::wstring& Name);
-protected: // ½ûÖ¹Õ»¶ÔÏó
+protected: // ç¦æ­¢æ ˆå¯¹è±¡
 	virtual ~fuiControl();
 };

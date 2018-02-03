@@ -1,6 +1,6 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  f2dInputKeyboardImpl.h
-/// @brief fancy2DÊäÈëÏµÍ³ ¼üÅÌÊµÏÖ
+/// @brief fancy2Dè¾“å…¥ç³»ç»Ÿ é”®ç›˜å®ç°
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "fcyRefObj.h"
@@ -13,7 +13,7 @@
 class f2dEngineImpl;
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ¼üÅÌÉè±¸ÊµÏÖ
+/// @brief é”®ç›˜è®¾å¤‡å®ç°
 ////////////////////////////////////////////////////////////////////////////////
 class f2dInputKeyboardImpl :
 	public fcyRefObjImpl<f2dInputKeyboard>
@@ -52,7 +52,7 @@ public:
 	fResult SetListener(f2dInputKeyboardEventListener* pListener);
 	
 	fBool IsKeyDown(F2DINPUTKEYCODE KeyCode);
-protected: // ½ûÖ¹Ö±½Ónew/delete
+protected: // ç¦æ­¢ç›´æ¥new/delete
 	f2dInputKeyboardImpl(f2dInputSysImpl* pSys, HWND Win, const GUID& pGUID, fBool bGlobalFocus);
 	~f2dInputKeyboardImpl();
 };

@@ -1,4 +1,4 @@
-#ifndef _M_ARM
+ï»¿#ifndef _M_ARM
 
 #include "f2dInputSysImpl.h"
 
@@ -42,12 +42,12 @@ f2dInputSysImpl::f2dInputSysImpl(f2dEngineImpl* pEngine)
 	if(FAILED(tHR))
 		throw fcyWin32COMException("f2dInputSysImpl::f2dInputSysImpl", "DirectInput8Create Failed.", tHR);
 
-	enumDevice(); // Ã¶¾ÙËùÓĞÉè±¸
+	enumDevice(); // æšä¸¾æ‰€æœ‰è®¾å¤‡
 }
 
 f2dInputSysImpl::~f2dInputSysImpl()
 {
-	// ±¨¸æ¿ÉÄÜµÄ¶ÔÏóĞ¹Â©
+	// æŠ¥å‘Šå¯èƒ½çš„å¯¹è±¡æ³„æ¼
 	if(!m_pObjList.empty())
 	{
 		std::vector<f2dInputDevice*>::iterator i = m_pObjList.begin();
@@ -69,11 +69,11 @@ f2dInputSysImpl::~f2dInputSysImpl()
 
 void f2dInputSysImpl::enumDevice()
 {
-	// Ã¶¾ÙËùÓĞÊó±ê
+	// æšä¸¾æ‰€æœ‰é¼ æ ‡
 	m_pDInput->EnumDevices(DI8DEVCLASS_POINTER, enumMouse, this, 0);
-	// Ã¶¾ÙËùÓĞ¼üÅÌ
+	// æšä¸¾æ‰€æœ‰é”®ç›˜
 	m_pDInput->EnumDevices(DI8DEVCLASS_KEYBOARD, enumKeyboard, this, 0);
-	// Ã¶¾ÙËùÓĞÊÖ±ú
+	// æšä¸¾æ‰€æœ‰æ‰‹æŸ„
 	m_pDInput->EnumDevices(DI8DEVCLASS_GAMECTRL, enumGameCtrl, this, 0);
 }
 

@@ -1,6 +1,6 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiRes.h
-/// @brief fancyUI ×ÊÔ´
+/// @brief fancyUI èµ„æº
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include <fcyRefObj.h>
@@ -14,7 +14,7 @@
 class fuiGraphics;
 
 ////////////////////////////////////////////////////////////////////////////////
-// À©³ä±ê×¼¿âHASHº¯Êı
+// æ‰©å……æ ‡å‡†åº“HASHå‡½æ•°
 ////////////////////////////////////////////////////////////////////////////////
 namespace std
 {
@@ -41,27 +41,27 @@ namespace std
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ×ÊÔ´¼ÓÔØÆ÷
+/// @brief èµ„æºåŠ è½½å™¨
 ////////////////////////////////////////////////////////////////////////////////
 struct fuiResProvider
 {
-	/// @brief ÇëÇóäÖÈ¾Æ÷
+	/// @brief è¯·æ±‚æ¸²æŸ“å™¨
 	virtual f2dRenderer* GetRenderer()=0;
 
-	/// @brief ÇëÇóÎÆÀí
-	/// @note  ·µ»ØÈõÒıÓÃ
+	/// @brief è¯·æ±‚çº¹ç†
+	/// @note  è¿”å›å¼±å¼•ç”¨
 	virtual f2dTexture2D* QueryTexture(const std::wstring& ResSrc)=0;
 	
-	/// @brief ÇëÇó×ÖÌå
-	/// @note  ·µ»ØÈõÒıÓÃ
+	/// @brief è¯·æ±‚å­—ä½“
+	/// @note  è¿”å›å¼±å¼•ç”¨
 	virtual f2dFontProvider* QueryFont(const std::wstring& ResSrc, const fcyVec2& Size)=0;
 
-	/// @brief ÇëÇóÎÆÀí×ÖÌå
+	/// @brief è¯·æ±‚çº¹ç†å­—ä½“
 	virtual f2dFontProvider* QuerySpriteFont(const std::wstring& TexSrc, const std::wstring& DefineSrc)=0;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ×ÊÔ´¼ÓÔØÆ÷ÊµÏÖ
+/// @brief èµ„æºåŠ è½½å™¨å®ç°
 ////////////////////////////////////////////////////////////////////////////////
 class fuiResProviderImpl :
 	public fuiResProvider
@@ -85,7 +85,7 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ×ÊÔ´»ùÀà
+/// @brief èµ„æºåŸºç±»
 ////////////////////////////////////////////////////////////////////////////////
 class fuiRes :
 	public fcyRefObjImpl<fcyRefObj>,
@@ -110,7 +110,7 @@ public:
 	RESTYPE GetResType() { return m_Type; }
 	const std::wstring& GetResName() { return m_ResName; }
 public:
-	/// @brief ¹¹Ôì×ÊÔ´
+	/// @brief æ„é€ èµ„æº
 	virtual void ConstructRes(fuiResProvider* pProvider) {}
 public:
 	fuiRes(RESTYPE Type, const std::wstring& Name);
@@ -119,7 +119,7 @@ protected:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ¾«Áé
+/// @brief ç²¾çµ
 ////////////////////////////////////////////////////////////////////////////////
 class fuiSprite :
 	public fuiRes
@@ -145,7 +145,7 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ±ß¿ò¾«Áé
+/// @brief è¾¹æ¡†ç²¾çµ
 ////////////////////////////////////////////////////////////////////////////////
 class fuiBorderSprite :
 	public fuiRes
@@ -159,8 +159,8 @@ protected:
 	fuiPropertyAccessor<fcyRect> m_Rect_Accessor;
 	fuiPropertyAccessor<fcyRect> m_Margin_Accessor;
 protected:
-	fcyRefPointer<f2dSprite> m_pBorderSprite;  ///< @brief ±ß¿òÍ¼
-	fcyRect m_Sprites[3][3];                   ///< @brief ¾Å¹¬¸ñÎ»ÖÃ
+	fcyRefPointer<f2dSprite> m_pBorderSprite;  ///< @brief è¾¹æ¡†å›¾
+	fcyRect m_Sprites[3][3];                   ///< @brief ä¹å®«æ ¼ä½ç½®
 public:
 	f2dSprite* GetSprite() { return m_pBorderSprite; }
 
@@ -172,7 +172,7 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ×ÖÌå
+/// @brief å­—ä½“
 ////////////////////////////////////////////////////////////////////////////////
 class fuiFont :
 	public fuiRes
@@ -200,7 +200,7 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief Á£×Ó×ÊÔ´
+/// @brief ç²’å­èµ„æº
 ////////////////////////////////////////////////////////////////////////////////
 class fuiParticleDesc :
 	public fuiRes

@@ -1,4 +1,4 @@
-#include "fuiParticleEmitter.h"
+ï»¿#include "fuiParticleEmitter.h"
 
 #include "fuiExceptionMacro.h"
 
@@ -11,13 +11,13 @@ fuiParticleEmitter::fuiParticleEmitter(fuiPage* pRootPage, const std::wstring& N
 {
 	m_EmitterTimeRange = fcyVec2(1.f, 2.f);
 
-	// Ä¬ÈÏ²ÎÊı
+	// é»˜è®¤å‚æ•°
 	m_bClip = false;
 	m_bMouseTrans = true;
 
 	SetVisible(false);
 
-	// ÉèÖÃ·ÃÎÊÆ÷
+	// è®¾ç½®è®¿é—®å™¨
 	m_Particle_Accessor = fuiPropertyAccessor<wstring>(
 		&m_ParticleName,
 		[&](std::wstring& Prop, const std::wstring* Value)
@@ -46,17 +46,17 @@ fuiParticleEmitter::fuiParticleEmitter(fuiPage* pRootPage, const std::wstring& N
 	m_EmitterCountRange_Accessor = fuiPropertyAccessor<fcyVec2>(&m_EmitterCountRange);
 	m_bEmitterEnable_Accessor = fuiPropertyAccessor<bool>(&m_bEmitterEnable);
 
-	// ÉèÖÃÊôĞÔ
+	// è®¾ç½®å±æ€§
 	RegisterProperty(L"Particle", &m_Particle_Accessor);
 	RegisterProperty(L"ParticleSprite", &m_ParticleSprite_Accessor);
 	RegisterProperty(L"EmitterTimeRange", &m_EmitterTimeRange_Accessor);
 	RegisterProperty(L"EmitterCountRange", &m_EmitterCountRange_Accessor);
 	RegisterProperty(L"EmitterEnable", &m_bEmitterEnable_Accessor);
 
-	// ÉèÖÃÊÂ¼ş
+	// è®¾ç½®äº‹ä»¶
 	RegisterEvent(L"OnEmitter");
 
-	// ÉèÖÃÊÂ¼ş»Øµ÷
+	// è®¾ç½®äº‹ä»¶å›è°ƒ
 	GetEvent(L"OnParentChanged") += fuiDelegate::EventCallBack(this, &fuiParticleEmitter::OnParentChanged);
 	GetEvent(L"OnStyleChanged") += fuiDelegate::EventCallBack(this, &fuiParticleEmitter::OnStyleChanged);
 }
@@ -93,13 +93,13 @@ void fuiParticleEmitter::Update(fDouble ElapsedTime)
 		{
 			ExecEvent(L"OnEmitter");
 
-			// ·¢ÉäÁ£×Ó
+			// å‘å°„ç²’å­
 			if(m_pPool && m_pImageSprite && m_pParticleDesc)
 			{
 				m_pPool->Emitted(m_pImageSprite->GetSprite(), m_Rect.a, m_EmitterCountRange, m_pParticleDesc->GetDesc());
 			}
 
-			// ÖØÖÃÊ±¼ä
+			// é‡ç½®æ—¶é—´
 			m_NextTime = m_pPool->RandFloat(m_EmitterTimeRange.x, m_EmitterTimeRange.y);
 		}
 	}

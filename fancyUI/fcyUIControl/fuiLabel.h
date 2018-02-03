@@ -1,12 +1,12 @@
-////////////////////////////////////////////////////////////////////////////////
+Ôªø////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiLabel.h
-/// @brief fancyUI ±Í«©
+/// @brief fancyUI Ê†áÁ≠æ
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "../fcyUIBase/fuiControl.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief UI ±Í«©
+/// @brief UI Ê†áÁ≠æ
 ////////////////////////////////////////////////////////////////////////////////
 class fuiLabel :
 	public fuiControl
@@ -24,30 +24,30 @@ public:
 		VALIGNMODE_CENTER,
 		VALIGNMODE_BOTTOM
 	};
-protected: // ∂»¡ø ˝æ›
+protected: // Â∫¶ÈáèÊï∞ÊçÆ
 	std::vector<std::wstring> m_Lines;
 	std::vector<float> m_LineWidth;
 	float m_TextHeight;
-protected: //  Ù–‘
+protected: // Â±ûÊÄß
 	std::wstring m_Text;
 	std::wstring m_FontName;
 	fcyColor m_FontColor;
-	HALIGNMODE m_HAlign;   // ÀÆ∆Ω∂‘∆Î
-	VALIGNMODE m_VAlign;   // ¥π÷±∂‘∆Î
+	HALIGNMODE m_HAlign;   // Ê∞¥Âπ≥ÂØπÈΩê
+	VALIGNMODE m_VAlign;   // ÂûÇÁõ¥ÂØπÈΩê
 
 	fuiPropertyAccessor<std::wstring> m_Text_Accessor;
 	fuiPropertyAccessor<std::wstring> m_FontName_Accessor;
 	fuiPropertyAccessor<fcyColor> m_FontColor_Accessor;
 	fuiPropertyAccessor<HALIGNMODE> m_HAlign_Accessor;
 	fuiPropertyAccessor<VALIGNMODE> m_VAlign_Accessor;
-protected: // ªÊÕº◊ ‘¥
+protected: // ÁªòÂõæËµÑÊ∫ê
 	fcyRefPointer<fuiFont> m_Font;
 	f2dFontProvider* m_pFontProvider;
 	f2dFontRenderer* m_pFontRenderer;
 
 	void OnTextChanged(fuiControl* pThis, fuiEventArgs* pArgs);
 	void OnStyleChanged(fuiControl* pThis, fuiEventArgs* pArgs);
-public: //  µœ÷Ω”ø⁄
+public: // ÂÆûÁé∞Êé•Âè£
 	void Update(fDouble ElapsedTime);
 	void Render(fuiGraphics* pGraph);
 public:

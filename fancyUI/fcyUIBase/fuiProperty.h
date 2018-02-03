@@ -1,6 +1,6 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiProperty.h
-/// @brief fancyUI ¿Ø¼şÊôĞÔ
+/// @brief fancyUI æ§ä»¶å±æ€§
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include <fcyRefObj.h>
@@ -12,7 +12,7 @@
 #include <unordered_map>
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ÊôĞÔ·ÃÎÊ½Ó¿Ú
+/// @brief å±æ€§è®¿é—®æ¥å£
 ////////////////////////////////////////////////////////////////////////////////
 struct fuiProperty
 {
@@ -27,7 +27,7 @@ struct fuiProperty
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ÊôĞÔ·ÃÎÊ¸¨Öú
+/// @brief å±æ€§è®¿é—®è¾…åŠ©
 ////////////////////////////////////////////////////////////////////////////////
 template<class T>
 struct fuiPropertyAccessorHelper
@@ -49,7 +49,7 @@ void fuiPropertyAccessorHelper<T>::DefaultSetter(const std::wstring&, T*)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ÊôĞÔ·ÃÎÊ¸¨Öú - ÌØ»¯
+/// @brief å±æ€§è®¿é—®è¾…åŠ© - ç‰¹åŒ–
 ////////////////////////////////////////////////////////////////////////////////
 template<>
 struct fuiPropertyAccessorHelper<void*>
@@ -122,7 +122,7 @@ struct fuiPropertyAccessorHelper<std::wstring>
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ÊôĞÔ·ÃÎÊÆ÷
+/// @brief å±æ€§è®¿é—®å™¨
 ////////////////////////////////////////////////////////////////////////////////
 template<typename T>
 class fuiPropertyAccessor :
@@ -132,11 +132,11 @@ public:
 	typedef fcyFunctor<void(std::wstring&, const T*)> PropGetter;
 	typedef fcyFunctor<void(const std::wstring&, T*)> PropSetter;
 protected:
-	T* m_pObj;               ///< @brief ¹ØÁªµÄÊôĞÔ³ÉÔ±
-	std::wstring m_PropStr;  ///< @brief ÁÙÊ±´¢´æ·µ»ØÖµ
-	PropGetter m_Getter;     ///< @brief ¶Áº¯Êı
-	PropSetter m_Setter;     ///< @brief Ğ´º¯Êı
-public: // ½Ó¿ÚÊµÏÖ
+	T* m_pObj;               ///< @brief å…³è”çš„å±æ€§æˆå‘˜
+	std::wstring m_PropStr;  ///< @brief ä¸´æ—¶å‚¨å­˜è¿”å›å€¼
+	PropGetter m_Getter;     ///< @brief è¯»å‡½æ•°
+	PropSetter m_Setter;     ///< @brief å†™å‡½æ•°
+public: // æ¥å£å®ç°
 	const std::wstring& Get()
 	{
 		if(m_Getter.Empty())
@@ -176,13 +176,13 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ÊôĞÔ¼¯ºÏ
+/// @brief å±æ€§é›†åˆ
 ////////////////////////////////////////////////////////////////////////////////
 class fuiPropertySet
 {
 	typedef std::unordered_map<std::wstring, fuiProperty*>::iterator IterType;
 public:
-	// ÊôĞÔµü´úÆ÷
+	// å±æ€§è¿­ä»£å™¨
 	class Iterator
 	{
 		friend class fuiPropertySet;
@@ -241,34 +241,34 @@ public:
 		~Iterator() {}
 	};
 protected:
-	/// @brief ÊôĞÔÁĞ±í
+	/// @brief å±æ€§åˆ—è¡¨
 	std::unordered_map<std::wstring, fuiProperty*> m_PropList;
 protected:
-	/// @brief ×¢²áÊôĞÔ
+	/// @brief æ³¨å†Œå±æ€§
 	void RegisterProperty(const std::wstring& Str, fuiProperty* pProp);
-public: // ÊôĞÔ²Ù×÷
-	/// @brief ·µ»Ø¿ªÊ¼µü´úÆ÷
+public: // å±æ€§æ“ä½œ
+	/// @brief è¿”å›å¼€å§‹è¿­ä»£å™¨
 	Iterator GetPropertyBegin()
 	{
 		return m_PropList.begin();
 	}
-	/// @brief ·µ»Ø½áÎ²µü´úÆ÷
+	/// @brief è¿”å›ç»“å°¾è¿­ä»£å™¨
 	Iterator GetPropertyEnd()
 	{
 		return m_PropList.end();
 	}
-	/// @brief     ·µ»ØÊôĞÔ½Ó¿Ú
-	/// @param[in] Prop ÊôĞÔÃû
+	/// @brief     è¿”å›å±æ€§æ¥å£
+	/// @param[in] Prop å±æ€§å
 	fuiProperty* QueryPropertyInterface(const std::wstring& Prop);
-	/// @brief     »ñµÃÔ­Ê¼ÊôĞÔ×Ö·û´®
-	/// @param[in] PropName ÊôĞÔÃû³Æ
+	/// @brief     è·å¾—åŸå§‹å±æ€§å­—ç¬¦ä¸²
+	/// @param[in] PropName å±æ€§åç§°
 	const std::wstring& RawGetProperty(const std::wstring& PropName)const;
-	/// @brief     ÉèÖÃÔ­Ê¼ÊôĞÔ×Ö·û´®
-	/// @param[in] PropName ÊôĞÔÃû³Æ
-	/// @param[in] Value    ÊôĞÔÖµ
+	/// @brief     è®¾ç½®åŸå§‹å±æ€§å­—ç¬¦ä¸²
+	/// @param[in] PropName å±æ€§åç§°
+	/// @param[in] Value    å±æ€§å€¼
 	void RawSetProperty(const std::wstring& PropName, const std::wstring& Value);
-	/// @brief     »ñµÃÊôĞÔ
-	/// @param[in] PropName ÊôĞÔÃû³Æ
+	/// @brief     è·å¾—å±æ€§
+	/// @param[in] PropName å±æ€§åç§°
 	template<typename T>
 	T GetProperty(const std::wstring& PropName)const
 	{
@@ -286,9 +286,9 @@ public: // ÊôĞÔ²Ù×÷
 
 		return tStr;
 	}
-	/// @brief     ÉèÖÃÊôĞÔ
-	/// @param[in] PropName ÊôĞÔÃû³Æ
-	/// @param[in] Value    ÊôĞÔÖµ
+	/// @brief     è®¾ç½®å±æ€§
+	/// @param[in] PropName å±æ€§åç§°
+	/// @param[in] Value    å±æ€§å€¼
 	template<typename T>
 	void SetProperty(const std::wstring& PropName, const T& Value)
 	{

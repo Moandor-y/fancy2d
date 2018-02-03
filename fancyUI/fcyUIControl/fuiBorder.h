@@ -1,27 +1,27 @@
-////////////////////////////////////////////////////////////////////////////////
+Ôªø////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiBorder.h
-/// @brief fancyUI ±ﬂøÚ
+/// @brief fancyUI ËæπÊ°Ü
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "../fcyUIBase/fuiControl.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief UI ±ﬂøÚ
+/// @brief UI ËæπÊ°Ü
 ////////////////////////////////////////////////////////////////////////////////
 class fuiBorder :
 	public fuiControl
 {
-protected: //  Ù–‘
+protected: // Â±ûÊÄß
 	std::wstring m_BorderImage;
 	fcyColor m_BlendColor;
 	
 	fuiPropertyAccessor<std::wstring> m_BorderImage_Accessor;
 	fuiPropertyAccessor<fcyColor> m_BlendColor_Accessor;
-protected: // ªÊÕº◊ ‘¥
+protected: // ÁªòÂõæËµÑÊ∫ê
 	fcyRefPointer<fuiBorderSprite> m_pBorderImageSprite;
 	
 	void OnStyleChanged(fuiControl* pThis, fuiEventArgs* pArgs);
-public: //  µœ÷Ω”ø⁄
+public: // ÂÆûÁé∞Êé•Âè£
 	void Update(fDouble ElapsedTime);
 	void Render(fuiGraphics* pGraph);
 public:

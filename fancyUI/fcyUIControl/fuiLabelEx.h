@@ -1,23 +1,23 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiLabelEx.h
-/// @brief fancyUI ¸ß¼¶±êÇ©
+/// @brief fancyUI é«˜çº§æ ‡ç­¾
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "../fcyUIBase/fuiControl.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief UI ¸ß¼¶±êÇ©
+/// @brief UI é«˜çº§æ ‡ç­¾
 ////////////////////////////////////////////////////////////////////////////////
 class fuiLabelEx :
 	public fuiControl
 {
-	struct DrawCmd // »æÍ¼ÃüÁî
+	struct DrawCmd // ç»˜å›¾å‘½ä»¤
 	{
 		enum TYPE
 		{
 			TYPE_NULL,
-			TYPE_COLOR, // ¸Ä±ä×ÖÌåÑÕÉ«
-			TYPE_FONT   // ¸Ä±ä×ÖÌå
+			TYPE_COLOR, // æ”¹å˜å­—ä½“é¢œè‰²
+			TYPE_FONT   // æ”¹å˜å­—ä½“
 		};
 
 		TYPE Type;
@@ -33,27 +33,27 @@ class fuiLabelEx :
 			f2dFontProvider* FontData;
 		};
 	};
-protected: // »æÍ¼Êı¾İ
-	std::vector<std::wstring> m_DrawText; // »æÖÆÎÄ±¾
-	std::vector<DrawCmd> m_DrawCmd;       // »æÖÆÃüÁî
-	std::unordered_map<std::wstring, fcyRefPointer<fuiFont>> m_FontList; // ËùÓĞÒıÓÃµÄ×ÖÌå
-	float m_LineHeight;                   // ĞĞ¸ß
-	float m_MaxAscender;                  // ×î´óÉÏ½ç
-	fuInt m_TotalTextLength;              // ×ÜÎÄ±¾ÊıÁ¿
-	float m_YOffset;                      // YÖáÆğ±ÊÆ«ÒÆ
-	fcyVec2 m_PenEndPos;                  // Âä±ÊÎ»ÖÃ
+protected: // ç»˜å›¾æ•°æ®
+	std::vector<std::wstring> m_DrawText; // ç»˜åˆ¶æ–‡æœ¬
+	std::vector<DrawCmd> m_DrawCmd;       // ç»˜åˆ¶å‘½ä»¤
+	std::unordered_map<std::wstring, fcyRefPointer<fuiFont>> m_FontList; // æ‰€æœ‰å¼•ç”¨çš„å­—ä½“
+	float m_LineHeight;                   // è¡Œé«˜
+	float m_MaxAscender;                  // æœ€å¤§ä¸Šç•Œ
+	fuInt m_TotalTextLength;              // æ€»æ–‡æœ¬æ•°é‡
+	float m_YOffset;                      // Yè½´èµ·ç¬”åç§»
+	fcyVec2 m_PenEndPos;                  // è½ç¬”ä½ç½®
 
-	// ×Ö·ûÏÔÊ¾ËÙÂÊ
-	fuInt m_CurDisplayCount;               // µ±Ç°ÏÔÊ¾ÎÄ±¾ÊıÁ¿
-	float m_CharWait;                      // µ±Ç°µÈ´ıÊ±¼ä
-protected: // ÊôĞÔ
+	// å­—ç¬¦æ˜¾ç¤ºé€Ÿç‡
+	fuInt m_CurDisplayCount;               // å½“å‰æ˜¾ç¤ºæ–‡æœ¬æ•°é‡
+	float m_CharWait;                      // å½“å‰ç­‰å¾…æ—¶é—´
+protected: // å±æ€§
 	std::wstring m_Text;
 	std::wstring m_FontName;
 	fcyColor m_FontColor;
 	fcyRefPointer<fuiFont> m_Font;
 	float m_ZValue;
 	float m_CharDisplaySpeed;
-	int m_TotalAlpha;  // ÕûÌåAlpha [0~255]
+	int m_TotalAlpha;  // æ•´ä½“Alpha [0~255]
 
 	fuiPropertyAccessor<std::wstring> m_Text_Accessor;
 	fuiPropertyAccessor<std::wstring> m_FontName_Accessor;
@@ -61,19 +61,19 @@ protected: // ÊôĞÔ
 	fuiPropertyAccessor<float> m_ZValue_Accessor;
 	fuiPropertyAccessor<float> m_CharDisplaySpeed_Accessor;
 	fuiPropertyAccessor<int> m_TotalAlpha_Accessor;
-	fuiPropertyAccessor<float> m_YOffset_Accessor;          // YÖáÆğ±ÊÆ«ÒÆ
+	fuiPropertyAccessor<float> m_YOffset_Accessor;          // Yè½´èµ·ç¬”åç§»
 
-	// Ö»¶ÁÊôĞÔ
-	fuiPropertyAccessor<float> m_LineHeight_Accessor;       // ĞĞ¸ß
-	fuiPropertyAccessor<float> m_MaxAscender_Accessor;      // ×î´óÉÏ½ç
-	fuiPropertyAccessor<fcyVec2> m_PenEndPos_Accessor;      // Âä±ÊÎ»ÖÃ
+	// åªè¯»å±æ€§
+	fuiPropertyAccessor<float> m_LineHeight_Accessor;       // è¡Œé«˜
+	fuiPropertyAccessor<float> m_MaxAscender_Accessor;      // æœ€å¤§ä¸Šç•Œ
+	fuiPropertyAccessor<fcyVec2> m_PenEndPos_Accessor;      // è½ç¬”ä½ç½®
 protected:
 	fcyVec2 drawText(f2dGraphics2D* pGraph, const std::wstring& Text, int Count, f2dFontProvider* pFontProvider, const fcyColor& BlendColor, const fcyVec2& StartPos, float Margin = 2.f);
 	fcyVec2 calcuTextEndDrawPos();
-protected: // ÊÂ¼ş
+protected: // äº‹ä»¶
 	void OnTextChanged(fuiControl* pThis, fuiEventArgs* pArgs);
 	void OnStyleChanged(fuiControl* pThis, fuiEventArgs* pArgs);
-public: // ÊµÏÖ½Ó¿Ú
+public: // å®ç°æ¥å£
 	void Update(fDouble ElapsedTime);
 	void Render(fuiGraphics* pGraph);
 public:

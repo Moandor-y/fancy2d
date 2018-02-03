@@ -1,4 +1,4 @@
-#ifndef _M_ARM
+ï»¿#ifndef _M_ARM
 
 #include "f2dInputKeyboardImpl.h"
 
@@ -302,7 +302,7 @@ f2dInputKeyboardImpl::f2dInputKeyboardImpl(f2dInputSysImpl* pSys, HWND Win, cons
 	if(FAILED(tHR))
 		throw fcyWin32COMException("f2dInputKeyboardImpl::f2dInputKeyboardImpl", "CreateDevice Failed.", tHR);
 	
-	// ÉèÖÃÐ­×÷Ä£Ê½
+	// è®¾ç½®åä½œæ¨¡å¼
 	fuInt tFlag = DISCL_NONEXCLUSIVE;
 	if(bGlobalFocus)
 		tFlag |= DISCL_BACKGROUND;
@@ -315,7 +315,7 @@ f2dInputKeyboardImpl::f2dInputKeyboardImpl(f2dInputSysImpl* pSys, HWND Win, cons
 		throw fcyWin32COMException("f2dInputKeyboardImpl::f2dInputKeyboardImpl", "SetCooperativeLevel Failed.", tHR);
 	}
 
-    // ÉèÖÃÊý¾Ý¸ñÊ½
+    // è®¾ç½®æ•°æ®æ ¼å¼
 	tHR = m_pDev->SetDataFormat(&DIDF_Keyboard);
 	if(FAILED(tHR))
 	{
@@ -323,7 +323,7 @@ f2dInputKeyboardImpl::f2dInputKeyboardImpl(f2dInputSysImpl* pSys, HWND Win, cons
 		throw fcyWin32COMException("f2dInputKeyboardImpl::f2dInputKeyboardImpl", "SetDataFormat Failed.", tHR);
 	}
 
-	// ÉèÖÃ»º³åÇø
+	// è®¾ç½®ç¼“å†²åŒº
 	DIPROPDWORD tBufferProperty;
 
     tBufferProperty.diph.dwSize = sizeof(DIPROPDWORD);
@@ -339,10 +339,10 @@ f2dInputKeyboardImpl::f2dInputKeyboardImpl(f2dInputSysImpl* pSys, HWND Win, cons
 		throw fcyWin32COMException("f2dInputKeyboardImpl::f2dInputKeyboardImpl", "SetProperty Failed.", tHR);
 	}
 
-	// »ñµÃÉè±¸
+	// èŽ·å¾—è®¾å¤‡
 	tHR = m_pDev->Acquire();
 
-	// ×¢²á
+	// æ³¨å†Œ
 	m_pSys->RegisterDevice(this);
 }
 
@@ -351,7 +351,7 @@ f2dInputKeyboardImpl::~f2dInputKeyboardImpl()
 	if(m_pDev)
 		m_pDev->Unacquire();
 
-	// È¡Ïû×¢²á
+	// å–æ¶ˆæ³¨å†Œ
 	m_pSys->UnregisterDevice(this);
 
 	FCYSAFEKILL(m_pDev);

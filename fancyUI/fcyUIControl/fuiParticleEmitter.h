@@ -1,23 +1,23 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiParticleEmitter.h
-/// @brief fancyUI Á£×Ó·¢ÉäÆ÷
+/// @brief fancyUI ç²’å­å‘å°„å™¨
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "../fcyUIBase/fuiControl.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief UI Á£×Ó·¢ÉäÆ÷
+/// @brief UI ç²’å­å‘å°„å™¨
 ////////////////////////////////////////////////////////////////////////////////
 class fuiParticleEmitter :
 	public fuiControl
 {
-protected: // »æÍ¼×ÊÔ´
+protected: // ç»˜å›¾èµ„æº
 	fcyRefPointer<fuiSprite> m_pImageSprite;
 	fcyRefPointer<fuiParticleDesc> m_pParticleDesc;
 
 	f2dParticlePool* m_pPool;
 	fDouble m_NextTime;
-protected: // ÊôĞÔ
+protected: // å±æ€§
 	std::wstring m_ParticleName;
 	std::wstring m_ParticleSpriteName;
 	fcyVec2 m_EmitterTimeRange;
@@ -29,10 +29,10 @@ protected: // ÊôĞÔ
 	fuiPropertyAccessor<fcyVec2> m_EmitterTimeRange_Accessor;
 	fuiPropertyAccessor<fcyVec2> m_EmitterCountRange_Accessor;
 	fuiPropertyAccessor<bool> m_bEmitterEnable_Accessor;
-protected: // ¼àÌıÊÂ¼ş
+protected: // ç›‘å¬äº‹ä»¶
 	void OnParentChanged(fuiControl* pThis, fuiEventArgs* pArgs);
 	void OnStyleChanged(fuiControl* pThis, fuiEventArgs* pArgs);
-public: // ÊµÏÖ½Ó¿Ú
+public: // å®ç°æ¥å£
 	void Update(fDouble ElapsedTime);
 	void Render(fuiGraphics* pGraph);
 public:

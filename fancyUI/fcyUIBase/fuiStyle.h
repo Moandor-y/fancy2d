@@ -1,7 +1,7 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiStyle.h
-/// @brief fancyUI ¿Ø¼şÑùÊ½
-/// @note  ¸ºÔğ¿Ø¼şäÖÈ¾×ÊÔ´µÄ¹ÜÀí
+/// @brief fancyUI æ§ä»¶æ ·å¼
+/// @note  è´Ÿè´£æ§ä»¶æ¸²æŸ“èµ„æºçš„ç®¡ç†
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "fuiGraphics.h"
@@ -10,7 +10,7 @@
 #include <unordered_map>
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ÑùÊ½¶ÔÏó
+/// @brief æ ·å¼å¯¹è±¡
 ////////////////////////////////////////////////////////////////////////////////
 class fuiStyle :
 	public fcyRefObjImpl<fcyRefObj>
@@ -18,17 +18,17 @@ class fuiStyle :
 protected:
 	std::unordered_map<std::wstring, fcyRefPointer<fuiRes>> m_ResList;
 public:
-	/// @brief ×¢²á×ÊÔ´
+	/// @brief æ³¨å†Œèµ„æº
 	void RegisterRes(const std::wstring Name, fuiRes* pRes);
 	
-	/// @brief ÒÆ³ı×ÊÔ´
+	/// @brief ç§»é™¤èµ„æº
 	void UnregisterRes(const std::wstring Name);
 
-	/// @brief ²éÑ¯×ÊÔ´
-	/// @note  ·µ»ØÈõÒıÓÃ
+	/// @brief æŸ¥è¯¢èµ„æº
+	/// @note  è¿”å›å¼±å¼•ç”¨
 	fuiRes* QueryRes(const std::wstring Name);
 
-	/// @brief ´ÓÎÄ¼ş¹¹Ôì
+	/// @brief ä»æ–‡ä»¶æ„é€ 
 	void LoadResFromFile(f2dStream* pStream, fuiResProvider* pProvider);
 public:
 	fuiStyle();

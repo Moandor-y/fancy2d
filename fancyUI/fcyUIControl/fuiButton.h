@@ -1,6 +1,6 @@
-////////////////////////////////////////////////////////////////////////////////
+ï»¿////////////////////////////////////////////////////////////////////////////////
 /// @file  fuiButton.h
-/// @brief fancyUI °´Å¥
+/// @brief fancyUI æŒ‰é’®
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "../fcyUIBase/fuiControl.h"
@@ -8,7 +8,7 @@
 #include "fuiLabel.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief UI °´Å¥
+/// @brief UI æŒ‰é’®
 ////////////////////////////////////////////////////////////////////////////////
 class fuiButton :
 	public fuiControl
@@ -20,9 +20,9 @@ protected:
 		BUTTONSTATE_MOUSEON,
 		BUTTONSTATE_MOUSEDOWN
 	};
-protected: // ×Ó¿Ø¼ş
+protected: // å­æ§ä»¶
 	fcyRefPointer<fuiLabel> m_pTextLabel;
-protected: // ÊôĞÔ
+protected: // å±æ€§
 	std::wstring m_DefaultSprite;
 	std::wstring m_MouseOnSprite;
 	std::wstring m_MouseDownSprite;
@@ -32,9 +32,9 @@ protected: // ÊôĞÔ
 	fuiPropertyAccessor<std::wstring> m_MouseOnSprite_Accessor;
 	fuiPropertyAccessor<std::wstring> m_MouseDownSprite_Accessor;
 	fuiPropertyAccessor<fcyVec2> m_LabelOffsetWhenDown_Accessor;
-protected: // ×´Ì¬
+protected: // çŠ¶æ€
 	BUTTONSTATE m_ButtonState;
-protected: // »æÍ¼×ÊÔ´
+protected: // ç»˜å›¾èµ„æº
 	fcyRefPointer<fuiBorderSprite> m_pDefault;
 	fcyRefPointer<fuiBorderSprite> m_pMouseOn;
 	fcyRefPointer<fuiBorderSprite> m_pMouseDown;
@@ -46,7 +46,7 @@ protected:
 	void OnMouseLeave(fuiControl* pThis, fuiEventArgs* pArgs);
 	void OnMouseLButtonDown(fuiControl* pThis, fuiEventArgs* pArgs);
 	void OnMouseLButtonUp(fuiControl* pThis, fuiEventArgs* pArgs);
-public: // ÊµÏÖ½Ó¿Ú
+public: // å®ç°æ¥å£
 	void Update(fDouble ElapsedTime);
 	void Render(fuiGraphics* pGraph);
 public:

@@ -1,4 +1,4 @@
-#include "fuiEditBox.h"
+ï»¿#include "fuiEditBox.h"
 
 #include "fuiExceptionMacro.h"
 
@@ -14,7 +14,7 @@ fuiEditBox::fuiEditBox(fuiPage* pRootPage, const std::wstring& Name)
 	m_CursorDrawAtY(0.f), m_bCursorVisible(false), m_CursorDisplayInterval(1.f), m_Timer(0),
 	m_bFitCursor(true)
 {
-	// ÉèÖÃ·ÃÎÊÆ÷
+	// è®¾ç½®è®¿é—®å™¨
 	m_Text_Accessor = fuiPropertyAccessor<wstring>(
 		&m_Text,
 		[&](std::wstring& Prop, const std::wstring* Value)
@@ -102,7 +102,7 @@ fuiEditBox::fuiEditBox(fuiPage* pRootPage, const std::wstring& Name)
 	m_CursorDisplayInterval_Accessor = fuiPropertyAccessor<float>(&m_CursorDisplayInterval);
 	m_FitCursor_Accessor = fuiPropertyAccessor<fBool>(&m_bFitCursor);
 
-	// ×¢²áÊôÐÔ
+	// æ³¨å†Œå±žæ€§
 	RegisterProperty(L"Text", &m_Text_Accessor);
 	RegisterProperty(L"FontName", &m_FontName_Accessor);
 	RegisterProperty(L"FontColor", &m_FontColor_Accessor);
@@ -115,10 +115,10 @@ fuiEditBox::fuiEditBox(fuiPage* pRootPage, const std::wstring& Name)
 	RegisterProperty(L"CursorDisplayInterval", &m_CursorDisplayInterval_Accessor);
 	RegisterProperty(L"FitCursor", &m_FitCursor_Accessor);
 
-	// ×¢²áÊÂ¼þ
+	// æ³¨å†Œäº‹ä»¶
 	RegisterEvent(L"OnTextChanged");
 
-	// ÉèÖÃÊÂ¼þ
+	// è®¾ç½®äº‹ä»¶
 	GetEvent(L"OnTextChanged") += fuiDelegate::EventCallBack(this, &fuiEditBox::OnTextChanged);
 	GetEvent(L"OnStyleChanged") += fuiDelegate::EventCallBack(this, &fuiEditBox::OnStyleChanged);
 	GetEvent(L"OnSizeChanged") += fuiDelegate::EventCallBack(this, &fuiEditBox::OnSizeChanged);
@@ -209,7 +209,7 @@ void fuiEditBox::OnStyleChanged(fuiControl* pThis, fuiEventArgs* pArgs)
 		m_TextDrawAt.y = m_Margin.a.y + (m_Rect.GetHeight() - m_Margin.a.y - m_Margin.b.y) / 2.f - m_pFontProvider->GetLineHeight() / 2.f + m_pFontProvider->GetAscender();
 		m_CursorDrawAtY = m_Margin.a.y + (m_Rect.GetHeight() - m_Margin.a.y - m_Margin.b.y) / 2.f;
 
-		// ÖØÐÂ²¼¾Ö
+		// é‡æ–°å¸ƒå±€
 		m_CursorPos = 0;
 		OnTextChanged(pThis, pArgs);
 		OnSizeChanged(pThis, pArgs);
@@ -287,7 +287,7 @@ void fuiEditBox::OnGetFocus(fuiControl* pThis, fuiEventArgs* pArgs)
 
 	m_pRootPage->ExecEvent(L"OnTextInputStart");
 
-	// ÖØÐÂÉèÖÃÊäÈë¿òÎ»ÖÃ
+	// é‡æ–°è®¾ç½®è¾“å…¥æ¡†ä½ç½®
 	adjustPos();
 
 	m_bCursorVisible = true;
@@ -306,7 +306,7 @@ void fuiEditBox::OnLostFocus(fuiControl* pThis, fuiEventArgs* pArgs)
 
 void fuiEditBox::OnMouseLDown(fuiControl* pThis, fuiEventArgs* pArgs)
 {
-	// ´Ó×óÏòÓÒÉ¨Ãè×Ö·û´®À´¶¨Î»¹â±ê
+	// ä»Žå·¦å‘å³æ‰«æå­—ç¬¦ä¸²æ¥å®šä½å…‰æ ‡
 	if(m_pFontProvider && m_pFontRenderer)
 	{
 		fcyVec2 tPos = m_pRootPage->GetMouseLastPos() - GetAbsolutePos();
